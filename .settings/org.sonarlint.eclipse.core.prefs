@@ -1,0 +1,3 @@
+autoEnabled=true
+eclipse.preferences.version=1
+fileExclusions=DIRECTORY\:node_modules\r\nDIRECTORY\:build
