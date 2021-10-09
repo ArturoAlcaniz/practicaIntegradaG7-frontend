@@ -41,7 +41,8 @@
   },
   "react-dotenv": {
     "whitelist": [
-      "API_URL"
+      "production_API_URL",
+      "development_API_URL"
     ]
   }
 }

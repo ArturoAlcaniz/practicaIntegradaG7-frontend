@@ -7,7 +7,7 @@ function App () {
     const [message, setMessage] = useState("")
 	
     useEffect(() => {
-        fetch(env.API_URL+'/hello')
+        fetch(env[process.env.NODE_ENV+'_API_URL']+'/hello')
             .then(response => response.text())
             .then(response => {
                 setMessage(response);
