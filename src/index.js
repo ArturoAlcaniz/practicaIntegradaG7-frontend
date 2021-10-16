@@ -8,12 +8,16 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
 
 import App from './components/App/App';
+import Centros from './components/Centros'
 
 ReactDOM.render(
   (
   <Router>
     <Route path="/" exact>
       <App />
+      <Router>
+        <Route path="/centro" exact component={Centros} />
+      </Router>
     </Route>
   </Router>
   
