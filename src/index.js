@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -17,7 +16,7 @@ ReactDOM.render(
     <Route path="/" exact>
       <App />
       <Router>
-        <Route path="/centro" exact component={Centros} />
+        <Route path="/Centros" exact component={Centros } />
       </Router>
     </Route>
   </Router>
