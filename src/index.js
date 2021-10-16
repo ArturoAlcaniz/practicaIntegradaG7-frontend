@@ -10,18 +10,20 @@ import 'bootstrap/dist/css/bootstrap.css';
 import App from './components/App/App';
 import Centros from './components/Centros'
 
-ReactDOM.render(
-  (
-  <Router>
-    <Route path="/" exact>
-      <App />
-      <Router>
-        <Route path="/centro" exact component={Centros} />
-      </Router>
-    </Route>
-  </Router>
-  
-  ), document.getElementById('root'));
+function Routing() {
+	return (
+		<div>
+			
+			<App />
+			<Router>
+				<Route path="/Centros" exact component={Centros} />
+			</Router>
+		</div>
+	)
+}
+
+ReactDOM.render(<Routing />,
+	document.getElementById("root"))
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
