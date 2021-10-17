@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
 export default class Centros extends Component{
     render() {
         return (
@@ -17,8 +18,6 @@ export default class Centros extends Component{
                             
                             <a class="btn btn-success" aria-current="page" href="/Formulario">Add Centro</a>
                         
-
-                            
                             <table class="table table-hover">
                                 <thead>
                                   <th>Nombre del centro</th>
