@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
+
 import {BrowserRouter as Router}  from "react-router-dom";
 
 function App () {
@@ -16,7 +17,7 @@ function App () {
 			          <a className="nav-link active" aria-current="page" href="/">Centros</a>
 			        </li>
 					<li className="nav-item">
-			          <a className="nav-link active" aria-current="page" href="/">Usuarios</a>
+			          <a className="nav-link active" aria-current="page" href="/Usuarios">Usuarios</a>
 			        </li>
 			      </ul>
 			    </div>
