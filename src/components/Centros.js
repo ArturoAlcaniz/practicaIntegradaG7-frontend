@@ -1,11 +1,11 @@
 import {React, Component} from "react";
-import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 export default class Centros extends Component{
     render() {
         return (
         	<div>
-				<h3>Log In</h3>
+				<h3>Hola</h3>
 			</div>
         );
     }
