@@ -12,7 +12,6 @@ import Centros from './components/Centros'
 function Routing() {
 	return (
 		<div>
-			
 			<App />
 			<Router>
 				<Route path="/Centros" exact component={Centros} />

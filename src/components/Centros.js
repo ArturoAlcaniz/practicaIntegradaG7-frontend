@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 export default class Centros extends Component{
     render() {
         return (
@@ -14,24 +15,8 @@ export default class Centros extends Component{
                     <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
                         <div class="dataTable-container">
                             <div class="container mt-3">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Add Centro</button>
-
-                                <div class="modal fade" id="myModal">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Datos centro</h4>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <h1>HOLA</h1>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <a class="btn btn-success" aria-current="page" href="/Formulario">Add Centro</a>
+                        
 
                             </div>
                             <table class="table table-hover">
@@ -62,7 +47,8 @@ export default class Centros extends Component{
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
+
         );
     }
 }
