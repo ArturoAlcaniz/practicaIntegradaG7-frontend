@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -11,6 +10,7 @@ import '../src/utils/styles/index.css';
 import App from './components/App/App';
 //import Centros from './components/Centros';
 import Usuarios from './components/Usuarios';
+import FormularioUsuarios from './components/FormularioUsuarios';
 
 function Routing() {
 	return (
@@ -18,6 +18,7 @@ function Routing() {
 			<App />
 			<Router>
 				<Route path="/Usuarios" exact component={Usuarios} />
+				<Route path="/FormularioUsuarios" exact component={FormularioUsuarios} />
 			</Router>
 		</div>
 	)

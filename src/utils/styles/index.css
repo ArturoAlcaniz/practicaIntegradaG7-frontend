@@ -26,7 +26,7 @@ display: block;
 justify-content: center;
 flex-direction: column;
 text-align: left;
-padding-top: 10%;
+padding-top: 50px;
 }
 .auth-inner {
 width: 450px;
