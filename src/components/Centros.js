@@ -24,19 +24,19 @@ export default class Centros extends Component{
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>Santa Cecilia</td>
+                                            <td>Calle Laurel</td>
+                                            <td>1500</td>
                                         </tr>
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>Hospital Universitariol</td>
+                                            <td>Calle Toledo</td>
+                                            <td>1200</td>
                                         </tr>
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>Hospital Azuzena</td>
+                                            <td>Calle La Paz</td>
+                                            <td>85</td>
                                         </tr>
                                     </tbody>
                                 </table>
