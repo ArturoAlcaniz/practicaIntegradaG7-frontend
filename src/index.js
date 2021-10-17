@@ -8,15 +8,15 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
 
 import App from './components/App/App';
-import Centros from './components/Centros'
+//import Centros from './components/Centros';
+import Usuarios from './components/Usuarios';
 
 function Routing() {
 	return (
 		<div>
-			
 			<App />
 			<Router>
-				<Route path="/Centros" exact component={Centros} />
+				<Route path="/Usuarios" exact component={Usuarios} />
 			</Router>
 		</div>
 	)
