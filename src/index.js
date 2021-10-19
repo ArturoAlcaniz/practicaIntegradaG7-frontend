@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -6,17 +5,19 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 
 import 'bootstrap/dist/css/bootstrap.css';
+import '../src/utils/styles/index.css';
 
 import App from './components/App/App';
-import Centros from './components/Centros'
+import Usuarios from './components/Usuarios';
+import FormularioUsuarios from './components/FormularioUsuarios';
 
 function Routing() {
 	return (
 		<div>
-			
 			<App />
 			<Router>
-				<Route path="/Centros" exact component={Centros} />
+				<Route path="/Usuarios" exact component={Usuarios} />
+				<Route path="/FormularioUsuarios" exact component={FormularioUsuarios} />
 			</Router>
 		</div>
 	)
