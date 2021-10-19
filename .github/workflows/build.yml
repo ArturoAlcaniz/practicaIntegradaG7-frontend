@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - Crear_interfaz_crear-visualizar_centros
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
