@@ -44,13 +44,13 @@ export default class Appointment extends Component {
 					<h3>Reservar cita</h3>
 					<div className="form-group">
 						<label>DNI</label>
-						<input type="text" className="form-control"
+						<input id="DNI" type="text" className="form-control"
 							placeholder="DNI" onChange={e => this.setState({ user: e.target.value })}/>
 					</div>
-					<button type="submit" className="btn btn-primary btnblock">Pedir cita</button>
+					<button id="SubmitButton" type="submit" className="btn btn-primary btnblock">Pedir cita</button>
 					<div><label></label></div>
-					<div className="appoint-success dblock">{this.state.appointment}</div>
-					<div className="appoint-error dblock">{this.state.msgAppointFail}</div>
+					<div id="txtSuccess" className="appoint-success dblock">{this.state.appointment}</div>
+					<div id="txtErr" className="appoint-error dblock">{this.state.msgAppointFail}</div>
 				</form>
 				</div>
 				</div>
