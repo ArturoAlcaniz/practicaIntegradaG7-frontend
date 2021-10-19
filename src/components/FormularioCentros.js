@@ -29,35 +29,31 @@ export default class FormularioCentros extends Component {
 
 	render() {
 		return (
-		<div className="card mb-3">
-			<div className="card-body">
-				<div className="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
-					<div className="dataTable-container">
-						<form onSubmit={this.handleCrearCentro.bind(this)}>
-							<h3>Nuevo Centro</h3>
-							
-							<div className="form-group">
-								<label>Nombre</label>
-								<input type="nombre" className="form-control" placeholder="Introduzca Nombre"
-									onChange={e => this.setState({ nombre: e.target.value })} />
-							</div>
-							<div className="form-group">
-								<label>Direccion</label>
-								<input type="Direccion" className="form-control" placeholder="Introduzca Direccion"
-									onChange={e => this.setState({ direccion: e.target.value })} />
-							</div>
-							<div className="form-group">
-								<label>Vacunas disponibles</label>
-								<input type="nvacunas" className="form-control" placeholder="Introduzca el numero de vacunas"
-									onChange={e => this.setState({ nvacunas: e.target.value })} />
-							</div>
+		<div className="auth-wrapper">
+			<div className="auth-inner">	
+				<form onSubmit={this.handleCrearCentro.bind(this)}>
+						<h3>Nuevo Centro</h3>
+						
+						<div className="form-group">
+							<label>Nombre</label>
+							<input type="nombre" className="form-control" placeholder="Introduzca Nombre"
+								onChange={e => this.setState({ nombre: e.target.value })} />
+						</div>
+						<div className="form-group">
+							<label>Direccion</label>
+							<input type="Direccion" className="form-control" placeholder="Introduzca Direccion"
+								onChange={e => this.setState({ direccion: e.target.value })} />
+						</div>
+						<div className="form-group">
+							<label>Vacunas disponibles</label>
+							<input type="nvacunas" className="form-control" placeholder="Introduzca el numero de vacunas"
+								onChange={e => this.setState({ nvacunas: e.target.value })} />
+						</div>
 
-							<div className="invalid-feedback d-block">{this.state.msgLoginResultFail}</div>
-							<div className="valid-feedback d-block">{this.state.msgLoginResultOk}</div>
-							<button type="submit" className="btn btn-primary btn-block">Crear centro</button>
-						</form>
-					</div>
-				</div>
+						<div className="invalid-feedback d-block">{this.state.msgLoginResultFail}</div>
+						<div className="valid-feedback d-block">{this.state.msgLoginResultOk}</div>
+					<button type="submit" className="btn btn-primary btn-block">Crear centro</button>
+				</form>
 			</div>
 		</div>
 		);
