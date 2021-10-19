@@ -8,7 +8,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import '../src/utils/styles/index.css';
 
 import App from './components/App/App';
-//import Centros from './components/Centros';
 import Usuarios from './components/Usuarios';
 import FormularioUsuarios from './components/FormularioUsuarios';
 
