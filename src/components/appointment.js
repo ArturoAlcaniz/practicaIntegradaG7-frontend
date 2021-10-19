@@ -17,7 +17,6 @@ export default class Appointment extends Component {
 				method: "POST",
 				body: JSON.stringify({user: thisComponent.state.user}),
 				headers: { 
-					'Access-Control-Allow-Origin': "*",
 					'Accept': 'application/json',
 					'Content-Type': 'application/json' 
 				}
