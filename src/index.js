@@ -9,6 +9,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 import App from './components/App/App';
 import Centros from './components/Centros';
 import FormularioCentros from './components/FormularioCentros';
+import Usuarios from './components/Usuarios';
+import FormularioUsuarios from './components/FormularioUsuarios';
+
 
 function Routing() {
 	return (
@@ -17,13 +20,13 @@ function Routing() {
 			<Router>
 				<Route path="/Centros" exact component={Centros} />
 				<Route path="/FormularioCentros" exact component={FormularioCentros} />
+				<Route path="/Usuarios" exact component={Usuarios} />
+				<Route path="/FormularioUsuarios" exact component={FormularioUsuarios} />
 			</Router>
 		</div>
 	)
 }
-
 ReactDOM.render(<Routing />,
 	document.getElementById("root"))
-
-
+	
 reportWebVitals();
