@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-
 import {BrowserRouter as Router}  from "react-router-dom";
 
 function App () {
@@ -14,7 +13,7 @@ function App () {
 			    <div className="collapse navbar-collapse" id="navbarNavDropdown">
 			      <ul className="navbar-nav">
 			        <li className="nav-item">
-			          <a className="nav-link active" aria-current="page" href="/">Centros</a>
+			          <a className="nav-link active" aria-current="page" href="/Centros">Centros</a>
 			        </li>
 					<li className="nav-item">
 			          <a className="nav-link active" aria-current="page" href="/Usuarios">Usuarios</a>
