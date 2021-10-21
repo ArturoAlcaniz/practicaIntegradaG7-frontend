@@ -11,6 +11,7 @@ import Centros from './components/Centros';
 import FormularioCentros from './components/FormularioCentros';
 import Usuarios from './components/Usuarios';
 import FormularioUsuarios from './components/FormularioUsuarios';
+import Appointment from './components/Appointment';
 
 
 function Routing() {
