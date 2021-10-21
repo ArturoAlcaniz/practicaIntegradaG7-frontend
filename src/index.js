@@ -11,6 +11,7 @@ import Centros from './components/Centros';
 import FormularioCentros from './components/FormularioCentros';
 import Usuarios from './components/Usuarios';
 import FormularioUsuarios from './components/FormularioUsuarios';
+import Appointment from './components/Appointment';
 
 
 function Routing() {
@@ -22,6 +23,7 @@ function Routing() {
 				<Route path="/FormularioCentros" exact component={FormularioCentros} />
 				<Route path="/Usuarios" exact component={Usuarios} />
 				<Route path="/FormularioUsuarios" exact component={FormularioUsuarios} />
+				<Route path="/Appointment" exact component={Appointment} />
 			</Router>
 		</div>
 	)
