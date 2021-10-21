@@ -5,6 +5,7 @@ on:
       - master
       - Crear_interfaz_crear-visualizar_centros
       - Crear_interfaz_crear_usuarios
+      - Crear_interfaz_cupos
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
