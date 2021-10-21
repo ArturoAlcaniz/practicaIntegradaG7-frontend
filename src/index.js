@@ -24,7 +24,7 @@ function Routing() {
 				<Route path="/Usuarios" exact component={Usuarios} />
 				<Route path="/FormularioUsuarios" exact component={FormularioUsuarios} />
 				<Route path="/Cupos" exact component={Cupos} />
-				<Route path="/FormularioCupos" exact component={FormularioCupos} />
+				<Route path="/FormulariosCupos" exact component={FormularioCupos} />
 			</Router>
 		</div>
 	)

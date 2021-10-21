@@ -17,15 +17,18 @@ export default class Cupos extends Component{
                             <div className="dataTable-container">
                                 <table className="table table-hover">
                                     <thead>
+                                    	<th>Fecha</th>
                                         <th>FranjaHoraria</th>
                                         <th>Citas</th>
                                     </thead>
                                     <tbody>
                                     	<tr>
+                                    		<td>21/10/2021</td>
                                         	<td>9h a 10h</td>
                                         	<td>8</td>
                                         </tr>
                                         <tr>
+                                        	<td>21/10/2021</td>
                                     		<td>10h a 11h</td>
                                     		<td>8</td>
                                     	</tr>

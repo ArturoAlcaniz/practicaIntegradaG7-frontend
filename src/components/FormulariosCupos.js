@@ -34,7 +34,11 @@ export default class FormularioCentros extends Component {
 					<div className="dataTable-container">
 						<form onSubmit={this.handleCrearCupo.bind(this)}>
 							<h3>Nuevo Cupo</h3>
-							
+							<div className="form-group">
+								<label>Fecha</label>
+								<input type="Fecha" className="form-control" placeholder="Introduzca fecha"
+									onChange={e => this.setState({ fecha: e.target.value })} />
+							</div>
 							<div className="form-group">
 								<label>Horario</label>
 								<input type="Horario" className="form-control" placeholder="Introduzca Franja Horaria"
