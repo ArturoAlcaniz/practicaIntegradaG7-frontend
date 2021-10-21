@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - master
+      - Crear_interfaz_crear-visualizar_centros
+      - Crear_interfaz_crear_usuarios
       - H2-2-Front
   pull_request:
     types: [opened, synchronize, reopened]
