@@ -44,10 +44,10 @@ export default class Appointment extends Component {
 		return (
 				<div className="auth-wrapper">
 				<div className="auth-inner">
-				<form class="align-items-center" onSubmit={this.handlePetition.bind(this)}>
+				<form className="align-items-center" onSubmit={this.handlePetition.bind(this)}>
 					<h3>Reservar cita</h3>
-					<div class="text-center">
-					<button id="SubmitButton" type="submit" class="btn  btn-primary btnblock">Pedir cita</button>
+					<div className="text-center">
+					<button id="SubmitButton" type="submit" className="btn  btn-primary btnblock">Pedir cita</button>
 					</div>
 					<div><label></label></div>
 					<div id="txtSuccess" className="appoint-success dblock">{this.state.appointment}</div>
