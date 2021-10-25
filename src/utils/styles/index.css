@@ -47,6 +47,10 @@ margin: 0;
 line-height: 1;
 padding-bottom: 20px;
 }
+.auth-form {
+    align-items: center;
+    display: inline;
+}
 .custom-control-label {
 font-weight: 400;
 }
