@@ -8,34 +8,36 @@ export default class Appointment extends Component {
 		super(props);
 		this.state = {
 				user: "PRUEBA",
-				appointment: "",
-				msgAppointFail: ""
+				msgAppointFail: "",
+				msgAppointOk: ""
 		}
 	}
 	
 	handlePetition(event) {
 		event.preventDefault()
 		async function makeReserve(thisComponent) {
-			//Coger DNI de Session.storage o similares,
-			//luego this.setState({ user: <DNI> })
-			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/makeAppointment', {
-				method: "POST",
-				body: JSON.stringify({user: thisComponent.state.user}),
-				headers: { 
-					'Accept': 'application/json',
-					'Content-Type': 'application/json' 
-				}
-			});
-			let date = await answer.text()
-			if (date === undefined) {
+			
+			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/citas/create', 
+				{ method: "POST" }
+			);
+			
+			let response = (await answer.json());
+			
+			if (response.status === "200") {
 				thisComponent.setState(
-						{ appointment: ""
-							, msgAppointFail: "Error al pedir cita"})
-			}else{
+					{ msgAppointOk: response.message
+					, msgAppointFail: ""
+					}
+				)
+			}else {
 				thisComponent.setState(
-						{ appointment: date
-							, msgAppointFail: ""})
+					{ msgAppointOk: ""
+					, msgAppointFail: response.message
+					}
+				)
 			}
+			
+
 		}
 		makeReserve(this)
 	}
@@ -50,8 +52,8 @@ export default class Appointment extends Component {
 					<button id="SubmitButton" type="submit" className="btn  btn-primary btnblock">Pedir cita</button>
 					</div>
 					<div><label></label></div>
-					<div id="txtSuccess" className="appoint-success dblock">{this.state.appointment}</div>
-					<div id="txtErr" className="appoint-error dblock">{this.state.msgAppointFail}</div>
+					<div className="text-success d-block text-center">{this.state.msgAppointOk}</div>
+					<div className="text-danger d-block text-center">{this.state.msgAppointFail}</div>
 				</form>
 				</div>
 				</div>
