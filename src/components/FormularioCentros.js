@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import env from "react-dotenv";
 
 export default class FormularioCentros extends Component {
@@ -20,21 +21,17 @@ export default class FormularioCentros extends Component {
 			
 			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/centros/create', {
 				method: "POST",
-				//body: JSON.stringify({user: thisComponent.state.user}),
-				headers: { 
-					'Accept': 'application/json',
-					'Content-Type': 'application/json' 
-				}
+				body: JSON.stringify({nombre: thisComponent.state.nombre, direccion: thisComponent.state.direccion, nvacunas: thisComponent.state.nvacunas})
 			});
-			let nombre = await answer.text()
-			if (nombre === undefined) {
+			let response = (await answer.json());
+			if (response.status === "200") {
 				thisComponent.setState(
-						{ msgCreationResultOk: ""
-							, msgCreationResultFail: "Error al crear centro, se necesita un id"})
+						{ msgCreationResultOk: response.message
+							, msgCreationResultFail: ""})
 			}else{
 				thisComponent.setState(
-						{ msgCreationResultOk: "Centro creado correctamente"
-							, msgCreationResultFail: ""})
+						{ msgCreationResultOk: ""
+							, msgCreationResultFail: response.message})
 			}console.log(answer);
 		}
 
@@ -64,9 +61,9 @@ export default class FormularioCentros extends Component {
 								onChange={e => this.setState({ nvacunas: e.target.value })} />
 						</div>
 
+						<button type="submit" className="btn btn-primary btn-block">Crear centro</button>
 						<div className="invalid-feedback d-block">{this.state.msgCreationResultFail}</div>
 						<div className="valid-feedback d-block">{this.state.msgCreationResultOk}</div>
-					<button type="submit" className="btn btn-primary btn-block">Crear centro</button>
 				</form>
 			</div>
 		</div>
