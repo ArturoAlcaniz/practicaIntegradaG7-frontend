@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
-
+import env from "react-dotenv";
 
 export default class FormularioCentros extends Component {
 
@@ -10,21 +10,35 @@ export default class FormularioCentros extends Component {
 			nombre: "",
 			direccion: "",
 			nvacunas: "",
-			msgLoginResultOk: "",
-			msgLoginResultFail: ""
+			msgCreationResultOk: "",
+			msgCreationResultFail: ""
 		}
 	}
 	handleCrearCentro(event) {
 		event.preventDefault()
-		async function fetchCentros(thisComponent) {
-			thisComponent.setState(
-				{
-					msgLoginResultOk: "Centro creado correctamente"
-					, msgLoginResultFail: ""
-				})
-
+		async function makeCentros(thisComponent) {
+			
+			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/centros/create', {
+				method: "POST",
+				//body: JSON.stringify({user: thisComponent.state.user}),
+				headers: { 
+					'Accept': 'application/json',
+					'Content-Type': 'application/json' 
+				}
+			});
+			let nombre = await answer.text()
+			if (nombre === undefined) {
+				thisComponent.setState(
+						{ msgCreationResultOk: ""
+							, msgCreationResultFail: "Error al crear centro, se necesita un id"})
+			}else{
+				thisComponent.setState(
+						{ msgCreationResultOk: "Centro creado correctamente"
+							, msgCreationResultFail: ""})
+			}console.log(answer);
 		}
-		fetchCentros(this)
+
+		makeCentros(this)
 	}
 
 	render() {
@@ -33,7 +47,7 @@ export default class FormularioCentros extends Component {
 			<div className="auth-inner">	
 				<form onSubmit={this.handleCrearCentro.bind(this)}>
 						<h3>Nuevo Centro</h3>
-						
+
 						<div className="form-group">
 							<label>Nombre</label>
 							<input type="nombre" className="form-control" placeholder="Introduzca Nombre"
@@ -50,8 +64,8 @@ export default class FormularioCentros extends Component {
 								onChange={e => this.setState({ nvacunas: e.target.value })} />
 						</div>
 
-						<div className="invalid-feedback d-block">{this.state.msgLoginResultFail}</div>
-						<div className="valid-feedback d-block">{this.state.msgLoginResultOk}</div>
+						<div className="invalid-feedback d-block">{this.state.msgCreationResultFail}</div>
+						<div className="valid-feedback d-block">{this.state.msgCreationResultOk}</div>
 					<button type="submit" className="btn btn-primary btn-block">Crear centro</button>
 				</form>
 			</div>
