@@ -10,7 +10,7 @@ export default class FormularioCentros extends Component {
 		this.state = {
 			nombre: "",
 			direccion: "",
-			nvacunas: "",
+			vacunas: "",
 			msgCreationResultOk: "",
 			msgCreationResultFail: ""
 		}
@@ -21,7 +21,11 @@ export default class FormularioCentros extends Component {
 			
 			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/centros/create', {
 				method: "POST",
-				body: JSON.stringify({nombre: thisComponent.state.nombre, direccion: thisComponent.state.direccion, nvacunas: thisComponent.state.nvacunas})
+				body: JSON.stringify({nombre: thisComponent.state.nombre, direccion: thisComponent.state.direccion, vacunas: thisComponent.state.vacunas}),
+				headers: { 
+					'Accept': 'application/json',
+					'Content-Type': 'application/json' 
+				}
 			});
 			let response = (await answer.json());
 			if (response.status === "200") {
@@ -57,8 +61,8 @@ export default class FormularioCentros extends Component {
 						</div>
 						<div className="form-group">
 							<label>Vacunas disponibles</label>
-							<input type="nvacunas" className="form-control" placeholder="Introduzca el numero de vacunas"
-								onChange={e => this.setState({ nvacunas: e.target.value })} />
+							<input type="vacunas" className="form-control" placeholder="Introduzca el numero de vacunas"
+								onChange={e => this.setState({ vacunas: e.target.value })} />
 						</div>
 
 						<button type="submit" className="btn btn-primary btn-block">Crear centro</button>
