@@ -33,16 +33,18 @@ export default class Centros extends Component{
 		console.log("Vacunas anadidas")
 	}
 	
-	obtenerDatos(event){
-		fetch(env[process.env.NODE_ENV+'_API_URL']+'centros/obtener', {
+	obtenerDatos(){
+		let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'centros/obtener', {
 			method: "GET",
 			body: JSON.stringify({}),
-			headers: { 
+			headers: {
 				'Accept': 'application/json',
-				'Content-Type': 'application/json' 
+				'Content-Type': 'application/json'
 			}
 		});
 
+		console.log(answer)
+	
 	}
 
     render() {
