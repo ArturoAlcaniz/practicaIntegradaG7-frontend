@@ -14,6 +14,9 @@ export default class Centros extends Component{
 		
 		var amount = prompt("¿Cuantas vacunas?", "0");
 		
+		if (amount === null) {
+			return;
+		}
 		fetch(env[process.env.NODE_ENV+'_API_URL']+'/addVaccines', {
 			method: "POST",
 			body: JSON.stringify({hospital, amount}),
