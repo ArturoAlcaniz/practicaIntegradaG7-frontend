@@ -34,9 +34,15 @@ export default class Centros extends Component{
 	}
 	
 	obtenerDatos(event){
-		fetch(env[process.env.NODE_ENV+'_API_URL']+'centros/obtener')
-		.then(response => response.json())
-  		.then(data => console.log(data));
+		fetch(env[process.env.NODE_ENV+'_API_URL']+'centros/obtener', {
+			method: "GET",
+			body: JSON.stringify({}),
+			headers: { 
+				'Accept': 'application/json',
+				'Content-Type': 'application/json' 
+			}
+		});
+
 	}
 
     render() {
