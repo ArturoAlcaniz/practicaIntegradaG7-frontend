@@ -7,6 +7,13 @@ export default class Centros extends Component{
 	constructor(props) {
 		super(props);
 		this.addVaccines = this.addVaccines.bind(this);
+		this.state = {
+			nombre: "",
+			direccion: "",
+			vacunas: "",
+			msgGetResultOk: "",
+			msgGetResultFail: ""
+		}
 	}
 
 	addVaccines(event) {
@@ -24,6 +31,12 @@ export default class Centros extends Component{
 		});
 
 		console.log("Vacunas anadidas")
+	}
+	
+	obtenerDatos(event){
+		fetch(env[process.env.NODE_ENV+'_API_URL']+'centros/obtener')
+		.then(response => response.json())
+  		.then(data => console.log(data));
 	}
 
     render() {
@@ -70,6 +83,7 @@ export default class Centros extends Component{
                                             <td>85</td><td>
                                             	<button id="addVaccinesB3" onClick={this.addVaccines}>Anadir vacunas</button>
                                             </td>
+												<button id="get" onClick={this.obtenerDatos}>datos</button>
                                         </tr>
                                     </tbody>
                                 </table>
