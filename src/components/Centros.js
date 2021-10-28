@@ -45,7 +45,7 @@ export default class Centros extends Component{
 			}
 		});
 		var arrayCentros = this.state.centros
-		arrayCentros[this.state.centros.findIndex(item => item.nombre == hospital)].vacunas = nvacunas
+		arrayCentros[this.state.centros.findIndex(item => item.nombre === hospital)].vacunas = nvacunas
 		this.setState({centros: arrayCentros})
 		console.log("Vacunas anadidas")
 	}
