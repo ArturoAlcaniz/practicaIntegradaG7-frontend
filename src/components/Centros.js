@@ -30,7 +30,6 @@ export default class Centros extends Component{
 		getCentros();
 	}
 
-	
 	addVaccines(event) {
 		var hospital =  event.target.parentNode.parentNode.getElementsByTagName("td")[0].getAttribute("data-value");
 		var nvacunas = event.target.parentNode.parentNode.getElementsByTagName("td")[2].innerHTML;
