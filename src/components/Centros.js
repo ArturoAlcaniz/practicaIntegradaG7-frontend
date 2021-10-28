@@ -33,9 +33,9 @@ export default class Centros extends Component{
 	
 	addVaccines(event) {
 		var hospital =  event.target.parentNode.parentNode.getElementsByTagName("td")[0].getAttribute("data-value");
-		
+		var nvacunas = event.target.parentNode.parentNode.getElementsByTagName("td")[2].innerHTML;
 		var amount = prompt("¿Cuantas vacunas?", "0");
-		
+		nvacunas = parseInt(nvacunas) + parseInt(amount);
 		fetch(env[process.env.NODE_ENV+'_API_URL']+'/addVaccines', {
 			method: "POST",
 			body: JSON.stringify({hospital, amount}),
@@ -44,6 +44,7 @@ export default class Centros extends Component{
 				'Content-Type': 'application/json' 
 			}
 		});
+		event.target.parentNode.parentNode.getElementsByTagName("td")[2].innerHTML = nvacunas;
 		console.log("Vacunas anadidas")
 	}
 	
