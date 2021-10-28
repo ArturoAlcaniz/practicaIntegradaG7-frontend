@@ -29,7 +29,7 @@ export default class FormularioUsuarios extends Component {
 		fetchUsuarios(this)
 	}
 
-
+	 
 	render() {
 		return (
 				<div className="auth-wrapper">

@@ -3,6 +3,19 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 
 export default class Usuarios extends Component {
+
+	obtenerDatos(thisComponent){
+		async function getUsuarios(){
+				let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/usuarios/obtener', {
+			method: "GET"
+		});
+		
+		let json = await answer.text();
+		thisComponent.setState({usuarios: JSON.parse(json)})
+		}
+		getUsuarios();
+	}
+
 	render() {
 		return (
 			<div className="auth-wrapper">
@@ -26,46 +39,18 @@ export default class Usuarios extends Component {
 									</tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-										<td>05122334E</td>
-										<td>Sanitario</td>
-										<td>Mariano</td>
-										<td>Lopez Jimenez</td>
-										<td>mariano@gmail.com</td>
-										<td>Santa Cecilia</td>
-                                    </tr>
-                                    <tr>
-										<td>05122354X</td>
-										<td>Paciente</td>
-										<td>Juan</td>
-										<td>Gervas Sanchez</td>
-										<td>juang_7632@hotmail.com</td>
-										<td>Luz de Sevilla</td>
-                                    </tr>
-                                    <tr>
-										<td>05164433F</td>
-										<td>Paciente</td>
-										<td>Francisca</td>
-										<td>Salas Delgado</td>
-										<td>pacaxd@gmail.com</td>
-										<td>Hospital Universitario Ciudad Real</td>
-                                    </tr>
-									<tr>
-										<td>05232334B</td>
-										<td>Administrador</td>
-										<td>Jose Luis</td>
-										<td>Rodriguez Castillo</td>
-										<td>joselu-cars@yahoo.es</td>
-										<td>Ernesto Balbuena Madrid</td>
-                                    </tr>
- 									<tr>
-										<td>05232234F</td>
-										<td>Paciente</td>
-										<td>Manuel</td>
-										<td>Toloso Sanchez</td>
-										<td>manueltosan@gmail.com</td>
-										<td>Hospital Azuzena</td>
-                                    </tr>
+                                {this.state.Usuarios.map((listValue, index) => {
+											return (
+												<tr key={index}>
+													<td>{listValue.dni}</td>
+													<td>{listValue.rol}</td>
+													<td>{listValue.nombre}</td>
+													<td>{listValue.apellidos}</td>
+													<td>{listValue.email}</td>
+													<td>{listValue.centro}</td>
+												</tr>
+											);
+										})}
                                 </tbody>
                             </table>
                         </div>
