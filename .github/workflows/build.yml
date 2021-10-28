@@ -7,6 +7,7 @@ on:
       - Crear_interfaz_crear_usuarios
       - H2-2-Front
       - desarrollo
+      - Crear_ControllerCentrosFront
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
