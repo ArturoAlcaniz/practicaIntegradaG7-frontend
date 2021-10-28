@@ -44,7 +44,9 @@ export default class Centros extends Component{
 				'Content-Type': 'application/json' 
 			}
 		});
-		event.target.parentNode.parentNode.getElementsByTagName("td")[2].innerHTML = nvacunas;
+		var arrayCentros = this.state.centros
+		arrayCentros[this.state.centros.findIndex(item => item.nombre == hospital)].vacunas = nvacunas
+		this.setState({centros: arrayCentros})
 		console.log("Vacunas anadidas")
 	}
 	
