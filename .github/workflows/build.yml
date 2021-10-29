@@ -8,6 +8,7 @@ on:
       - H2-2-Front
       - desarrollo
       - h2-4
+      - highlight_current_page_navigation
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
