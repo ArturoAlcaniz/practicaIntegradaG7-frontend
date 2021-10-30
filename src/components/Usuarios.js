@@ -4,6 +4,12 @@ import env from"react-dotenv";
 
 
 export default class Usuarios extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			usuarios: []
+		}
+	}
 
 	obtenerDatos(thisComponent){
 		async function getUsuarios(){
