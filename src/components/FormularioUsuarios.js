@@ -41,7 +41,7 @@ export default class FormularioUsuarios extends Component {
 			}console.log(answer);
 		}
 
-		makeCentros(this)
+		makeUsuarios(this)
 	}
 
 	 
