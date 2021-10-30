@@ -8,8 +8,10 @@ on:
       - Crear_interfaz_cupos
       - H2-2-Front
       - desarrollo
+      - Crear_ControllerCentrosFront
       - h2-4
       - highlight_current_page_navigation
+
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
