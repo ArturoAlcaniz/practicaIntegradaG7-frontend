@@ -35,6 +35,10 @@ export default class Centros extends Component{
 		var nvacunas = event.target.parentNode.parentNode.getElementsByTagName("td")[2].innerHTML;
 		var amount = prompt("¿Cuantas vacunas?", "0");
 		nvacunas = parseInt(nvacunas) + parseInt(amount);
+		
+		if (amount === null) {
+			return;
+		}
 		fetch(env[process.env.NODE_ENV+'_API_URL']+'/addVaccines', {
 			method: "POST",
 			body: JSON.stringify({hospital, amount}),
