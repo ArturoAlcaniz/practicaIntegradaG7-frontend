@@ -46,7 +46,7 @@ export default class Usuarios extends Component {
 									</tr>
                                 </thead>
                                 <tbody>
-                                {this.state.Usuarios.map((listValue, index) => {
+                                {this.state.usuarios.map((listValue, index) => {
 											return (
 												<tr key={index}>
 													<td>{listValue.dni}</td>
