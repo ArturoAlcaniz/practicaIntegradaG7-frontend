@@ -1,29 +1,45 @@
 import React, { Component } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
+import env from "react-dotenv";
 
-
-export default class FormularioCentros extends Component {
-
+export default class FormularioCupos extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			franjahoraria: "",
+			fechaini: "", 
+			fechafin: "",
+			centro: "",
 			ncitas: "",
-			msgLoginResultOk: "",
-			msgLoginResultFail: ""
+			msgCreationResultOk: "",
+			msgCreationResultFail: ""
 		}
 	}
+	
 	handleCrearCupo(event) {
 		event.preventDefault()
-		async function fetchCupo(thisComponent) {
-			thisComponent.setState(
-				{
-					msgLoginResultOk: "Cupo creado correctamente"
-					, msgLoginResultFail: ""
-				})
-
+		async function makeCupo(thisComponent) {
+			
+			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/cupo/create', {
+				method: "POST",
+				body: JSON.stringify({fechaini: thisComponent.state.fechaini, fechafin: thisComponent.state.fechafin, centro: thisComponent.state.centro, ncitas: thisComponent.state.ncitas}),
+				headers: { 
+					'Accept': 'application/json',
+					'Content-Type': 'application/json' 
+				}
+			});
+			let response = (await answer.json());
+			if (response.status === "200") {
+				thisComponent.setState(
+						{ msgCreationResultOk: response.message
+							, msgCreationResultFail: ""})
+			}else{
+				thisComponent.setState(
+						{ msgCreationResultOk: ""
+							, msgCreationResultFail: response.message})
+			}console.log(answer);
 		}
-		fetchCupo(this)
+
+		makeCupo(this)
 	}
 
 	render() {
@@ -55,8 +71,8 @@ export default class FormularioCentros extends Component {
 									onChange={e => this.setState({ centro: e.target.value })} />
 							</div>
 
-							<div className="invalid-feedback d-block">{this.state.msgLoginResultFail}</div>
-							<div className="valid-feedback d-block">{this.state.msgLoginResultOk}</div>
+							<div className="invalid-feedback d-block">{this.state.msgCreationResultFail}</div>
+							<div className="valid-feedback d-block">{this.state.msgCreationResultOk}</div>
 							<button type="submit" className="btn btn-primary btn-block">Crear Cupo</button>
 						</form>
 					</div>

@@ -15,6 +15,7 @@ export default class FormularioCentros extends Component {
 			msgCreationResultFail: ""
 		}
 	}
+	
 	handleCrearCentro(event) {
 		event.preventDefault()
 		async function makeCentros(thisComponent) {
