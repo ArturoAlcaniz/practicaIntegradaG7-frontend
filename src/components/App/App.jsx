@@ -1,6 +1,10 @@
 import React from 'react';
-import './App.css';
-import {BrowserRouter as Router}  from "react-router-dom";
+import {BrowserRouter as Router, NavLink, Switch, Route}  from "react-router-dom";
+import Centros from '../Centros';
+import FormularioCentros from '../FormularioCentros';
+import Usuarios from '../Usuarios';
+import FormularioUsuarios from '../FormularioUsuarios';
+import Appointment from '../Appointment';
 
 function App () {
      return (<Router>
@@ -13,10 +17,19 @@ function App () {
 			    <div className="collapse navbar-collapse" id="navbarNavDropdown">
 			      <ul className="navbar-nav">
 			        <li className="nav-item">
-			          <a className="nav-link active" aria-current="page" href="/Centros">Centros</a>
+			          <NavLink className="nav-link" to="/Centros" activeClassName="nav-link active">
+						  Centros
+						</NavLink>
 			        </li>
 					<li className="nav-item">
-			          <a className="nav-link active" aria-current="page" href="/Usuarios">Usuarios</a>
+			          <NavLink className="nav-link" to="/Usuarios" activeClassName="nav-link active">
+						  Usuarios
+						</NavLink>
+			        </li>
+					<li className="nav-item">
+			          <NavLink className="nav-link" to="/Appointment" activeClassName="nav-link active">
+						  Pedir cita
+						</NavLink>
 			        </li>
 			        <li className="nav-item">
 			          <a className="nav-link active" aria-current="page" href="/Cupos">Cupos</a>
@@ -25,6 +38,13 @@ function App () {
 			    </div>
 			  </div>  
            </nav>
+		<Switch>
+              <Route exact path='/Centros' exact component={Centros} />
+              <Route path='/Usuarios' exact component={Usuarios} />
+              <Route path='/Appointment' exact component={Appointment} />
+              <Route path='/FormularioCentros' exact component={FormularioCentros} />
+              <Route path='/FormularioUsuarios' exact component={FormularioUsuarios} />
+          </Switch>
         </div>
     </Router>);
 }

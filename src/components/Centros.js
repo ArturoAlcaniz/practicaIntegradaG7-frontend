@@ -1,9 +1,34 @@
 import React, {Component} from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import env  from "react-dotenv";
 
 export default class Centros extends Component{
+	constructor(props) {
+		super(props);
+		this.addVaccines = this.addVaccines.bind(this);
+	}
+
+	addVaccines(event) {
+		var hospital =  event.target.parentNode.parentNode.getElementsByTagName("td")[0].getAttribute("data-value");
+		
+		var amount = prompt("Â¿Cuantas vacunas?", "0");
+		
+		if (amount === null) {
+			return;
+		}
+		fetch(env[process.env.NODE_ENV+'_API_URL']+'/addVaccines', {
+			method: "POST",
+			body: JSON.stringify({hospital, amount}),
+			headers: { 
+				'Accept': 'application/json',
+				'Content-Type': 'application/json' 
+			}
+		});
+
+		console.log("Vacunas anadidas")
+	}
+
     render() {
         return (
         	<div className="container-fluid px-4">
@@ -18,25 +43,36 @@ export default class Centros extends Component{
 
                                 <table className="table table-hover">
                                     <thead>
+                                    <tr>
                                         <th>Nombre del centro</th>
-                                        <th>Dirección</th>
+                                        <th>Direccion</th>
                                         <th>Vacunas disponibles</th>
+                                        <th>Anadir vacunas</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>Santa Cecilia</td>
+                                            <td data-value="Santa Cecilia">Santa Cecilia</td>
                                             <td>Calle Laurel</td>
                                             <td>1500</td>
+                                            <td>
+                                            	<button id="addVaccinesB1" onClick={this.addVaccines}>Anadir vacunas</button>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td>Hospital Universitariol</td>
+                                            <td data-value="Hospital Universitario1">Hospital Universitariol</td>
                                             <td>Calle Toledo</td>
                                             <td>1200</td>
+                                            <td>
+                                        		<button id="addVaccinesB2" onClick={this.addVaccines}>Anadir vacunas</button>
+                                        	</td>
                                         </tr>
                                         <tr>
-                                            <td>Hospital Azuzena</td>
+                                            <td data-value="Hospital Azuzena">Hospital Azuzena</td>
                                             <td>Calle La Paz</td>
-                                            <td>85</td>
+                                            <td>85</td><td>
+                                            	<button id="addVaccinesB3" onClick={this.addVaccines}>Anadir vacunas</button>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -46,7 +82,6 @@ export default class Centros extends Component{
             </div>
             <a className="btn btn-success" aria-current="page" href="/FormularioCentros">Add Centro</a>
         </div>
-
         );
     }
 }
