@@ -20,13 +20,28 @@ export default class FormularioUsuarios extends Component {
 	}
 	handleCrearUsuario(event) {
 		event.preventDefault()
-		async function fetchUsuarios(thisComponent) {
-			thisComponent.setState(
-					{ msgLoginResultOk: "Usuario creado correctamente"
-						, msgLoginResultFail: ""})
-
+		async function makeUsuarios(thisComponent) {
+			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/usuario/create', {
+				method: "POST",
+				body: JSON.stringify({dni: thisComponent.state.dni, nombre: thisComponent.state.nombre, apellidos: thisComponent.state.apellidos, email: thisComponent.state.email, password: thisComponent.state.password, centro: thisComponent.state.centro, rol: thisComponent.state.rol}),
+				headers: { 
+					'Accept': 'application/json',
+					'Content-Type': 'application/json' 
+				}
+			});
+			let response = (await answer.json());
+			if (response.status === "200") {
+				thisComponent.setState(
+						{ msgLoginResultOk: "Usuario creado correctamente"
+							, msgLoginResultFail: ""})
+			}else{
+				thisComponent.setState(
+						{ msgLoginResultOk: ""
+							, msgLoginResultFail: "Error al crear usuario"})
+			}console.log(answer);
 		}
-		fetchUsuarios(this)
+
+		makeCentros(this)
 	}
 
 	 
