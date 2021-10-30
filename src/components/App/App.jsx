@@ -31,6 +31,9 @@ function App () {
 						  Pedir cita
 						</NavLink>
 			        </li>
+			        <li className="nav-item">
+			          <a className="nav-link active" aria-current="page" href="/Cupos">Cupos</a>
+			        </li>
 			      </ul>
 			    </div>
 			  </div>  
