@@ -35,19 +35,24 @@ export default class FormularioCentros extends Component {
 						<form onSubmit={this.handleCrearCupo.bind(this)}>
 							<h3>Nuevo Cupo</h3>
 							<div className="form-group">
-								<label>Fecha</label>
-								<input type="Fecha" className="form-control" placeholder="Introduzca fecha"
-									onChange={e => this.setState({ fecha: e.target.value })} />
+								<label>FechaInicio</label>
+								<input type="FechaInicio" className="form-control" placeholder="Introduzca fecha de inicio"
+									onChange={e => this.setState({ fechaini: e.target.value })} />
 							</div>
 							<div className="form-group">
-								<label>Horario</label>
-								<input type="Horario" className="form-control" placeholder="Introduzca Franja Horaria"
-									onChange={e => this.setState({ franjahoraria: e.target.value })} />
+								<label>FechaFin</label>
+								<input type="FechaFin" className="form-control" placeholder="Introduzca fecha de fin"
+									onChange={e => this.setState({ fechafin: e.target.value })} />
 							</div>
 							<div className="form-group">
 								<label>Citas</label>
 								<input type="Citas" className="form-control" placeholder="Introduzca cantidad de citas"
 									onChange={e => this.setState({ ncitas: e.target.value })} />
+							</div>
+							<div className="form-group">
+								<label>Centro</label>
+								<input type="Centro" className="form-control" placeholder="Introduzca centro"
+									onChange={e => this.setState({ centro: e.target.value })} />
 							</div>
 
 							<div className="invalid-feedback d-block">{this.state.msgLoginResultFail}</div>

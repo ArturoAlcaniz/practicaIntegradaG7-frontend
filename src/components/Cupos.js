@@ -4,11 +4,24 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 export default class Cupos extends Component{
+    
+	obtenerDatos(thisComponent){
+		async function getCupos(){
+				let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/cupos/obtener', {
+			method: "GET"
+		});
+		
+		let json = await answer.text();
+		thisComponent.setState({cupos: JSON.parse(json)})
+		}
+		getCupos();
+    }
+    
     render() {
         return (
+            <div className="auth-wrapper">
         	<div className="container-fluid px-4">
-                <h1>Cupos</h1>
-                <div className="card mb-3">
+                <div className="card mb-4">
                     <div className="card-header">
                         Cupos
                     </div>
@@ -17,21 +30,22 @@ export default class Cupos extends Component{
                             <div className="dataTable-container">
                                 <table className="table table-hover">
                                     <thead>
-                                    	<th>Fecha</th>
-                                        <th>FranjaHoraria</th>
-                                        <th>Citas</th>
+                                    	<th>FechaInicio</th>
+                                        <th>FechaFin</th>
+                                        <th>NumCitas</th>
+                                        <th>Centro</th>
                                     </thead>
                                     <tbody>
-                                    	<tr>
-                                    		<td>21/10/2021</td>
-                                        	<td>9h a 10h</td>
-                                        	<td>8</td>
-                                        </tr>
-                                        <tr>
-                                        	<td>21/10/2021</td>
-                                    		<td>10h a 11h</td>
-                                    		<td>8</td>
-                                    	</tr>
+                                    	 {this.state.Cupos.map((listValue, index) => {
+											return (
+												<tr key={index}>
+													<td>{listValue.fechaInicio}</td>
+													<td>{listValue.fechaFin}</td>
+													<td>{listValue.numeroCitas}</td>
+													<td>{listValue.centro}</td>
+												</tr>
+											);
+										})}
                                     </tbody>
                                   </table>
                             </div>
@@ -39,6 +53,7 @@ export default class Cupos extends Component{
                      </div>
                 </div>
                 <a className="btn btn-success" aria-current="page" href="/FormularioCupos">Add Cupo</a>
+           </div>
            </div>
         );
     }
