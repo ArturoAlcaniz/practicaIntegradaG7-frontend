@@ -6,8 +6,7 @@ import Usuarios from '../Usuarios';
 import FormularioUsuarios from '../FormularioUsuarios';
 import Appointment from '../Appointment';
 import Cupos from '../Cupos';
-
-
+import FormularioCupos from '../FormularioCupos';
 
 function App() {
 	return (<Router>
@@ -47,6 +46,7 @@ function App() {
 				<Route path='/Appointment' exact component={Appointment} />
 				<Route path='/FormularioCentros' exact component={FormularioCentros} />
 				<Route path='/FormularioUsuarios' exact component={FormularioUsuarios} />
+				<Route path='/FormularioCupos' exact component={FormularioCupos} />
 				<Route path='/Cupos' exact component={Cupos} />
 			</Switch>
 		</div>

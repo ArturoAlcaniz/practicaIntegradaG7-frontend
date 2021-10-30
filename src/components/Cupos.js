@@ -3,9 +3,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import env from "react-dotenv";
 
-
-
-
 export default class Cupos extends Component {
     constructor(props) {
         super(props);
@@ -17,11 +14,9 @@ export default class Cupos extends Component {
 
     }
 
-
-
     obtenerDatos(thisComponent) {
         async function getCupos() {
-            let answer = await fetch(env[process.env.NODE_ENV + '_API_URL'] + '/cupos/obtener', {
+        	let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/cupo/obtener', {
                 method: "GET"
             });
 
@@ -56,7 +51,7 @@ export default class Cupos extends Component {
                                                         <td>{listValue.fechaInicio}</td>
                                                         <td>{listValue.fechaFin}</td>
                                                         <td>{listValue.numeroCitas}</td>
-                                                        <td>{listValue.centro}</td>
+                                                        <td>{listValue.centro.nombre}</td>
                                                     </tr>
                                                 );
                                             })}
@@ -71,4 +66,7 @@ export default class Cupos extends Component {
             </div>
         );
     }
+	componentDidMount(){
+		this.obtenerDatos(this);
+	}
 }
