@@ -34,7 +34,9 @@ function App() {
 </NavLink>
 							</li>
 							<li className="nav-item">
-								<a className="nav-link active" aria-current="page" href="/Cupos">Cupos</a>
+							<NavLink className="nav-link" to="/Cupos" activeClassName="nav-link active">
+									Cupos
+</NavLink>
 							</li>
 						</ul>
 					</div>

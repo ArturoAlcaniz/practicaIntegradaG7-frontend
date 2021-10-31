@@ -11,6 +11,7 @@ on:
       - Crear_ControllerCentrosFront
       - h2-4
       - highlight_current_page_navigation
+      - fix_Navegacion
 
   pull_request:
     types: [opened, synchronize, reopened]
