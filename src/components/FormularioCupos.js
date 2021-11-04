@@ -44,10 +44,9 @@ export default class FormularioCupos extends Component {
 
 	render() {
 		return (
-		<div className="card mb-3">
-			<div className="card-body">
-				<div className="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
-					<div className="dataTable-container">
+		
+				<div className="auth-wrapper">
+					<div className="auth-inner">
 						<form onSubmit={this.handleCrearCupo.bind(this)}>
 							<h3>Nuevo Cupo</h3>
 							<div className="form-group">
@@ -77,8 +76,7 @@ export default class FormularioCupos extends Component {
 						</form>
 					</div>
 				</div>
-			</div>
-		</div>
+			
 		);
 	}
 

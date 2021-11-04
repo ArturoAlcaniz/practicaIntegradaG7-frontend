@@ -37,6 +37,7 @@ export default class Cupos extends Component {
                         <div className="card-body">
                             <div className="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
                                 <div className="dataTable-container">
+									<a className="btn btn-success" aria-current="page" href="/FormularioCupos">Add Cupo</a>
                                     <table className="table table-hover">
                                         <thead>
                                             <th>FechaInicio</th>
@@ -61,7 +62,6 @@ export default class Cupos extends Component {
                             </div>
                         </div>
                     </div>
-                    <a className="btn btn-success" aria-current="page" href="/FormularioCupos">Add Cupo</a>
                 </div>
             </div>
         );

@@ -57,7 +57,6 @@ export default class Centros extends Component{
 	
         return (
         	<div className="container-fluid px-4">
-                <h1>Centros de salud</h1>
                 <div className="card mb-4">
                     <div className="card-header">
                         Centros
@@ -65,7 +64,7 @@ export default class Centros extends Component{
                     <div className="card-body">
                         <div className="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
                             <div className="dataTable-container">
-
+								<a className="btn btn-success" aria-current="page" href="/FormularioCentros">Add Centro</a>
                                 <table className="table table-hover">
                                     <thead>
                                     <tr>
@@ -94,7 +93,6 @@ export default class Centros extends Component{
                         </div>
                     </div>
             </div>
-            <a className="btn btn-success" aria-current="page" href="/FormularioCentros">Add Centro</a>
         </div>
         );
     }

@@ -19,6 +19,11 @@ function App() {
 					<div className="collapse navbar-collapse" id="navbarNavDropdown">
 						<ul className="navbar-nav">
 							<li className="nav-item">
+								<NavLink className="nav-link" to="/Cupos" activeClassName="nav-link active">
+									Cupos
+								</NavLink>
+							</li>
+							<li className="nav-item">
 								<NavLink className="nav-link" to="/Centros" activeClassName="nav-link active">
 									Centros
 </NavLink>
@@ -33,11 +38,7 @@ function App() {
 									Pedir cita
 </NavLink>
 							</li>
-							<li className="nav-item">
-							<NavLink className="nav-link" to="/Cupos" activeClassName="nav-link active">
-									Cupos
-</NavLink>
-							</li>
+							
 						</ul>
 					</div>
 				</div>
