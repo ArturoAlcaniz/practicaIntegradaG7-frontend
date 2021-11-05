@@ -7,6 +7,7 @@ import FormularioUsuarios from '../FormularioUsuarios';
 import Appointment from '../Appointment';
 import Cupos from '../Cupos';
 import FormularioCupos from '../FormularioCupos';
+import FormularioConfiguracion from '../FormularioConfiguracion';
 
 function App() {
 	return (<Router>
@@ -18,6 +19,11 @@ function App() {
 					</button>
 					<div className="collapse navbar-collapse" id="navbarNavDropdown">
 						<ul className="navbar-nav">
+							<li className="nav-item">
+								<NavLink className="nav-link" to="/Configuracion" activeClassName="nav-link active">
+									Configuracion
+								</NavLink>
+							</li>
 							<li className="nav-item">
 								<NavLink className="nav-link" to="/Cupos" activeClassName="nav-link active">
 									Cupos
@@ -51,6 +57,7 @@ function App() {
 				<Route path='/FormularioUsuarios' exact component={FormularioUsuarios} />
 				<Route path='/FormularioCupos' exact component={FormularioCupos} />
 				<Route path='/Cupos' exact component={Cupos} />
+				<Route path='/Configuracion' exact component={FormularioConfiguracion} />
 			</Switch>
 		</div>
 	</Router>);
