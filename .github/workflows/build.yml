@@ -12,6 +12,7 @@ on:
       - h2-4
       - highlight_current_page_navigation
       - fix_Navegacion
+      - Crear_formulario_modificacion_cita
 
   pull_request:
     types: [opened, synchronize, reopened]
