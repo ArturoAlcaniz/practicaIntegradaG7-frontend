@@ -50,7 +50,7 @@ function App() {
 				</div>
 			</nav>
 			<Switch>
-				<Route exact path='/Centros' exact component={Centros} />
+				<Route path='/Centros' exact component={Centros} />
 				<Route path='/Usuarios' exact component={Usuarios} />
 				<Route path='/Appointment' exact component={Appointment} />
 				<Route path='/FormularioCentros' exact component={FormularioCentros} />
