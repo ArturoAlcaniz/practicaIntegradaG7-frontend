@@ -8,11 +8,12 @@ export default class FormularioConfiguracion extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			horaInicio: "08:00",
-			horaFin: "17:00",
-			citasPorFranja: "1",
-            franjasPorDia: "1",
-            duracionFranja: "540",
+			horaInicio: "",
+			horaFin: "",
+			citasPorFranja: "",
+            franjasPorDia: "",
+            duracionFranja: "",
+            configurationAlreadySaved: false,
 			msgConfigResultOk: "",
 			msgConfigResultFail: ""
 		}
@@ -39,17 +40,43 @@ export default class FormularioConfiguracion extends Component {
 			let response = (await answer.json());
 			if (response.status === "200") {
 				thisComponent.setState(
-						{ msgConfigResultOk: response.message
-							, msgConfigResultFail: ""})
+						{ configurationAlreadySaved: true
+                        , msgConfigResultOk: response.message
+						, msgConfigResultFail: ""})
 			}else{
 				thisComponent.setState(
 						{ msgConfigResultOk: ""
-							, msgConfigResultFail: response.message})
+						, msgConfigResultFail: response.message})
 			}
-            console.log(answer);
 		}
 
 		makeConfiguracion(this)
+	}
+
+    obtenerConfiguracion(thisComponent){
+		async function getConfiguration(){
+				let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/configuration/obtener', {
+			method: "GET"
+		});
+		
+		let json = await answer.text();
+        let response = JSON.parse(json)
+        if (response.status === undefined) {
+            thisComponent.setState(
+                { configurationAlreadySaved: true
+                , horaInicio: response.horaInicio
+                , horaFin: response.horaFin
+                , citasPorFranja: response.citasPorFranja
+                , franjasPorDia: response.franjasPorDia
+                , duracionFranja: Math.round((((new Date (new Date().toDateString() + ' ' + response.horaFin))
+                -(new Date (new Date().toDateString() + ' ' + response.horaInicio)))/60000)/response.franjasPorDia) 
+                }
+            )
+        }
+
+
+		}
+		getConfiguration();
 	}
 
 	render() {
@@ -78,7 +105,8 @@ export default class FormularioConfiguracion extends Component {
                                             { horaInicio: e.target.value
                                             , duracionFranja: Math.round((((new Date (new Date().toDateString() + ' ' + this.state.horaFin))
                                             -(new Date (new Date().toDateString() + ' ' + e.target.value)))/60000)/this.state.franjasPorDia) })} 
-                                        value={this.state.horaInicio}/>
+                                        value={this.state.horaInicio}
+                                        disabled={this.state.configurationAlreadySaved} />
                                 </div>
                                 <div className="col-5">
                                     <input className="h5" type="time"
@@ -87,7 +115,8 @@ export default class FormularioConfiguracion extends Component {
                                             { horaFin: e.target.value
                                             , duracionFranja: Math.round((((new Date (new Date().toDateString() + ' ' + e.target.value))
                                             -(new Date (new Date().toDateString() + ' ' + this.state.horaInicio)))/60000)/this.state.franjasPorDia) })} 
-                                        value={this.state.horaFin}/>
+                                        value={this.state.horaFin}
+                                        disabled={this.state.configurationAlreadySaved} />
                                 </div>
                             </div>
 						</div>
@@ -109,7 +138,8 @@ export default class FormularioConfiguracion extends Component {
                                                 { franjasPorDia: e.target.value
                                                 , duracionFranja: Math.round((((new Date (new Date().toDateString() + ' ' + this.state.horaFin))
                                                 -(new Date (new Date().toDateString() + ' ' + this.state.horaInicio)))/60000)/e.target.value) }) } 
-                                            value={this.state.franjasPorDia} />
+                                            value={this.state.franjasPorDia}
+                                            disabled={this.state.configurationAlreadySaved} />
                                     </div>
                                 </div>
                                 <div className="col-5">
@@ -117,7 +147,8 @@ export default class FormularioConfiguracion extends Component {
                                         <input type="number" className="form-control"
                                             min="0" max="9999"
                                             onChange={e => this.setState({ citasPorFranja: e.target.value })} 
-                                            value={this.state.citasPorFranja} />
+                                            value={this.state.citasPorFranja}
+                                            disabled={this.state.configurationAlreadySaved} />
                                     </div>
                                 </div>
                             </div>
@@ -129,11 +160,14 @@ export default class FormularioConfiguracion extends Component {
 
 						<div className="invalid-feedback d-block">{this.state.msgConfigResultFail}</div>
 						<div className="valid-feedback d-block">{this.state.msgConfigResultOk}</div>
-						<button type="submit" className="btn btn-primary btn-block">Guardar configuración</button>
+						<button disabled={this.state.configurationAlreadySaved} type="submit" className="btn btn-primary btn-block">Guardar configuración</button>
 				</form>
 			</div>
 		</div>
 		);
 	}
 
+    componentDidMount(){
+		this.obtenerConfiguracion(this);
+	}
 }
