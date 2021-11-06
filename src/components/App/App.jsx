@@ -7,6 +7,7 @@ import FormularioUsuarios from '../FormularioUsuarios';
 import Appointment from '../Appointment';
 import Cupos from '../Cupos';
 import FormularioCupos from '../FormularioCupos';
+import Login from '../Login';
 
 function App() {
 	return (<Router>
@@ -38,6 +39,11 @@ function App() {
 									Pedir cita
 </NavLink>
 							</li>
+							<li className="nav-item">
+								<NavLink className="nav-link" to="/Login" activeClassName="nav-link active">
+									Login
+</NavLink>
+							</li>
 							
 						</ul>
 					</div>
@@ -51,6 +57,7 @@ function App() {
 				<Route path='/FormularioUsuarios' exact component={FormularioUsuarios} />
 				<Route path='/FormularioCupos' exact component={FormularioCupos} />
 				<Route path='/Cupos' exact component={Cupos} />
+				<Route path='/Login' exact component={Login} />
 			</Switch>
 		</div>
 	</Router>);
