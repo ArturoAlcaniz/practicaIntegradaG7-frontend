@@ -1,4 +1,4 @@
-import React, {Component, useState, show, handleClose, handleShow} from "react";
+import React, {Component, useState } from "react";
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import env from "react-dotenv";
@@ -33,15 +33,7 @@ export default class Appointment extends Component {
 		}
 		getCitas();
 	}
-	
-	modificarFecha(event) {
-		var fecha =  event.target.parentNode.parentNode.getElementsByTagName("td")[1].innerHTML;
-		console.log(fecha);
-		
-		
-	}
-	
-	
+
 	handlePetition(event) {
 		event.preventDefault()
 		async function makeReserve(thisComponent) {
@@ -120,7 +112,7 @@ export default class Appointment extends Component {
                                                         <td>{listValue.centroNombre}</td>
                                                         <td>{listValue.fecha}</td>
                                                         <td>		
-													<Example  dataFecha={listValue.fecha}/>											        
+													<ModificarCita dataCita={[listValue.dni, listValue.centroNombre, listValue.fecha]}/>										        
 													</td>
                                                     </tr>
                                                 );
@@ -152,27 +144,98 @@ export default class Appointment extends Component {
 	componentDidMount(){
 		this.obtenerDatos(this);
 	}
+	
+	componentDidUpdate(){
+		this.obtenerDatos(this);
+	}
+}
+
+
+function ModificarCita({dataCita}){
+	
+	let dniCita = dataCita[0];
+	let centroCita = dataCita[1];
+	let fechaCita = dataCita[2];
+	
+	const handleClick = () => {
+    	localStorage.setItem("dniCita",dniCita);
+		localStorage.setItem("centroCita",centroCita);
+		localStorage.setItem("fechaCita",fechaCita);
+	
+  }
+	
+	
+	return (
+		<Button href="/ModificarCita" onClick={handleClick}>Modificar cita</Button>	
+	)
 }
 
 
 
-
-
-
-
-
-
-
-
-
-function Example({dataFecha}) {
+function ModificarBoton({dataCita}) {
 	
-	//var fecha = event.target.parentNode.parentNode.parentNode.getElementsByTagName("td")[1].innerHTML;
+	
+	const handleModificarCita = () => {
+		
+		
+		
+		async function modificarCita() {
+			
+			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/citas/modify', {
+				method: "POST",
+				body: JSON.stringify({dni: dataCita[0], centro: dataCita[1], fechaAntigua: dataCita[2], fechaNueva: dataCita[3]}),
+				headers: { 
+					'Accept': 'application/json',
+					'Content-Type': 'application/json' 
+				}
+			});
+			let response = await answer.json();
+			
+			console.log(response);
+			dataCita[4] = response;
+			return dataCita;
+		
+		}
+		
+		return modificarCita();
+	
+	
+	
+	}
+	
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+		
+		setShow(false);
+	}
+	
+	const handleSave = async () => {
+		
+		dataCita[3]=document.getElementById("FechaCita").value;
+		
+		dataCita = await handleModificarCita();
+		
+		var response = dataCita[4].status;
+		if (!response === '200'){
+			console.log("JEJE");
+			setShow(false);
+		}else{
+			console.log("maricon");
+	
+		}
+		
+		
+		
+	}
+	
   const handleShow = () => setShow(true);
-
+	
+	
+	
+	
+	
+	
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
@@ -190,17 +253,18 @@ function Example({dataFecha}) {
 
 		<form>
 							<div className="form-group">
-								<input id="FechaCita" className="form-control" placeholder="" defaultValue={dataFecha}
+								<input id="FechaCita" className="form-control" placeholder="" defaultValue={dataCita[2]}
 									/>
 							</div>
 							
 							</form>
 		
         <Modal.Footer>
+			
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleSave}>
             Save Changes
           </Button>
         </Modal.Footer>
@@ -210,56 +274,3 @@ function Example({dataFecha}) {
 }
 
 
-
-
-
-
-
-
-
-
-
-function ModificarCitaModal(){
-	
-		
-		const [show, setShow] = useState(false);
-
-  const handleClose = () => {
-			console.log(document.getElementById("FechaCita").value);
-			setShow(false)};
-  const handleShow = () => setShow(true);
-	
-;
- 
-return (
-	<>
-
-      <Modal
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    show={show} onHide={handleClose}>
-    
-        <Modal.Body>Introduce una nueva fecha para tu cita</Modal.Body>
-
-		<form>
-							<div className="form-group">
-								<input id="FechaCita" className="form-control" placeholder="" defaultValue=""
-									/>
-							</div>
-							
-							</form>
-		
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-</>
-);
-		
-	}
