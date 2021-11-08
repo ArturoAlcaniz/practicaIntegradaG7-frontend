@@ -18,7 +18,7 @@ export default class Login extends Component{
 	handleCrearLogin(event) {
 		event.preventDefault()
 		async function makeLogin(thisComponent) {
-			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/login', {
+			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/usuario/login', {
 				method: "POST",
 				body: JSON.stringify({email: thisComponent.state.email, password: thisComponent.state.password}),
 				headers: { 
