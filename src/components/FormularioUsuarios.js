@@ -8,6 +8,7 @@ export default class FormularioUsuarios extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+				centros: [],
 				dni:"",
 				rol:"",
 				nombre:"",
@@ -15,7 +16,6 @@ export default class FormularioUsuarios extends Component {
 				email: "",
 				centro:"",
 				password: "",
-				cent: [],
 				msgLoginResultOk: "",
 				msgLoginResultFail: ""
 		}
@@ -46,21 +46,17 @@ export default class FormularioUsuarios extends Component {
 		makeUsuarios(this)
 	}
 	
-	obtenerNombre(thisComponent){
+	obtenerDatos(thisComponent){
 		async function getCentros(){
-				let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/obtenerNombre', {
+				let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/centros/obtener', {
 			method: "GET"
 		});
 		
 		let json = await answer.text();
-		let centros = JSON.parse(json);
-		thisComponent.setState({cent: centros})
+		thisComponent.setState({centros: JSON.parse(json)})
 		}
-		console.log(this.state.cent)
-		
 		getCentros();
 	}
-
 	 
 	render() {
 		return (
@@ -101,9 +97,9 @@ export default class FormularioUsuarios extends Component {
 						<div className="form-group">
 							<label htmlFor="exampleFormControlSelect1">Centro</label>
 							<select className="form-control" id="exampleFormControlSelect1"
-							onChange={() => this.state.cent.map((listValue, index) => {
+							onChange={() => this.state.centros.map((listValue, index) => {
 												return (
-													<option key={index}>{listValue}</option>	
+													<option key={index}>{listValue.nombre}</option>	
 												);
 											})}>
 							</select >
@@ -122,7 +118,7 @@ export default class FormularioUsuarios extends Component {
 		);
 	}
 	componentDidMount(){
-		this.obtenerNombre(this);
+		this.obtenerDatos(this);
 	}
 
 }
