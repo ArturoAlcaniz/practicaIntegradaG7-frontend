@@ -15,6 +15,7 @@ export default class FormularioUsuarios extends Component {
 				email: "",
 				centro:"",
 				password: "",
+				centros: [],
 				msgLoginResultOk: "",
 				msgLoginResultFail: ""
 		}
@@ -22,7 +23,7 @@ export default class FormularioUsuarios extends Component {
 	handleCrearUsuario(event) {
 		event.preventDefault()
 		async function makeUsuarios(thisComponent) {
-			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/usuario/create', {
+			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/post', {
 				method: "POST",
 				body: JSON.stringify({dni: thisComponent.state.dni, nombre: thisComponent.state.nombre, apellidos: thisComponent.state.apellidos, email: thisComponent.state.email, password: thisComponent.state.password, centro: thisComponent.state.centro, rol: thisComponent.state.rol}),
 				headers: { 
@@ -43,6 +44,21 @@ export default class FormularioUsuarios extends Component {
 		}
 
 		makeUsuarios(this)
+	}
+	
+	obtenerNombre(thisComponent){
+		async function getUsuarios(){
+				let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/obtenerNombre', {
+			method: "GET"
+		});
+		
+		let json = await answer.text();
+		console.log(JSON.parse(json))
+		thisComponent.setState({centros: JSON.parse(json)})
+		}
+		console.log(this.state.centros)
+		
+		getUsuarios();
 	}
 
 	 
@@ -85,11 +101,11 @@ export default class FormularioUsuarios extends Component {
 						<div className="form-group">
 							<label htmlFor="exampleFormControlSelect1">Centro</label>
 							<select className="form-control" id="exampleFormControlSelect1"
-								onChange={e => this.setState({ centro: e.target.value })}>
-								<option>Selecciona un centro</option>
-								<option>Paciente</option>
-								<option>Sanitario</option>
-								<option>Administrador</option>
+							onChange={this.state.centros.map((listValue, index) => {
+												return (
+													<option key={index}>{listValue}</option>	
+												);
+											})}>
 							</select >
 						</div>
 						<div className="form-group">
@@ -104,6 +120,9 @@ export default class FormularioUsuarios extends Component {
 				</div>
 			</div>
 		);
+	}
+	componentDidMount(){
+		this.obtenerNombre(this);
 	}
 
 }
