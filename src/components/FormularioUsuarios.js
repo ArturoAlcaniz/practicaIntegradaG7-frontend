@@ -53,11 +53,10 @@ export default class FormularioUsuarios extends Component {
 		});
 		
 		let json = await answer.text();
-		thisComponent.setState({centros: JSON.parse(json)})
-		}
+		thisComponent.setState({centros: JSON.parse(json)})}
 		getCentros();
 	}
-	 
+	
 	render() {
 		return (
 			<div className="auth-wrapper">
@@ -96,12 +95,12 @@ export default class FormularioUsuarios extends Component {
 						</div>
 						<div className="form-group">
 							<label htmlFor="exampleFormControlSelect1">Centro</label>
-							<select className="form-control" id="exampleFormControlSelect1"
-							onChange={() => this.state.centros.map((listValue, index) => {
-												return (
-													<option key={index}>{listValue.nombre}</option>	
-												);
-											})}>
+							<select className="form-control" id="exampleFormControlSelect1">
+								{this.state.centros.map((listValue, index) => {
+									return (
+										<option key={index}>{listValue.nombre}</option>
+									);
+								})}
 							</select >
 						</div>
 						<div className="form-group">
