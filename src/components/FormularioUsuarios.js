@@ -23,7 +23,7 @@ export default class FormularioUsuarios extends Component {
 	handleCrearUsuario(event) {
 		event.preventDefault()
 		async function makeUsuarios(thisComponent) {
-			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/post', {
+			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/usuario/create', {
 				method: "POST",
 				body: JSON.stringify({dni: thisComponent.state.dni, nombre: thisComponent.state.nombre, apellidos: thisComponent.state.apellidos, email: thisComponent.state.email, password: thisComponent.state.password, centro: thisComponent.state.centro, rol: thisComponent.state.rol}),
 				headers: { 
