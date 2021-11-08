@@ -15,7 +15,7 @@ export default class FormularioUsuarios extends Component {
 				email: "",
 				centro:"",
 				password: "",
-				centros: [],
+				cent: [],
 				msgLoginResultOk: "",
 				msgLoginResultFail: ""
 		}
@@ -47,18 +47,18 @@ export default class FormularioUsuarios extends Component {
 	}
 	
 	obtenerNombre(thisComponent){
-		async function getUsuarios(){
+		async function getCentros(){
 				let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/obtenerNombre', {
 			method: "GET"
 		});
 		
 		let json = await answer.text();
-		console.log(JSON.parse(json))
-		thisComponent.setState({centros: JSON.parse(json)})
+		let centros = JSON.parse(json);
+		thisComponent.setState({cent: centros})
 		}
-		console.log(this.state.centros)
+		console.log(this.state.cent)
 		
-		getUsuarios();
+		getCentros();
 	}
 
 	 
@@ -101,7 +101,7 @@ export default class FormularioUsuarios extends Component {
 						<div className="form-group">
 							<label htmlFor="exampleFormControlSelect1">Centro</label>
 							<select className="form-control" id="exampleFormControlSelect1"
-							onChange={this.state.centros.map((listValue, index) => {
+							onChange={() => this.state.cent.map((listValue, index) => {
 												return (
 													<option key={index}>{listValue}</option>	
 												);
