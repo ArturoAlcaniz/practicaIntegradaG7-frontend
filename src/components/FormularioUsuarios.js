@@ -8,6 +8,7 @@ export default class FormularioUsuarios extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+				centros: [],
 				dni:"",
 				rol:"",
 				nombre:"",
@@ -44,8 +45,18 @@ export default class FormularioUsuarios extends Component {
 
 		makeUsuarios(this)
 	}
-
-	 
+	
+	obtenerDatos(thisComponent){
+		async function getCentros(){
+				let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/centros/obtener', {
+			method: "GET"
+		});
+		
+		let json = await answer.text();
+		thisComponent.setState({centros: JSON.parse(json)})}
+		getCentros();
+	}
+	
 	render() {
 		return (
 			<div className="auth-wrapper">
@@ -84,12 +95,12 @@ export default class FormularioUsuarios extends Component {
 						</div>
 						<div className="form-group">
 							<label htmlFor="exampleFormControlSelect1">Centro</label>
-							<select className="form-control" id="exampleFormControlSelect1"
-								onChange={e => this.setState({ centro: e.target.value })}>
-								<option>Selecciona un centro</option>
-								<option>Paciente</option>
-								<option>Sanitario</option>
-								<option>Administrador</option>
+							<select className="form-control" id="exampleFormControlSelect1">
+								{this.state.centros.map((listValue, index) => {
+									return (
+										<option key={index}>{listValue.nombre}</option>
+									);
+								})}
 							</select >
 						</div>
 						<div className="form-group">
@@ -104,6 +115,9 @@ export default class FormularioUsuarios extends Component {
 				</div>
 			</div>
 		);
+	}
+	componentDidMount(){
+		this.obtenerDatos(this);
 	}
 
 }
