@@ -6,10 +6,11 @@ export default class ModificarCita extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			dni: localStorage.getItem("dniCita"),
+			email: localStorage.getItem("emailCita"),
 			centro:localStorage.getItem("centroCita"),
 			fechaAntigua: localStorage.getItem("fechaCita"),
 			fechaNueva:localStorage.getItem("fechaCita"),
+			ncita:localStorage.getItem("ncita"),
 			msgCreationResultOk: "",
 			msgCreationResultFail: ""
 		}
@@ -21,7 +22,8 @@ export default class ModificarCita extends Component {
 			
 			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/citas/modify', {
 				method: "POST",
-				body: JSON.stringify({dni: thisComponent.state.dni, centro: thisComponent.state.centro, fechaAntigua: thisComponent.state.fechaAntigua, fechaNueva:thisComponent.state.fechaNueva}),
+				body: JSON.stringify({email: thisComponent.state.email, centro: thisComponent.state.centro, fechaAntigua: thisComponent.state.fechaAntigua, 
+				fechaNueva:thisComponent.state.fechaNueva, ncita : thisComponent.state.ncita}),
 				headers: { 
 					'Accept': 'application/json',
 					'Content-Type': 'application/json' 
