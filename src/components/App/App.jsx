@@ -9,6 +9,7 @@ import Cupos from '../Cupos';
 import FormularioCupos from '../FormularioCupos';
 import Login from '../Login';
 import FormularioConfiguracion from '../FormularioConfiguracion';
+import ListaVacunacion from '../ListaVacunacion';
 
 function App() {
 	return (<Router>
@@ -46,6 +47,11 @@ function App() {
 </NavLink>
 							</li>
 							<li className="nav-item">
+								<NavLink className="nav-link" to="/ListaVacunacion" activeClassName="nav-link active">
+									Lista de vacunacion
+</NavLink>
+							</li>
+							<li className="nav-item">
 								<NavLink className="nav-link" to="/Login" activeClassName="nav-link active">
 									Login
 </NavLink>
@@ -65,6 +71,7 @@ function App() {
 				<Route path='/Cupos' exact component={Cupos} />
 				<Route path='/Login' exact component={Login} />
 				<Route path='/Configuracion' exact component={FormularioConfiguracion} />
+				<Route path='/ListaVacunacion' exact component={ListaVacunacion} />
 			</Switch>
 		</div>
 	</Router>);
