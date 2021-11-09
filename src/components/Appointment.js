@@ -18,6 +18,8 @@ export default class Appointment extends Component {
 				
 				
 		}
+		
+		
 	}
 	
 	
@@ -147,9 +149,7 @@ export default class Appointment extends Component {
 		this.obtenerDatos(this);
 	}
 	
-	componentDidUpdate(){
-		this.obtenerDatos(this);
-	}
+	
 }
 
 
