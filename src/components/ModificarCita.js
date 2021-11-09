@@ -58,6 +58,8 @@ export default class ModificarCita extends Component {
 							<h3>Modificar cita</h3>
 							<div className="form-group">
 								<label>Introduzca un nueva fecha</label>
+								<input type="date" id="start" name="trip-start" min="2021-11-01" max="2022-01-11"/>
+								<label>Seleccione una hora disponible para esa fecha</label>
 								<input type="fecha" className="form-control" defaultValue={this.state.fechaAntigua} placeholder="Introduzca fecha"
 									onChange={e => this.setState({ fechaNueva: e.target.value })} />
 							</div>
