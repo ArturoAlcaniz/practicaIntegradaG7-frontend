@@ -1,4 +1,4 @@
-import React, {Component, useState, show, handleClose, handleShow} from "react";
+import React, {Component, useState } from "react";
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import env from "react-dotenv";
@@ -18,6 +18,8 @@ export default class Appointment extends Component {
 				
 				
 		}
+		
+		
 	}
 	
 	
@@ -33,15 +35,7 @@ export default class Appointment extends Component {
 		}
 		getCitas();
 	}
-	
-	modificarFecha(event) {
-		var fecha =  event.target.parentNode.parentNode.getElementsByTagName("td")[1].innerHTML;
-		console.log(fecha);
-		
-		
-	}
-	
-	
+
 	handlePetition(event) {
 		event.preventDefault()
 		async function makeReserve(thisComponent) {
@@ -110,7 +104,8 @@ export default class Appointment extends Component {
 										<tr>
                                             <th>Centro</th>
                                             <th>Fecha</th>
-                                            <th></th>
+                                            <th>Cita</th>
+											<th></th>
 										</tr>
                                         </thead>
                                         <tbody>
@@ -118,9 +113,10 @@ export default class Appointment extends Component {
                                                 return (
                                                     <tr key={index}>
                                                         <td>{listValue.centroNombre}</td>
-                                                        <td>{listValue.fecha}</td>
+                                                        <td>{listValue.fecha.substring(0,10)+" a las "+listValue.fecha.substring(11,16)}</td>
+														<td>{listValue.ncita}</td>
                                                         <td>		
-													<Example  dataFecha={listValue.fecha}/>											        
+													<ModificarCita dataCita={[listValue.email, listValue.centroNombre, listValue.fecha, listValue.ncita]}/>										        
 													</td>
                                                     </tr>
                                                 );
@@ -152,114 +148,27 @@ export default class Appointment extends Component {
 	componentDidMount(){
 		this.obtenerDatos(this);
 	}
+	
+	
 }
 
 
-
-
-
-
-
-
-
-
-
-
-function Example({dataFecha}) {
+function ModificarCita({dataCita}){
 	
-	//var fecha = event.target.parentNode.parentNode.parentNode.getElementsByTagName("td")[1].innerHTML;
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  return (
-    <>
-      <Button variant="primary" onClick={handleShow}>
-        Modificar cita
-      </Button>
-
-      
-      <Modal
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    show={show} onHide={handleClose}>
-    
-        <Modal.Body>Introduce una nueva fecha para tu cita</Modal.Body>
-
-		<form>
-							<div className="form-group">
-								<input id="FechaCita" className="form-control" placeholder="" defaultValue={dataFecha}
-									/>
-							</div>
-							
-							</form>
-		
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
-  );
+	let emailCita = dataCita[0];
+	let centroCita = dataCita[1];
+	let fechaCita = dataCita[2];
+	let ncita = dataCita[3];
+	
+	const handleClick = () => {
+    	localStorage.setItem("emailCita",emailCita);
+		localStorage.setItem("centroCita",centroCita);
+		localStorage.setItem("fechaCita",fechaCita);
+		localStorage.setItem("ncita",ncita);
+	
+  }
+	return (
+		<Button href="/ModificarCita" onClick={handleClick}>Modificar cita</Button>	
+	)
 }
 
-
-
-
-
-
-
-
-
-
-
-function ModificarCitaModal(){
-	
-		
-		const [show, setShow] = useState(false);
-
-  const handleClose = () => {
-			console.log(document.getElementById("FechaCita").value);
-			setShow(false)};
-  const handleShow = () => setShow(true);
-	
-;
- 
-return (
-	<>
-
-      <Modal
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    show={show} onHide={handleClose}>
-    
-        <Modal.Body>Introduce una nueva fecha para tu cita</Modal.Body>
-
-		<form>
-							<div className="form-group">
-								<input id="FechaCita" className="form-control" placeholder="" defaultValue=""
-									/>
-							</div>
-							
-							</form>
-		
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-</>
-);
-		
-	}

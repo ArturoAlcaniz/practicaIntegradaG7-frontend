@@ -9,6 +9,7 @@ import Cupos from '../Cupos';
 import FormularioCupos from '../FormularioCupos';
 import Login from '../Login';
 import FormularioConfiguracion from '../FormularioConfiguracion';
+import ModificarCita from '../ModificarCita';
 import ListaVacunacion from '../ListaVacunacion';
 
 function App() {
@@ -68,6 +69,7 @@ function App() {
 				<Route path='/FormularioCentros' exact component={FormularioCentros} />
 				<Route path='/FormularioUsuarios' exact component={FormularioUsuarios} />
 				<Route path='/FormularioCupos' exact component={FormularioCupos} />
+				<Route path='/ModificarCita' exact component={ModificarCita} />
 				<Route path='/Cupos' exact component={Cupos} />
 				<Route path='/Login' exact component={Login} />
 				<Route path='/Configuracion' exact component={FormularioConfiguracion} />
