@@ -12,6 +12,7 @@ export default class ModificarCita extends Component {
 			fechaAntigua: localStorage.getItem("fechaCita"),
 			fechaNueva:localStorage.getItem("fechaCita"),
 			ncita:localStorage.getItem("ncita"),
+			limiteCalendario:"",
 			diaSeleccionado:"",
 			cupoSeleccionado:"",
 			citas:[],
@@ -35,7 +36,18 @@ export default class ModificarCita extends Component {
 		getCitas();
 	}
 	
+	setLimiteCalendario(thisComponent){
+		if (this.state.ncita==="1"){
+		thisComponent.state.limiteCalendario="2022-01-10";
+		}
+		if (this.state.ncita==="2"){
+		thisComponent.state.limiteCalendario="2022-01-31";	
+		}
+		
+	}
+	
 	obtenerCuposLibres(thisComponent, fecha){
+	
 		if (typeof fecha !== 'undefined'){
 			thisComponent.state.diaSeleccionado = fecha;
 			async function getCuposLibres(){
@@ -54,6 +66,7 @@ export default class ModificarCita extends Component {
 		
 		}
 		getCuposLibres();
+		
 		}
 		
 	}
@@ -91,7 +104,6 @@ export default class ModificarCita extends Component {
 
 	render() {
 		
-		
 		return (
 		
 				<div className="auth-wrapper">
@@ -100,7 +112,7 @@ export default class ModificarCita extends Component {
 							<h3>Modificar cita</h3>
 							<div className="form-group">
 								<label>Introduzca un nueva fecha</label>
-								<input type="date" id="start" name="trip-start" defaultValue={this.state.fechaAntigua.substring(0,10)} min="2021-11-01" max="2022-01-11"
+								<input type="date" id="start" name="trip-start" defaultValue={this.state.fechaAntigua.substring(0,10)} min="2021-11-01" max={this.state.limiteCalendario}
 								onChange={e => this.obtenerCuposLibres(this,e.target.value)}/>
 							</div>
 							<div className="form-group">
@@ -126,7 +138,8 @@ export default class ModificarCita extends Component {
 	
 	componentDidMount(){
 		this.obtenerDatos(this);
-		this.obtenerCuposLibres(this);
+		this.setLimiteCalendario(this);
+		this.obtenerCuposLibres(this, this.state.fechaAntigua.substring(0,10));
 		
 	
 	}

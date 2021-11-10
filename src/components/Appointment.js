@@ -113,7 +113,7 @@ export default class Appointment extends Component {
                                                 return (
                                                     <tr key={index}>
                                                         <td>{listValue.centroNombre}</td>
-                                                        <td>{listValue.fecha}</td>
+                                                        <td>{listValue.fecha.substring(0,10)+" a las "+listValue.fecha.substring(11,16)}</td>
 														<td>{listValue.ncita}</td>
                                                         <td>		
 													<ModificarCita dataCita={[listValue.email, listValue.centroNombre, listValue.fecha, listValue.ncita]}/>										        
