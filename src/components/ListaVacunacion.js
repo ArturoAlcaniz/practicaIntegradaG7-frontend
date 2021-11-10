@@ -37,7 +37,7 @@ export default class ListaVacunacion extends Component {
 									<div>Fecha</div>
 									<div><input type="date" id="start" name="trip-start"
        									defaultValue={this.state.fecha}
-       									min="2021-11-01" max="2022-01-31"/>
+       									min="2021-11-10" max="2022-01-31"/>
 									</div>
 									<table className="table table-hover">
 										<thead>
