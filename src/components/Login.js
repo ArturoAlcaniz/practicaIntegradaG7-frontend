@@ -34,7 +34,6 @@ export default class Login extends Component{
 				thisComponent.setState(
 						{ msgLoginResultOk: "Acceso permitido"
 							, msgLoginResultFail: ""});
-				
 			}else{
 				thisComponent.setState(
 						{ msgLoginResultOk: ""
