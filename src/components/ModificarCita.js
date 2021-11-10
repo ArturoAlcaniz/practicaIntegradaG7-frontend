@@ -14,7 +14,7 @@ export default class ModificarCita extends Component {
 			ncita:localStorage.getItem("ncita"),
 			limiteCalendario:"",
 			diaSeleccionado:"",
-			cupoSeleccionado:"",
+			cupoSeleccionado: "",
 			citas:[],
 			cupos:[],
 			msgCreationResultOk: "",
@@ -43,7 +43,7 @@ export default class ModificarCita extends Component {
 		if (this.state.ncita==="2"){
 		thisComponent.state.limiteCalendario="2022-01-31";	
 		}
-		
+	
 	}
 	
 	obtenerCuposLibres(thisComponent, fecha){
@@ -117,8 +117,9 @@ export default class ModificarCita extends Component {
 							</div>
 							<div className="form-group">
 								<label>Seleccione una hora disponible para esa fecha</label>								
-								<select className="form-control" id="exampleFormControlSelect1"
+								<select className="form-control" id="LOL"
 								onChange={e => this.setState({ cupoSeleccionado: e.target.value })}>
+								<option selected disabled hidden>Selecciona una hora</option>
 								{this.state.cupos.map((listValue, index) => {
 									return (
 										<option key={index}>{(listValue.fechaInicio).substring(11,16)}</option>
