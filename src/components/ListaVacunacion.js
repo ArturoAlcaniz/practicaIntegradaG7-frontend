@@ -20,9 +20,6 @@ export default class ListaVacunacion extends Component {
 			fecha: date
 		}
 	}
-	
-	vacunar(event) {
-	}
 
 	render() {
 		return (
@@ -38,7 +35,7 @@ export default class ListaVacunacion extends Component {
 									<div>Fecha</div>
 									<div><input type="date" id="start" name="trip-start"
        									defaultValue={this.state.fecha}
-       									min="2021-11-01" max="2022-01-31"/>
+       									min="2021-11-10" max="2022-01-31"/>
 									</div>
 									<table className="table table-hover">
 										<thead>
@@ -57,7 +54,7 @@ export default class ListaVacunacion extends Component {
 														<td>{listValue.dni}</td>
 														<td>{listValue.nombre}</td>
 														<td>{listValue.primeraDosis ? "2" : "1"}</td>
-														<VacunarPaciente dataVacunacion={[listValue.dni]} />
+														<VacunarPaciente dataVacunacion={[listValue.email]} />
 													</tr>
 												);
 											})}
@@ -79,7 +76,7 @@ async function VacunarPaciente({dataVacunacion}) {
 	const handleVacunacion = async function() {
 		let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/usuario/vacunar', {
 			method: "POST",
-			body: JSON.stringify({dni: dataVacunacion[0]}),
+			body: JSON.stringify({email: dataVacunacion[0]}),
 			headers: { 
 				'Accept': 'application/json',
 				'Content-Type': 'application/json' 
