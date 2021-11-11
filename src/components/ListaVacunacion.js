@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import env from"react-dotenv";
+import Button from 'react-bootstrap/Button'
 
 
 export default class ListaVacunacion extends Component {
@@ -50,6 +51,16 @@ export default class ListaVacunacion extends Component {
 											</tr>
 										</thead>
 										<tbody>
+											{this.state.usuarios.map((listValue, index) => {
+												return (
+													<tr key={index}>
+														<td>{listValue.dni}</td>
+														<td>{listValue.nombre}</td>
+														<td>{listValue.primeraDosis ? "2" : "1"}</td>
+														<VacunarPaciente dataVacunacion={[listValue.dni]} />
+													</tr>
+												);
+											})}
 										</tbody>
 									</table>
 								</div>
@@ -61,4 +72,30 @@ export default class ListaVacunacion extends Component {
 			</div>
 		);
 	}
+}
+
+async function VacunarPaciente({dataVacunacion}) {
+	
+	const handleVacunacion = async function() {
+		let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/usuario/vacunar', {
+			method: "POST",
+			body: JSON.stringify({dni: dataVacunacion[0]}),
+			headers: { 
+				'Accept': 'application/json',
+				'Content-Type': 'application/json' 
+			}
+		});
+		let response = (await answer.json());
+		if (response.status === "200") {
+			let arrayUsuarios = this.state.usuarios
+			arrayUsuarios.remove(this.state.usuarios.findIndex(item => item.dni === dataVacunacion[0]))
+			this.setState({usuarios: arrayUsuarios})
+		}else{
+			
+		}
+	}
+
+	return (
+		<Button href="/VacunarPaciente" onClick={handleVacunacion}></Button> 
+	)
 }
