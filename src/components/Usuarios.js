@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import env from"react-dotenv";
+import Button from 'react-bootstrap/Button';
 
 
 export default class Usuarios extends Component {
@@ -9,6 +10,27 @@ export default class Usuarios extends Component {
 		this.state = {
 			usuarios: []
 		}
+	}
+	
+	handleEliminar(event) {
+		var email = event.target.parentNode.parentNode.getElementsByTagName("td")[4].innerHTML;
+		
+		/*async function eliminarUsuario() {
+		
+		fetch(env[process.env.NODE_ENV+'_API_URL']+'/usuario/eliminar', {
+			method: "POST",
+			body: JSON.stringify({email}),
+			headers: { 
+				'Accept': 'application/json',
+				'Content-Type': 'application/json' 
+			}
+		});
+		let response = await answer.json();
+			
+		alert(response.message);
+		
+		}
+		eliminarUsuario(this);*/
 	}
 
 	obtenerDatos(thisComponent){
@@ -44,6 +66,7 @@ export default class Usuarios extends Component {
 												<th>Apellidos</th>
 												<th>Email</th>
 												<th>Centro</th>
+												<th></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -56,6 +79,9 @@ export default class Usuarios extends Component {
 														<td>{listValue.apellidos}</td>
 														<td>{listValue.email}</td>
 														<td>{listValue.centro.nombre}</td>
+														<td>
+														<Button onClick={this.handleEliminar}>Eliminar</Button>	
+													</td>
 													</tr>
 												);
 											})}
@@ -75,3 +101,4 @@ export default class Usuarios extends Component {
 		this.obtenerDatos(this);
 	}
 }
+
