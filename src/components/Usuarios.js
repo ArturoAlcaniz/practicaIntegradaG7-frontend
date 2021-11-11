@@ -20,6 +20,7 @@ export default class Usuarios extends Component {
 		
 		let json = await answer.text();
 		thisComponent.setState({usuarios: JSON.parse(json)})
+		console.log(thisComponent.state.usuarios[0].dniDenc);
 		}
 		getUsuarios();
 	}

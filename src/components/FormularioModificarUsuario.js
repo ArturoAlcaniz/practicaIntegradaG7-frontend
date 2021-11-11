@@ -10,12 +10,14 @@ export default class FormularioModificarUsuario extends Component {
 		this.state = {
 				centros: [],
 				emailog: props.location.state.user.email,
-				dni: props.location.state.user.dni,
+				dni: props.location.state.user.dniDenc,
 				nombre:props.location.state.user.nombre,
 				apellidos:props.location.state.user.apellidos,
 				centro: props.location.state.user.centro.nombre,
+				rol: props.location.state.user.rol,
 				password: ""
 		}
+		console.log(props.location.state.user);
 	}
 	handleModUsuario(event) {
 		event.preventDefault()
@@ -27,7 +29,8 @@ export default class FormularioModificarUsuario extends Component {
 					nombre: thisComponent.state.nombre, 
 					apellidos: thisComponent.state.apellidos, 
 					password: thisComponent.state.password, 
-					centro: thisComponent.state.centro, 
+					centro: thisComponent.state.centro,
+					rol: thisComponent.state.rol
 					}),
 				headers: { 
 					'Accept': 'application/json',
@@ -95,8 +98,7 @@ export default class FormularioModificarUsuario extends Component {
 						</div>
 						<div className="form-group">
 							<label>Password</label>
-							<input type="password" className="form-control" placeholder={this.state.password}
-								onChange={e => this.setState({ password: e.target.value })} />
+							<input type="password" className="form-control" onChange={e => this.setState({ password: e.target.value })} />
 						</div>
 						<div className="invalid-feedback d-block">{this.state.msgLoginResultFail}</div>
 						<div className="valid-feedback d-block">{this.state.msgLoginResultOk}</div>
