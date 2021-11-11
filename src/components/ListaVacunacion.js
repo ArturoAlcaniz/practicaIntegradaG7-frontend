@@ -20,9 +20,6 @@ export default class ListaVacunacion extends Component {
 			fecha: date
 		}
 	}
-	
-	vacunar(event) {
-	}
 
 	render() {
 		return (
