@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import env from"react-dotenv";
+import { Link } from "react-router-dom";
 
 
 export default class Usuarios extends Component {
@@ -50,12 +51,21 @@ export default class Usuarios extends Component {
 											{this.state.usuarios.map((listValue, index) => {
 												return (
 													<tr key={index}>
-														<td>{listValue.dni}</td>
+														<td>{listValue.dniDenc}</td>
 														<td>{listValue.rol}</td>
 														<td>{listValue.nombre}</td>
 														<td>{listValue.apellidos}</td>
 														<td>{listValue.email}</td>
 														<td>{listValue.centro.nombre}</td>
+														<td>
+														<Link
+															to={{
+																pathname: "/modifyUser",
+																state: {user: this.state.usuarios[index]}
+															}}>
+															<button className="btn btn-success">Modificar usuario</button>
+														</Link>
+														</td>
 													</tr>
 												);
 											})}

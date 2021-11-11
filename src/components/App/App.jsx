@@ -9,6 +9,7 @@ import Cupos from '../Cupos';
 import FormularioCupos from '../FormularioCupos';
 import Login from '../Login';
 import FormularioConfiguracion from '../FormularioConfiguracion';
+import FormularioModificarUsuario from '../FormularioModificarUsuario';
 
 function App() {
 	return (<Router>
@@ -65,6 +66,7 @@ function App() {
 				<Route path='/Cupos' exact component={Cupos} />
 				<Route path='/Login' exact component={Login} />
 				<Route path='/Configuracion' exact component={FormularioConfiguracion} />
+				<Route path='/modifyUser' exact component={FormularioModificarUsuario} />
 			</Switch>
 		</div>
 	</Router>);
