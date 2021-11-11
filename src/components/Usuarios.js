@@ -15,9 +15,9 @@ export default class Usuarios extends Component {
 	handleEliminar(event) {
 		var email = event.target.parentNode.parentNode.getElementsByTagName("td")[4].innerHTML;
 		
-		/*async function eliminarUsuario() {
+		async function eliminarUsuario() {
 		
-		fetch(env[process.env.NODE_ENV+'_API_URL']+'/usuario/eliminar', {
+		let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/usuario/eliminar', {
 			method: "POST",
 			body: JSON.stringify({email}),
 			headers: { 
@@ -28,9 +28,10 @@ export default class Usuarios extends Component {
 		let response = await answer.json();
 			
 		alert(response.message);
+		window.location = '/Usuarios';
 		
 		}
-		eliminarUsuario(this);*/
+		eliminarUsuario(this);
 	}
 
 	obtenerDatos(thisComponent){
