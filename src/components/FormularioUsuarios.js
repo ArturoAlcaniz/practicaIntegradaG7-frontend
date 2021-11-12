@@ -95,7 +95,9 @@ export default class FormularioUsuarios extends Component {
 						</div>
 						<div className="form-group">
 							<label htmlFor="exampleFormControlSelect1">Centro</label>
-							<select className="form-control" id="exampleFormControlSelect1">
+							<select className="form-control" id="exampleFormControlSelect1" 
+							onChange={e => this.setState({ centro: e.target.value })}>
+								<option value="" selected disabled hidden>Selecciona un centro</option>
 								{this.state.centros.map((listValue, index) => {
 									return (
 										<option key={index}>{listValue.nombre}</option>

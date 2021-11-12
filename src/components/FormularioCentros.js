@@ -44,6 +44,8 @@ export default class FormularioCentros extends Component {
 	}
 
 	render() {
+		
+		
 		return (
 		<div className="auth-wrapper">
 			<div className="auth-inner">	
