@@ -9,6 +9,7 @@ import Cupos from '../Cupos';
 import FormularioCupos from '../FormularioCupos';
 import Login from '../Login';
 import FormularioConfiguracion from '../FormularioConfiguracion';
+import FormularioModificarUsuario from '../FormularioModificarUsuario';
 import ModificarCita from '../ModificarCita';
 import ListaVacunacion from '../ListaVacunacion';
 
@@ -73,6 +74,7 @@ function App() {
 				<Route path='/Cupos' exact component={Cupos} />
 				<Route path='/Login' exact component={Login} />
 				<Route path='/Configuracion' exact component={FormularioConfiguracion} />
+				<Route path='/modifyUser' exact component={FormularioModificarUsuario} />
 				<Route path='/ListaVacunacion' exact component={ListaVacunacion} />
 			</Switch>
 		</div>
