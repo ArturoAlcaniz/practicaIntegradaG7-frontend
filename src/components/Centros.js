@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import env  from "react-dotenv";
+import Button from 'react-bootstrap/Button';
 
 
 export default class Centros extends Component{
@@ -28,6 +29,30 @@ export default class Centros extends Component{
 		thisComponent.setState({centros: JSON.parse(json)})
 		}
 		getCentros();
+	}
+	
+	handleEliminar(event) {
+		var nombreCentro = event.target.parentNode.parentNode.getElementsByTagName("td")[0].innerHTML;
+		
+		async function eliminarCentro() {
+		
+		let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/centros/eliminar', {
+			method: "POST",
+			body: JSON.stringify({nombreCentro}),
+			headers: { 
+				'Accept': 'application/json',
+				'Content-Type': 'application/json' 
+			}
+		});
+		let response = await answer.json();
+			
+		alert(response.message);
+		if(response.status === "200"){
+		window.location = '/Centros';
+		}
+		
+		}
+		eliminarCentro(this);
 	}
 
 	addVaccines(event) {
@@ -72,6 +97,7 @@ export default class Centros extends Component{
                                         <th>Direccion</th>
                                         <th>Vacunas disponibles</th>
                                         <th>Anadir vacunas</th>
+										<th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -83,6 +109,9 @@ export default class Centros extends Component{
 													<td>{listValue.vacunas}</td>
 													<td>
 														<button onClick={this.addVaccines}>Anadir vacunas</button>
+													</td>
+													<td>
+														<Button onClick={this.handleEliminar}>Eliminar</Button>	
 													</td>
 												</tr>
 											);
