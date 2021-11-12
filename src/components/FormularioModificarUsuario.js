@@ -9,7 +9,7 @@ export default class FormularioModificarUsuario extends Component {
 		super(props);
 		this.state = {
 				centros: [],
-				emailog: props.location.state.user.email,
+				email: props.location.state.user.email,
 				dni: props.location.state.user.dniDenc,
 				nombre:props.location.state.user.nombre,
 				apellidos:props.location.state.user.apellidos,
@@ -24,7 +24,7 @@ export default class FormularioModificarUsuario extends Component {
 		async function modUsuarios(thisComponent) {
 			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/usuario/modify', {
 				method: "POST",
-				body: JSON.stringify({emailog: thisComponent.state.emailog, 
+				body: JSON.stringify({email: thisComponent.state.email, 
 					dni: thisComponent.state.dni, 
 					nombre: thisComponent.state.nombre, 
 					apellidos: thisComponent.state.apellidos, 
