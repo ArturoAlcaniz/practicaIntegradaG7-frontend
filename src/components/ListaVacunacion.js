@@ -70,7 +70,7 @@ export default class ListaVacunacion extends Component {
 														<td>{listValue.dni}</td>
 														<td>{listValue.nombre}</td>
 														<td>{listValue.primeraDosis ? "2" : "1"}</td>
-														<VacunarPaciente dataVacunacion={[listValue.dni]} />
+														<VacunarPaciente dataVacunacion={[listValue.email]} />
 													</tr>
 												);
 											})}
@@ -96,7 +96,7 @@ async function VacunarPaciente({dataVacunacion}) {
 	const handleVacunacion = async function() {
 		let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/usuario/vacunar', {
 			method: "POST",
-			body: JSON.stringify({dni: dataVacunacion[0]}),
+			body: JSON.stringify({email: dataVacunacion[0]}),
 			headers: { 
 				'Accept': 'application/json',
 				'Content-Type': 'application/json' 
