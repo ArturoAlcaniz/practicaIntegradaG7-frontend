@@ -20,6 +20,22 @@ export default class ListaVacunacion extends Component {
 			fecha: date
 		}
 	}
+	
+	obtenerUsuarios(thisComponent){
+		async function getUsuarios(){
+				let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/usuarios/obtenerPorFechaAndCentro', {
+			method: "GET",
+			body: JSON.stringify({fecha: thisComponent.state.fecha, centro: sessionStorage.getItem("centro")}),
+				headers: { 
+					'Accept': 'application/json',
+					'Content-Type': 'application/json' 
+				}
+		});
+		
+		let json = await answer.text();
+		thisComponent.setState({usuarios: JSON.parse(json)})}
+		getUsuarios();
+	}
 
 	render() {
 		return (
@@ -69,6 +85,10 @@ export default class ListaVacunacion extends Component {
 			</div>
 		);
 	}
+		componentDidMount(){
+		this.obtenerUsuarios(this);
+	}
+
 }
 
 async function VacunarPaciente({dataVacunacion}) {
@@ -95,4 +115,5 @@ async function VacunarPaciente({dataVacunacion}) {
 	return (
 		<Button href="/VacunarPaciente" onClick={handleVacunacion}></Button> 
 	)
+	
 }
