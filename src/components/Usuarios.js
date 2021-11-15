@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import env from"react-dotenv";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 
 
@@ -9,8 +9,38 @@ export default class Usuarios extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			usuarios: []
+			usuarios: [],
+			perm: ""
 		}
+	}
+	
+	manageNavBar() {
+		document.getElementById("navConf").hidden = false;
+		document.getElementById("navCupos").hidden = false;
+		document.getElementById("navCentros").hidden = false;
+		document.getElementById("navUsers").hidden = false;
+		document.getElementById("navCita").hidden = true;
+		document.getElementById("navLsVac").hidden = true;
+		document.getElementById("navLogin").hidden = false;
+	}
+	
+	checkPermission(thisComponent){
+		async function chek(){
+			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/perms/check', {
+				method: "POST",
+				body: JSON.stringify({site: "usuarios", 
+					email: sessionStorage.getItem("email"),
+					password: sessionStorage.getItem("password")}),
+				headers: { 
+					'Accept': 'application/json',
+					'Content-Type': 'application/json' 
+				}
+
+			});
+			let allowed = (await answer.json());
+			thisComponent.state.perm = allowed.message;
+			}
+		chek();
 	}
 	
 	handleEliminar(event) {
@@ -43,14 +73,21 @@ export default class Usuarios extends Component {
 		
 		let json = await answer.text();
 		thisComponent.setState({usuarios: JSON.parse(json)})
-		console.log(thisComponent.state.usuarios[0].dniDenc);
 		}
 		getUsuarios();
 	}
 
 	render() {
+		if (this.state.perm && this.state.perm !== "OK") {
+			return <Redirect to={{
+				pathname: '/notAllowed',
+				state: { prevMssg: this.state.perm }
+			}}
+			/>
+		}
+		
 		return (
-			<div className="auth-wrapper">
+				<div className="auth-wrapper">
 				<div className="container-fluid px-4">
 					<div className="card mb-4">
 						<div className="card-header">
@@ -109,6 +146,8 @@ export default class Usuarios extends Component {
 	}
 	
 	componentDidMount(){
+		this.checkPermission(this);
+		this.manageNavBar();
 		this.obtenerDatos(this);
 	}
 }

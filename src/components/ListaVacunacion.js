@@ -17,7 +17,8 @@ export default class ListaVacunacion extends Component {
 		let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + dia;
 		this.state = {
 			citas: [],
-			fecha: date
+			fecha: date,
+			perm: ""
 		}
 	}
 	
@@ -34,12 +35,49 @@ export default class ListaVacunacion extends Component {
 		
 		let json = await answer.text();
 		thisComponent.setState({citas: JSON.parse(json)})}
+		
 		getCitas();
+		}
+		
+		manageNavBar() {
+		document.getElementById("navConf").hidden = true;
+		document.getElementById("navCupos").hidden = true;
+		document.getElementById("navCentros").hidden = true;
+		document.getElementById("navUsers").hidden = true;
+		document.getElementById("navCita").hidden = true;
+		document.getElementById("navLsVac").hidden = false;
+		document.getElementById("navLogin").hidden = false;
+	}
+	
+	checkPermission(thisComponent){
+		async function chek(){
+			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/perms/check', {
+				method: "POST",
+				body: JSON.stringify({site: "listaVacunacion", 
+					email: sessionStorage.getItem("email"),
+					password: sessionStorage.getItem("password")}),
+				headers: { 
+					'Accept': 'application/json',
+					'Content-Type': 'application/json' 
+				}
+
+			});
+			let allowed = (await answer.json());
+			thisComponent.state.perm = allowed.message;
+			}
 	}
 
 	render() {
+		if (this.state.perm && this.state.perm !== "OK") {
+			return <Redirect to={{
+				pathname: '/notAllowed',
+				state: { prevMssg: this.state.perm }
+			}}
+			/>
+		}
+		
 		return (
-			<div className="auth-wrapper">
+				<div className="auth-wrapper">
 				<div className="container-fluid px-4">
 					<div className="card mb-4">
 						<div className="card-header">
@@ -77,15 +115,17 @@ export default class ListaVacunacion extends Component {
 									</table>
 								</div>
 							</div>
-
 						</div>
 					</div>
 				</div>
 			</div>
 		);
 	}
-		componentDidMount(){
+	
+	componentDidMount(){
 		this.obtenerCitas(this,this.state.fecha);
+		this.checkPermission(this);
+		this.manageNavBar();
 	}
 
 }
