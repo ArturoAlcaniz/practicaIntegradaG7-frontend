@@ -89,60 +89,59 @@ export default class Usuarios extends Component {
 		return (
 				<div className="auth-wrapper">
 				<div className="container-fluid px-4">
-				<div className="card mb-4">
-				<div className="card-header">
-				Usuarios
-				</div>
-				<div className="card-body">
-				<div className="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
-				<div className="dataTable-container">
-				<a className="btn btn-success" aria-current="page" href="/FormularioUsuarios">Add usuario</a>
-				<table className="table table-hover">
-				<thead>
-				<tr>
-				<th>DNI</th>
-				<th>Rol</th>
-				<th>Nombre</th>
-				<th>Apellidos</th>
-				<th>Email</th>
-				<th>Centro</th>
-				<th></th>
-				</tr>
-				</thead>
-				<tbody>
-				{this.state.usuarios.map((listValue, index) => {
-					return (
-							<tr key={index}>
-							<td>{listValue.dniDenc}</td>
-							<td>{listValue.rol}</td>
-							<td>{listValue.nombre}</td>
-							<td>{listValue.apellidos}</td>
-							<td>{listValue.email}</td>
-							<td>{listValue.centro.nombre}</td>
-							<td>
-							<Link
-							to={{
-								pathname: "/modifyUser",
-								state: {user: this.state.usuarios[index]}
-							}}>
-							<button className="btn btn-success">Modificar usuario</button>
-							</Link>
-							</td>
-							<td>
-							<Button onClick={this.handleEliminar}>Eliminar</Button>	
-							</td>
-							</tr>
-					);
-				})}
-				</tbody>
-				</table>
-				</div>
-				</div>
+					<div className="card mb-4">
+						<div className="card-header">
+							Usuarios
+						</div>
+						<div className="card-body">
+							<div className="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+								<div className="dataTable-container">
+									<a className="btn btn-success" aria-current="page" href="/FormularioUsuarios">Add usuario</a>
+									<table className="table table-hover">
+										<thead>
+											<tr>
+												<th>DNI</th>
+												<th>Rol</th>
+												<th>Nombre</th>
+												<th>Apellidos</th>
+												<th>Email</th>
+												<th>Centro</th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody>
+											{this.state.usuarios.map((listValue, index) => {
+												return (
+													<tr key={index}>
+														<td>{listValue.dniDenc}</td>
+														<td>{listValue.rol}</td>
+														<td>{listValue.nombre}</td>
+														<td>{listValue.apellidos}</td>
+														<td>{listValue.email}</td>
+														<td>{listValue.centro.nombre}</td>
+														<td>
+														<Link
+															to={{
+																pathname: "/modifyUser",
+																state: {user: this.state.usuarios[index]}
+															}}>
+															<button className="btn btn-success">Modificar usuario</button>
+														</Link>
+														</td>
+														<Button onClick={this.handleEliminar}>Eliminar</Button>	
+													
+													</tr>
+												);
+											})}
+										</tbody>
+									</table>
+								</div>
+							</div>
 
+						</div>
+					</div>
 				</div>
-				</div>
-				</div>
-				</div>
+			</div>
 		);
 	}
 	
