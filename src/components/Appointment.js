@@ -65,7 +65,36 @@ export default class Appointment extends Component {
 		makeReserve(this)
 	}
 	
-	
+	handleEliminarCita(event, ) {
+		event.preventDefault()
+
+		
+
+		async function eliminarCita() {
+
+		var email = sessionStorage.getItem("email");
+		var centro = event.target.parentNode.parentNode.getElementsByTagName("td")[0].innerHTML;
+		var fecha = event.target.parentNode.parentNode.getElementsByTagName("td")[1].innerHTML;
+		var ncita = event.target.parentNode.parentNode.getElementsByTagName("td")[2].innerHTML;
+
+		let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/citas/delete', {
+			method: "POST",
+			body: JSON.stringify({fecha: fecha, email: email, centro:centro, ncita: ncita}),
+			headers: { 
+				'Accept': 'application/json',
+				'Content-Type': 'application/json' 
+			}
+		});
+		let response = await answer.json();
+			
+		alert(response.message);
+		if(response.status === "200"){
+		
+		}
+		
+		}
+		eliminarCita(this);
+	}
 
 	render() {
 		
@@ -115,8 +144,11 @@ export default class Appointment extends Component {
                                                         <td>{listValue.centroNombre}</td>
                                                         <td>{listValue.fecha.substring(0,10)+" a las "+listValue.fecha.substring(11,16)}</td>
 														<td>{listValue.ncita}</td>
-                                                        <td>		
-													<ModificarCita dataCita={[listValue.email, listValue.centroNombre, listValue.fecha, listValue.ncita]}/>										        
+                                                    <td>		
+														<ModificarCita dataCita={[listValue.email, listValue.centroNombre, listValue.fecha, listValue.ncita]}/>
+													</td>
+										        	<td>
+														<Button  onClick={this.handleEliminarCita}>Eliminar</Button>
 													</td>
                                                     </tr>
                                                 );
@@ -170,5 +202,16 @@ function ModificarCita({dataCita}){
 	return (
 		<Button href="/ModificarCita" onClick={handleClick}>Modificar cita</Button>	
 	)
+
 }
+
+
+
+
+
+
+
+
+
+
 
