@@ -16,16 +16,16 @@ export default class ListaVacunacion extends Component {
 		}
 		let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + dia;
 		this.state = {
-			usuarios: [],
+			citas: [],
 			fecha: date
 		}
 	}
 	
-	obtenerUsuarios(thisComponent){
-		async function getUsuarios(){
-				let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/usuarios/obtenerPorFechaAndCentro', {
-			method: "GET",
-			body: JSON.stringify({fecha: thisComponent.state.fecha, centro: sessionStorage.getItem("centro")}),
+	obtenerCitas(thisComponent,fecha){
+		async function getCitas(){
+				let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/citas/obtenerPorFechaAndCentro', {
+			method: "POST",
+			body: JSON.stringify({fecha: fecha, centro: sessionStorage.getItem("centro")}),
 				headers: { 
 					'Accept': 'application/json',
 					'Content-Type': 'application/json' 
@@ -33,8 +33,8 @@ export default class ListaVacunacion extends Component {
 		});
 		
 		let json = await answer.text();
-		thisComponent.setState({usuarios: JSON.parse(json)})}
-		getUsuarios();
+		thisComponent.setState({citas: JSON.parse(json)})}
+		getCitas();
 	}
 
 	render() {
@@ -50,27 +50,26 @@ export default class ListaVacunacion extends Component {
 								<div className="dataTable-container">
 									<div>Fecha</div>
 									<div><input type="date" id="start" name="trip-start"
-       									defaultValue={this.state.fecha}
-       									min="2021-11-10" max="2022-01-31"/>
+       									defaultValue={this.state.fecha}	min="2021-11-10" max="2022-01-31"
+										onChange={e => this.obtenerCitas(this,e.target.value)}/>
 									</div>
 									<table className="table table-hover">
 										<thead>
 											<tr>
-												<th>DNI</th>
-												<th>Nombre</th>
-												<th>Apellidos</th>
+												<th>Email</th>
+												<th>Hora</th>
 												<th>Dosis a suministrar</th>
 												<th>Vacunar</th>
 											</tr>
 										</thead>
 										<tbody>
-											{this.state.usuarios.map((listValue, index) => {
+											{this.state.citas.map((listValue, index) => {
 												return (
 													<tr key={index}>
-														<td>{listValue.dni}</td>
-														<td>{listValue.nombre}</td>
-														<td>{listValue.primeraDosis ? "2" : "1"}</td>
-														<VacunarPaciente dataVacunacion={[listValue.email]} />
+														<td>{listValue.email}</td>
+														<td>{listValue.fecha.substring(11,16)}</td>
+														<td>{listValue.ncita}</td>
+														{/*<td><VacunarPaciente dataVacunacion={[listValue.email]} /></td>*/}										
 													</tr>
 												);
 											})}
@@ -86,7 +85,7 @@ export default class ListaVacunacion extends Component {
 		);
 	}
 		componentDidMount(){
-		this.obtenerUsuarios(this);
+		this.obtenerCitas(this,this.state.fecha);
 	}
 
 }

@@ -27,7 +27,7 @@ export default class Login extends Component{
 				}
 			});
 			let response = (await answer.json());
-			if (response.status == "200") {
+			if (response.status === "200") {
 				sessionStorage.setItem("email",response.email);
 				sessionStorage.setItem("password",response.pwd);
 				sessionStorage.setItem("centro",response.centro);

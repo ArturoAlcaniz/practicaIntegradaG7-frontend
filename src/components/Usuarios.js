@@ -92,7 +92,7 @@ export default class Usuarios extends Component {
 														</Link>
 														</td>
 														<Button onClick={this.handleEliminar}>Eliminar</Button>	
-													</td>
+													
 													</tr>
 												);
 											})}
