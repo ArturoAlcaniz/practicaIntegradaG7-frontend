@@ -88,7 +88,7 @@ export default class Appointment extends Component {
 		makeReserve(this)
 	}
 	
-	handleEliminarCita(event, ) {
+	handleEliminarCita(event) {
 		event.preventDefault()
 
 		async function eliminarCita() {
@@ -110,7 +110,7 @@ export default class Appointment extends Component {
 			
 		alert(response.message);
 		if(response.status === "200"){
-		
+			window.location = "/Appointment";
 		}
 		
 		}
@@ -140,54 +140,6 @@ export default class Appointment extends Component {
 				<div className="text-success d-block text-center">{this.state.msgAppointOk}</div>
 				<div className="text-danger d-block text-center">{this.state.msgAppointFail}</div>
 				</form>
-				
-				
-					<h3>Mis Citas</h3>
-					
-				
-                   
-					<div className="card-body">
-                            <div className="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
-                                <div className="dataTable-container">
-					<table className="table table-hover">
-                                        <thead>
-										<tr>
-                                            <th>Centro</th>
-                                            <th>Fecha</th>
-                                            <th>Cita</th>
-											<th></th>
-										</tr>
-                                        </thead>
-                                        <tbody>
-                                            {this.state.citas.map((listValue, index) => {
-                                                return (
-                                                    <tr key={index}>
-                                                        <td>{listValue.centroNombre}</td>
-                                                        <td>{listValue.fecha.substring(0,10)+" a las "+listValue.fecha.substring(11,16)}</td>
-														<td>{listValue.ncita}</td>
-                                                    <td>		
-														<ModificarCita dataCita={[listValue.email, listValue.centroNombre, listValue.fecha, listValue.ncita]}/>
-													</td>
-										        	<td>
-														<Button  onClick={this.handleEliminarCita}>Eliminar</Button>
-													</td>
-                                                    </tr>
-                                                );
-                                            })}
-                                        </tbody>
-                                    </table>
-</div>
-                    </div>
-                </div>
-					</div>
-                </div>
-					
-					<div className="text-center">
-						
-					</div>
-					
-				
-				
 				<h3>Mis Citas</h3>
 				<div className="card-body">
 				<div className="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
@@ -211,6 +163,9 @@ export default class Appointment extends Component {
 							<td>		
 							<ModificarCita dataCita={[listValue.email, listValue.centroNombre, listValue.fecha, listValue.ncita]}/>										        
 							</td>
+							<td>
+														<Button  onClick={this.handleEliminarCita}>Eliminar</Button>
+													</td>
 							</tr>
 					);
 				})}
@@ -227,7 +182,7 @@ export default class Appointment extends Component {
 		);
 	}
 	
-	componentDidMount() {
+componentDidMount() {
 		this.checkPermission(this);
 		this.manageNavBar();
 		this.obtenerDatos(this);
