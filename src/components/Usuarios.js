@@ -87,7 +87,7 @@ export default class Usuarios extends Component {
 		}
 		
 		return (
-				<div className="auth-wrapper">
+			<div className="auth-wrapper">
 				<div className="container-fluid px-4">
 					<div className="card mb-4">
 						<div className="card-header">
@@ -106,6 +106,9 @@ export default class Usuarios extends Component {
 												<th>Apellidos</th>
 												<th>Email</th>
 												<th>Centro</th>
+												<th>Modificar usuario</th>
+												<th>Eliminar usuario</th>
+
 												<th></th>
 											</tr>
 										</thead>
@@ -120,16 +123,17 @@ export default class Usuarios extends Component {
 														<td>{listValue.email}</td>
 														<td>{listValue.centro.nombre}</td>
 														<td>
-														<Link
-															to={{
-																pathname: "/modifyUser",
-																state: {user: this.state.usuarios[index]}
-															}}>
-															<button className="btn btn-success">Modificar usuario</button>
-														</Link>
+															<Link
+																to={{
+																	pathname: "/modifyUser",
+																	state: { user: this.state.usuarios[index] }
+																}}>
+																<Button>Modificar usuario</Button>
+															</Link>
 														</td>
-														<Button onClick={this.handleEliminar}>Eliminar</Button>	
-													
+														<td>
+															<Button onClick={this.handleEliminar}>Eliminar</Button>
+														</td>
 													</tr>
 												);
 											})}

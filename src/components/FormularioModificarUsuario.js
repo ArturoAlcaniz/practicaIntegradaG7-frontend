@@ -14,7 +14,7 @@ export default class FormularioModificarUsuario extends Component {
 				dni: props.location.state.user.dniDenc,
 				nombre:props.location.state.user.nombre,
 				apellidos:props.location.state.user.apellidos,
-				centro: props.location.state.user.centro.nombre,
+				centro: props.location.state.user.centro,
 				rol: props.location.state.user.rol,
 				password: "",
 				perm: ""
@@ -68,11 +68,10 @@ export default class FormularioModificarUsuario extends Component {
 					'Content-Type': 'application/json' 
 				}
 			});
+			console.log(thisComponent.state.centro);
 			let response = (await answer.json());
 			if (response.status === "200") {
-				thisComponent.setState(
-						{ msgLoginResultOk: "Usuario creado correctamente"
-							, msgLoginResultFail: ""})
+				window.location = '/Usuarios';
 			}else{
 				thisComponent.setState(
 						{ msgLoginResultOk: ""
@@ -105,46 +104,46 @@ export default class FormularioModificarUsuario extends Component {
 		}
 		
 		return (
-				<div className="auth-wrapper">
+			<div className="auth-wrapper">
 				<div className="auth-inner">
-				<form onSubmit={this.handleModUsuario.bind(this)}>
-				<h3>Modificar Usuario</h3>
-				<div className="form-group">
-				<label>DNI</label>
-				<input type="dni" className="form-control" value={this.state.dni}
-				onChange={e => this.setState({ dni: e.target.value })} />
+					<form onSubmit={this.handleModUsuario.bind(this)}>
+						<h3>Modificar Usuario</h3>
+						<div className="form-group">
+							<label>DNI</label>
+							<input type="dni" className="form-control" value={this.state.dni}
+								onChange={e => this.setState({ dni: e.target.value })} />
+						</div>
+						<div className="form-group">
+							<label>Nombre</label>
+							<input type="nombre" className="form-control" value={this.state.nombre}
+								onChange={e => this.setState({ nombre: e.target.value })} />
+						</div>
+						<div className="form-group">
+							<label>Apellidos</label>
+							<input type="apellidos" className="form-control" value={this.state.apellidos}
+								onChange={e => this.setState({ apellidos: e.target.value })} />
+						</div>
+						<div className="form-group">
+							<label htmlFor="exampleFormControlSelect1">Centro</label>
+							<select className="form-control" id="exampleFormControlSelect1" value={this.state.centro}
+								onChange={e => this.setState({ centro: e.target.value })}>
+								{this.state.centros.map((listValue, index) => {
+									return (
+										<option key={index}>{listValue.nombre}</option>
+									);
+								})}
+							</select >
+						</div>
+						<div className="form-group">
+							<label>Password</label>
+							<input type="password" className="form-control" onChange={e => this.setState({ password: e.target.value })} />
+						</div>
+						<div className="invalid-feedback d-block">{this.state.msgLoginResultFail}</div>
+						<div className="valid-feedback d-block">{this.state.msgLoginResultOk}</div>
+						<button type="submit" className="btn btn-primary btn-block">Modificar usuario</button>
+					</form>
 				</div>
-				<div className="form-group">
-				<label>Nombre</label>
-				<input type="nombre" className="form-control" value={this.state.nombre}
-				onChange={e => this.setState({ nombre: e.target.value })} />
-				</div>
-				<div className="form-group">
-				<label>Apellidos</label>
-				<input type="apellidos" className="form-control" value={this.state.apellidos}
-				onChange={e => this.setState({ apellidos: e.target.value })} />
-				</div>
-				<div className="form-group">
-				<label htmlFor="exampleFormControlSelect1">Centro</label>
-				<select className="form-control" id="exampleFormControlSelect1" value={this.state.centro}
-				onChange={e => this.setState({ centro: e.target.value })}>
-				{this.state.centros.map((listValue, index) => {
-					return (
-							<option key={index}>{listValue.nombre}</option>
-					);
-				})}
-				</select >
-				</div>
-				<div className="form-group">
-				<label>Password</label>
-				<input type="password" className="form-control" onChange={e => this.setState({ password: e.target.value })} />
-				</div>
-				<div className="invalid-feedback d-block">{this.state.msgLoginResultFail}</div>
-				<div className="valid-feedback d-block">{this.state.msgLoginResultOk}</div>
-				<button type="submit" className="btn btn-primary btn-block">Guardar usuario</button>
-				</form>
-				</div>
-				</div>
+			</div>
 		);
 	}
 	

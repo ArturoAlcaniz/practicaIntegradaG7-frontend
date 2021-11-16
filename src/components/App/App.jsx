@@ -13,6 +13,7 @@ import FormularioModificarUsuario from '../FormularioModificarUsuario';
 import ModificarCita from '../ModificarCita';
 import ListaVacunacion from '../ListaVacunacion';
 import NotAllowed from '../NotAllowed';
+import ModificarCentro from '../ModificarCentro';
 
 function App() {
 	return (<Router>
@@ -78,6 +79,7 @@ function App() {
 				<Route path='/modifyUser' exact component={FormularioModificarUsuario} />
 				<Route path='/ListaVacunacion' exact component={ListaVacunacion} />
 				<Route path='/notAllowed' exact component={NotAllowed} />
+				<Route path='/ModificarCentro' exact component={ModificarCentro} />
 				<Redirect exact from="/" to="/Login" />
 			</Switch>
 		</div>
