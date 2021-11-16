@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.css';
 import env from"react-dotenv";
 import { Redirect } from 'react-router-dom';
@@ -29,6 +30,9 @@ export default class FormularioModificarUsuario extends Component {
 		document.getElementById("navCita").hidden = true;
 		document.getElementById("navLsVac").hidden = true;
 		document.getElementById("navLogin").hidden = false;
+	}
+	handleCancelar(){
+		window.location = '/Usuarios'
 	}
 	
 	checkPermission(thisComponent){
@@ -142,6 +146,7 @@ export default class FormularioModificarUsuario extends Component {
 				<div className="invalid-feedback d-block">{this.state.msgLoginResultFail}</div>
 				<div className="valid-feedback d-block">{this.state.msgLoginResultOk}</div>
 				<button type="submit" className="btn btn-primary btn-block">Guardar usuario</button>
+				<Button variant="secondary" onClick={this.handleCancelar} className="btn btn-primary btn-block">Cancelar</Button>
 				</form>
 				</div>
 				</div>
