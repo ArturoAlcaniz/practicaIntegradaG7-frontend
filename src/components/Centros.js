@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import env  from "react-dotenv";
+import Button from 'react-bootstrap/Button';
+import { Redirect } from 'react-router-dom';
 
 
 export default class Centros extends Component{
@@ -14,10 +16,40 @@ export default class Centros extends Component{
 			direccion: "",
 			vacunas: "",
 			msgGetResultOk: "",
-			msgGetResultFail: ""
+			msgGetResultFail: "",
+			perm: ""
 		}
-		
 	}
+	
+	manageNavBar() {
+		document.getElementById("navConf").hidden = false;
+		document.getElementById("navCupos").hidden = false;
+		document.getElementById("navCentros").hidden = false;
+		document.getElementById("navUsers").hidden = false;
+		document.getElementById("navCita").hidden = true;
+		document.getElementById("navLsVac").hidden = true;
+		document.getElementById("navLogin").hidden = false;
+	}
+	
+	checkPermission(thisComponent){
+		async function chek(){
+			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/perms/check', {
+				method: "POST",
+				body: JSON.stringify({site: "centros", 
+					email: sessionStorage.getItem("email"),
+					password: sessionStorage.getItem("password")}),
+				headers: { 
+					'Accept': 'application/json',
+					'Content-Type': 'application/json' 
+				}
+
+			});
+			let allowed = (await answer.json());
+			thisComponent.state.perm = allowed.message;
+			}
+		chek();
+	}
+	
 	obtenerDatos(thisComponent){
 		async function getCentros(){
 				let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/centros/obtener', {
@@ -28,6 +60,30 @@ export default class Centros extends Component{
 		thisComponent.setState({centros: JSON.parse(json)})
 		}
 		getCentros();
+	}
+	
+	handleEliminar(event) {
+		var nombreCentro = event.target.parentNode.parentNode.getElementsByTagName("td")[0].innerHTML;
+		
+		async function eliminarCentro() {
+		
+		let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/centros/eliminar', {
+			method: "POST",
+			body: JSON.stringify({nombreCentro}),
+			headers: { 
+				'Accept': 'application/json',
+				'Content-Type': 'application/json' 
+			}
+		});
+		let response = await answer.json();
+			
+		alert(response.message);
+		if(response.status === "200"){
+		window.location = '/Centros';
+		}
+		
+		}
+		eliminarCentro(this);
 	}
 
 	addVaccines(event) {
@@ -54,7 +110,14 @@ export default class Centros extends Component{
 	}
 	
     render() {
-	
+    	if (this.state.perm && this.state.perm !== "OK") {
+			return <Redirect to={{
+				pathname: '/notAllowed',
+				state: { prevMssg: this.state.perm }
+			}}
+			/>
+		}
+    	
         return (
         	<div className="container-fluid px-4">
                 <div className="card mb-4">
@@ -72,6 +135,7 @@ export default class Centros extends Component{
                                         <th>Direccion</th>
                                         <th>Vacunas disponibles</th>
                                         <th>Anadir vacunas</th>
+										<th>Eliminar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -82,7 +146,10 @@ export default class Centros extends Component{
 													<td>{listValue.direccion}</td>
 													<td>{listValue.vacunas}</td>
 													<td>
-														<button onClick={this.addVaccines}>Anadir vacunas</button>
+														<Button onClick={this.addVaccines}>Anadir vacunas</Button>
+													</td>
+													<td>
+														<Button onClick={this.handleEliminar}>Eliminar</Button>	
 													</td>
 												</tr>
 											);
@@ -98,6 +165,8 @@ export default class Centros extends Component{
     }
 
 	componentDidMount(){
+		this.checkPermission(this);
+		this.manageNavBar();
 		this.obtenerDatos(this);
 	}
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, NavLink, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, NavLink, Switch, Route, Redirect } from "react-router-dom";
 import Centros from '../Centros';
 import FormularioCentros from '../FormularioCentros';
 import Usuarios from '../Usuarios';
@@ -9,8 +9,10 @@ import Cupos from '../Cupos';
 import FormularioCupos from '../FormularioCupos';
 import Login from '../Login';
 import FormularioConfiguracion from '../FormularioConfiguracion';
+import FormularioModificarUsuario from '../FormularioModificarUsuario';
 import ModificarCita from '../ModificarCita';
 import ListaVacunacion from '../ListaVacunacion';
+import NotAllowed from '../NotAllowed';
 
 function App() {
 	return (<Router>
@@ -23,41 +25,41 @@ function App() {
 					<div className="collapse navbar-collapse" id="navbarNavDropdown">
 						<ul className="navbar-nav">
 							<li className="nav-item">
-								<NavLink className="nav-link" to="/Configuracion" activeClassName="nav-link active">
+								<NavLink id="navConf" className="nav-link" to="/Configuracion" activeClassName="nav-link active">
 									Configuracion
 								</NavLink>
 							</li>
 							<li className="nav-item">
-								<NavLink className="nav-link" to="/Cupos" activeClassName="nav-link active">
+								<NavLink id="navCupos" className="nav-link" to="/Cupos" activeClassName="nav-link active">
 									Cupos
 								</NavLink>
 							</li>
 							<li className="nav-item">
-								<NavLink className="nav-link" to="/Centros" activeClassName="nav-link active">
+								<NavLink id="navCentros" className="nav-link" to="/Centros" activeClassName="nav-link active">
 									Centros
-</NavLink>
+								</NavLink>
 							</li>
 							<li className="nav-item">
-								<NavLink className="nav-link" to="/Usuarios" activeClassName="nav-link active">
+								<NavLink id="navUsers" className="nav-link" to="/Usuarios" activeClassName="nav-link active">
 									Usuarios
-</NavLink>
+								</NavLink>
 							</li>
 							<li className="nav-item">
-								<NavLink className="nav-link" to="/Appointment" activeClassName="nav-link active">
+								<NavLink id="navCita" className="nav-link" to="/Appointment" activeClassName="nav-link active">
 									Pedir cita
-</NavLink>
+								</NavLink>
 							</li>
 							<li className="nav-item">
-								<NavLink className="nav-link" to="/ListaVacunacion" activeClassName="nav-link active">
+								<NavLink id="navLsVac" className="nav-link" to="/ListaVacunacion" activeClassName="nav-link active">
 									Lista de vacunacion
-</NavLink>
+								</NavLink>
 							</li>
 							<li className="nav-item">
-								<NavLink className="nav-link" to="/Login" activeClassName="nav-link active">
+								<NavLink id="navLogin" className="nav-link" to="/Login" activeClassName="nav-link active">
 									Login
-</NavLink>
+								</NavLink>
 							</li>
-							
+
 						</ul>
 					</div>
 				</div>
@@ -73,7 +75,10 @@ function App() {
 				<Route path='/Cupos' exact component={Cupos} />
 				<Route path='/Login' exact component={Login} />
 				<Route path='/Configuracion' exact component={FormularioConfiguracion} />
+				<Route path='/modifyUser' exact component={FormularioModificarUsuario} />
 				<Route path='/ListaVacunacion' exact component={ListaVacunacion} />
+				<Route path='/notAllowed' exact component={NotAllowed} />
+				<Redirect exact from="/" to="/Login" />
 			</Switch>
 		</div>
 	</Router>);

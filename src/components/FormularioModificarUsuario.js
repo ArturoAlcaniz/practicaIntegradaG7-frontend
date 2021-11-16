@@ -4,21 +4,19 @@ import env from"react-dotenv";
 import { Redirect } from 'react-router-dom';
 
 
-export default class FormularioUsuarios extends Component {
+export default class FormularioModificarUsuario extends Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
 				centros: [],
-				dni:"",
-				rol:"",
-				nombre:"",
-				apellidos:"",
-				email: "",
-				centro:"",
+				email: props.location.state.user.email,
+				dni: props.location.state.user.dniDenc,
+				nombre:props.location.state.user.nombre,
+				apellidos:props.location.state.user.apellidos,
+				centro: props.location.state.user.centro.nombre,
+				rol: props.location.state.user.rol,
 				password: "",
-				msgLoginResultOk: "",
-				msgLoginResultFail: "",
 				perm: ""
 		}
 	}
@@ -52,12 +50,19 @@ export default class FormularioUsuarios extends Component {
 		chek();
 	}
 	
-	handleCrearUsuario(event) {
+	handleModUsuario(event) {
 		event.preventDefault()
-		async function makeUsuarios(thisComponent) {
-			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/usuario/create', {
+		async function modUsuarios(thisComponent) {
+			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/usuario/modify', {
 				method: "POST",
-				body: JSON.stringify({dni: thisComponent.state.dni, nombre: thisComponent.state.nombre, apellidos: thisComponent.state.apellidos, email: thisComponent.state.email, password: thisComponent.state.password, centro: thisComponent.state.centro, rol: thisComponent.state.rol}),
+				body: JSON.stringify({email: thisComponent.state.email, 
+					dni: thisComponent.state.dni, 
+					nombre: thisComponent.state.nombre, 
+					apellidos: thisComponent.state.apellidos, 
+					password: thisComponent.state.password, 
+					centro: thisComponent.state.centro,
+					rol: thisComponent.state.rol
+					}),
 				headers: { 
 					'Accept': 'application/json',
 					'Content-Type': 'application/json' 
@@ -72,21 +77,22 @@ export default class FormularioUsuarios extends Component {
 				thisComponent.setState(
 						{ msgLoginResultOk: ""
 							, msgLoginResultFail: "Error al crear usuario"})
-			}console.log(answer);
+			}
 		}
 
-		makeUsuarios(this)
+		modUsuarios(this)
 	}
 	
 	obtenerDatos(thisComponent){
-		async function getCentros(){
+		async function getUsuarios(){
 				let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/centros/obtener', {
 			method: "GET"
 		});
 		
 		let json = await answer.text();
-		thisComponent.setState({centros: JSON.parse(json)})}
-		getCentros();
+		thisComponent.setState({centros: JSON.parse(json)})
+		}
+		getUsuarios();
 	}
 	
 	render() {
@@ -101,43 +107,27 @@ export default class FormularioUsuarios extends Component {
 		return (
 				<div className="auth-wrapper">
 				<div className="auth-inner">
-				<form onSubmit={this.handleCrearUsuario.bind(this)}>
-				<h3>Nuevo Usuario</h3>
+				<form onSubmit={this.handleModUsuario.bind(this)}>
+				<h3>Modificar Usuario</h3>
 				<div className="form-group">
 				<label>DNI</label>
-				<input type="dni" className="form-control" placeholder="Introduzca DNI"
-					onChange={e => this.setState({ dni: e.target.value })} />
-				</div>
-				<div className="form-group">
-				<label htmlFor="exampleFormControlSelect1">Rol</label>
-				<select className="form-control" id="exampleFormControlSelect1"
-					onChange={e => this.setState({ rol: e.target.value })}>
-				<option>Selecciona un rol</option>
-				<option>Paciente</option>
-				<option>Sanitario</option>
-				<option>Administrador</option>
-				</select >
+				<input type="dni" className="form-control" value={this.state.dni}
+				onChange={e => this.setState({ dni: e.target.value })} />
 				</div>
 				<div className="form-group">
 				<label>Nombre</label>
-				<input type="nombre" className="form-control" placeholder="Introduzca Nombre"
-					onChange={e => this.setState({ nombre: e.target.value })} />
+				<input type="nombre" className="form-control" value={this.state.nombre}
+				onChange={e => this.setState({ nombre: e.target.value })} />
 				</div>
 				<div className="form-group">
 				<label>Apellidos</label>
-				<input type="apellidos" className="form-control" placeholder="Introduzca Apellidos"
-					onChange={e => this.setState({ apellidos: e.target.value })} />
-				</div>
-				<div className="form-group">
-				<label>Email</label>
-				<input type="email" className="form-control" placeholder="Introduzca Email"
-					onChange={e => this.setState({ email: e.target.value })} />
+				<input type="apellidos" className="form-control" value={this.state.apellidos}
+				onChange={e => this.setState({ apellidos: e.target.value })} />
 				</div>
 				<div className="form-group">
 				<label htmlFor="exampleFormControlSelect1">Centro</label>
-				<select className="form-control" id="exampleFormControlSelect1" 
-					onChange={e => this.setState({ centro: e.target.value })}>
-				<option value="" selected disabled hidden>Selecciona un centro</option>
+				<select className="form-control" id="exampleFormControlSelect1" value={this.state.centro}
+				onChange={e => this.setState({ centro: e.target.value })}>
 				{this.state.centros.map((listValue, index) => {
 					return (
 							<option key={index}>{listValue.nombre}</option>
@@ -147,17 +137,17 @@ export default class FormularioUsuarios extends Component {
 				</div>
 				<div className="form-group">
 				<label>Password</label>
-				<input type="password" className="form-control" placeholder="Introduzca Password"
-					onChange={e => this.setState({ password: e.target.value })} />
+				<input type="password" className="form-control" onChange={e => this.setState({ password: e.target.value })} />
 				</div>
 				<div className="invalid-feedback d-block">{this.state.msgLoginResultFail}</div>
 				<div className="valid-feedback d-block">{this.state.msgLoginResultOk}</div>
-				<button type="submit" className="btn btn-primary btn-block">Crear usuario</button>
+				<button type="submit" className="btn btn-primary btn-block">Guardar usuario</button>
 				</form>
 				</div>
 				</div>
 		);
 	}
+	
 	componentDidMount(){
 		this.checkPermission(this);
 		this.manageNavBar();

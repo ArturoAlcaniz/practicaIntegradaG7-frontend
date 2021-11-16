@@ -28,19 +28,71 @@ export default class Login extends Component{
 			});
 			let response = (await answer.json());
 			if (response.status === "200") {
+				let rol = response.rol;
+				sessionStorage.setItem("email",response.email);
+				sessionStorage.setItem("password",response.password);
+				sessionStorage.setItem("centro",response.centro);
 				thisComponent.setState(
 						{ msgLoginResultOk: "Acceso permitido"
-							, msgLoginResultFail: ""})
+							, msgLoginResultFail: ""});
+				if(rol === "paciente" || rol === "Paciente") {
+					thisComponent.loadPacienteLinks();
+				}
+				if(rol === "sanitario" || rol === "Sanitario") {
+					thisComponent.loadSanitarioLinks();
+				}
+				if(rol === "administrador" || rol === "Administrador") {
+					thisComponent.loadAdminLinks();
+				}
 			}else{
 				thisComponent.setState(
 						{ msgLoginResultOk: ""
 							, msgLoginResultFail: "Password o email erroneo"})
-			}console.log(answer);
+			}
 		}
 
 		makeLogin(this)
 	}
 	
+	loadPacienteLinks() {
+		document.getElementById("navConf").hidden = true;
+		document.getElementById("navCupos").hidden = true;
+		document.getElementById("navCentros").hidden = true;
+		document.getElementById("navUsers").hidden = true;
+		document.getElementById("navCita").hidden = false;
+		document.getElementById("navLsVac").hidden = true;
+		document.getElementById("navLogin").hidden = true;
+	}
+	
+	loadSanitarioLinks() {
+		document.getElementById("navConf").hidden = true;
+		document.getElementById("navCupos").hidden = true;
+		document.getElementById("navCentros").hidden = true;
+		document.getElementById("navUsers").hidden = true;
+		document.getElementById("navCita").hidden = true;
+		document.getElementById("navLsVac").hidden = false;
+		document.getElementById("navLogin").hidden = false;
+	}
+	
+	loadAdminLinks() {
+		document.getElementById("navConf").hidden = false;
+		document.getElementById("navCupos").hidden = false;
+		document.getElementById("navCentros").hidden = false;
+		document.getElementById("navUsers").hidden = false;
+		document.getElementById("navCita").hidden = true;
+		document.getElementById("navLsVac").hidden = true;
+		document.getElementById("navLogin").hidden = false;
+	}
+	
+	loadDefLinks() {
+		document.getElementById("navConf").hidden = true;
+		document.getElementById("navCupos").hidden = true;
+		document.getElementById("navCentros").hidden = true;
+		document.getElementById("navUsers").hidden = true;
+		document.getElementById("navCita").hidden = true;
+		document.getElementById("navLsVac").hidden = true;
+		document.getElementById("navLogin").hidden = false;
+	}
 
 	render() {
 		return (
@@ -68,5 +120,9 @@ export default class Login extends Component{
 				</div>
 				</div>
 		);
+	}
+	
+	componentDidMount(){
+		this.loadDefLinks();
 	}
 }

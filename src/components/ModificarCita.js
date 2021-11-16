@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import env from "react-dotenv";
+import { Redirect } from 'react-router-dom';
 
 export default class ModificarCita extends Component {
 	constructor(props) {
@@ -18,11 +19,39 @@ export default class ModificarCita extends Component {
 			citas:[],
 			cupos:[],
 			msgCreationResultOk: "",
-			msgCreationResultFail: ""
+			msgCreationResultFail: "",
+			perm: ""
 		}
-	
 	}
 	
+	manageNavBar() {
+		document.getElementById("navConf").hidden = true;
+		document.getElementById("navCupos").hidden = true;
+		document.getElementById("navCentros").hidden = true;
+		document.getElementById("navUsers").hidden = true;
+		document.getElementById("navCita").hidden = false;
+		document.getElementById("navLsVac").hidden = true;
+		document.getElementById("navLogin").hidden = true;
+	}
+	
+	checkPermission(thisComponent){
+		async function chek(){
+			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/perms/check', {
+				method: "POST",
+				body: JSON.stringify({site: "modificarCita", 
+					email: sessionStorage.getItem("email"),
+					password: sessionStorage.getItem("password")}),
+				headers: { 
+					'Accept': 'application/json',
+					'Content-Type': 'application/json' 
+				}
+
+			});
+			let allowed = (await answer.json());
+			thisComponent.state.perm = allowed.message;
+			}
+		chek();
+	}
 	
 	obtenerDatos(thisComponent){
 		async function getCitas(){
@@ -103,47 +132,52 @@ export default class ModificarCita extends Component {
 	}
 
 	render() {
+		if (this.state.perm && this.state.perm !== "OK") {
+			return <Redirect to={{
+				pathname: '/notAllowed',
+				state: { prevMssg: this.state.perm }
+			}}
+			/>
+		}
 		
 		return (
-		
 				<div className="auth-wrapper">
-					<div className="auth-inner">
-						<form onSubmit={this.handleModificarCita.bind(this)}>
-							<h3>Modificar cita</h3>
-							<div className="form-group">
-								<label>Introduzca un nueva fecha</label>
-								<input type="date" id="start" name="trip-start" defaultValue={this.state.fechaAntigua.substring(0,10)} min="2021-11-01" max={this.state.limiteCalendario}
-								onChange={e => this.obtenerCuposLibres(this,e.target.value)}/>
-							</div>
-							<div className="form-group">
-								<label>Seleccione una hora disponible para esa fecha</label>								
-								<select className="form-control" id="LOL"
-								onChange={e => this.setState({ cupoSeleccionado: e.target.value })}>
-								<option selected disabled hidden>Selecciona una hora</option>
-								{this.state.cupos.map((listValue, index) => {
-									return (
-										<option key={index}>{(listValue.fechaInicio).substring(11,16)}</option>
-									);
-								})}
-								</select >
-							</div>
-							<div className="invalid-feedback d-block">{this.state.msgCreationResultFail}</div>
-							<div className="valid-feedback d-block">{this.state.msgCreationResultOk}</div>
-							<button type="submit" className="btn btn-primary btn-block">Modificar cita</button>
-						</form>
-					</div>
+				<div className="auth-inner">
+				<form onSubmit={this.handleModificarCita.bind(this)}>
+				<h3>Modificar cita</h3>
+				<div className="form-group">
+				<label>Introduzca un nueva fecha</label>
+				<input type="date" id="start" name="trip-start" defaultValue={this.state.fechaAntigua.substring(0,10)} min="2021-11-01" max={this.state.limiteCalendario}
+				onChange={e => this.obtenerCuposLibres(this,e.target.value)}/>
 				</div>
-			
+				<div className="form-group">
+				<label>Seleccione una hora disponible para esa fecha</label>								
+				<select className="form-control" id="LOL"
+					onChange={e => this.setState({ cupoSeleccionado: e.target.value })}>
+				<option selected disabled hidden>Selecciona una hora</option>
+				{this.state.cupos.map((listValue, index) => {
+					return (
+							<option key={index}>{(listValue.fechaInicio).substring(11,16)}</option>
+					);
+				})}
+				</select >
+				</div>
+				<div className="invalid-feedback d-block">{this.state.msgCreationResultFail}</div>
+				<div className="valid-feedback d-block">{this.state.msgCreationResultOk}</div>
+				<button type="submit" className="btn btn-primary btn-block">Modificar cita</button>
+				</form>
+				</div>
+				</div>
+
 		);
 	}
 	
 	componentDidMount(){
+		this.checkPermission(this);
+		this.manageNavBar();
 		this.obtenerDatos(this);
 		this.setLimiteCalendario(this);
 		this.obtenerCuposLibres(this, this.state.fechaAntigua.substring(0,10));
-		
-	
 	}
 	
-
 }
