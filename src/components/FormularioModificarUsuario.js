@@ -14,7 +14,7 @@ export default class FormularioModificarUsuario extends Component {
 				dni: props.location.state.user.dniDenc,
 				nombre:props.location.state.user.nombre,
 				apellidos:props.location.state.user.apellidos,
-				centro: props.location.state.user.centro.nombre,
+				centro: props.location.state.user.centro,
 				rol: props.location.state.user.rol,
 				password: "",
 				perm: ""
@@ -71,7 +71,7 @@ export default class FormularioModificarUsuario extends Component {
 			console.log(thisComponent.state.centro);
 			let response = (await answer.json());
 			if (response.status === "200") {
-				window.location = '/Usuario';
+				window.location = '/Usuarios';
 			}else{
 				thisComponent.setState(
 						{ msgLoginResultOk: ""

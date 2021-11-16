@@ -108,6 +108,7 @@ export default class Usuarios extends Component {
 												<th>Centro</th>
 												<th>Modificar usuario</th>
 												<th>Eliminar usuario</th>
+
 												<th></th>
 											</tr>
 										</thead>
