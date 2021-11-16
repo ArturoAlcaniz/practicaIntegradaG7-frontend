@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import env from"react-dotenv";
+import { Redirect } from 'react-router-dom';
 import Button from 'react-bootstrap/Button'
 
 
@@ -68,13 +69,13 @@ export default class ListaVacunacion extends Component {
 	}
 
 	render() {
-		/*if (this.state.perm && this.state.perm !== "OK") {
+		if (this.state.perm && this.state.perm !== "OK") {
 			return <Redirect to={{
 				pathname: '/notAllowed',
 				state: { prevMssg: this.state.perm }
 			}}
 			/>
-		}*/
+		}
 		
 		return (
 				<div className="auth-wrapper">
