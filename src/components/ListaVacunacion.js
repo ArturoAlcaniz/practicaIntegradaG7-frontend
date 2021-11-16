@@ -69,11 +69,11 @@ export default class ListaVacunacion extends Component {
 
 	render() {
 		if (this.state.perm && this.state.perm !== "OK") {
-			/*return <Redirect to={{
+			return <Redirect to={{
 				pathname: '/notAllowed',
 				state: { prevMssg: this.state.perm }
 			}}
-			/>*/
+			/>
 		}
 		
 		return (
