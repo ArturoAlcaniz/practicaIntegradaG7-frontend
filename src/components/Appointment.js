@@ -67,8 +67,6 @@ export default class Appointment extends Component {
 	handleEliminarCita(event, ) {
 		event.preventDefault()
 
-		
-
 		async function eliminarCita() {
 
 		var email = sessionStorage.getItem("email");
