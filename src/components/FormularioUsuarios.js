@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
+import Button from 'react-bootstrap/Button';
 import env from"react-dotenv";
 import { Redirect } from 'react-router-dom';
 
@@ -50,6 +51,10 @@ export default class FormularioUsuarios extends Component {
 			thisComponent.state.perm = allowed.message;
 			}
 		chek();
+	}
+	
+	handleCancelar(){
+		window.location = '/Usuarios'
 	}
 	
 	handleCrearUsuario(event) {
@@ -153,6 +158,7 @@ export default class FormularioUsuarios extends Component {
 				<div className="invalid-feedback d-block">{this.state.msgLoginResultFail}</div>
 				<div className="valid-feedback d-block">{this.state.msgLoginResultOk}</div>
 				<button type="submit" className="btn btn-primary btn-block">Crear usuario</button>
+				<Button variant="secondary" onClick={this.handleCancelar} className="btn btn-primary btn-block">Cancelar</Button>
 				</form>
 				</div>
 				</div>

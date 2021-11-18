@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import env from "react-dotenv";
@@ -45,6 +46,10 @@ export default class FormularioCentros extends Component {
 			thisComponent.state.perm = allowed.message;
 			}
 		chek();
+	}
+	
+	handleCancelar(){
+		window.location = '/Centros'
 	}
 	
 	handleCrearCentro(event) {
@@ -106,6 +111,7 @@ export default class FormularioCentros extends Component {
 				</div>
 
 				<button type="submit" className="btn btn-primary btn-block">Crear centro</button>
+				<Button variant="secondary" onClick={this.handleCancelar} className="btn btn-primary btn-block">Cancelar</Button>
 				<div className="invalid-feedback d-block">{this.state.msgCreationResultFail}</div>
 				<div className="valid-feedback d-block">{this.state.msgCreationResultOk}</div>
 				</form>

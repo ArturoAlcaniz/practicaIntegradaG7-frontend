@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import env from "react-dotenv";
 import { Redirect } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 export default class ModificarCita extends Component {
 	constructor(props) {
@@ -51,6 +52,10 @@ export default class ModificarCita extends Component {
 			thisComponent.state.perm = allowed.message;
 			}
 		chek();
+	}
+	
+	handleCancelar(){
+		window.location = '/Appointment'
 	}
 	
 	obtenerDatos(thisComponent){
@@ -165,6 +170,7 @@ export default class ModificarCita extends Component {
 				<div className="invalid-feedback d-block">{this.state.msgCreationResultFail}</div>
 				<div className="valid-feedback d-block">{this.state.msgCreationResultOk}</div>
 				<button type="submit" className="btn btn-primary btn-block">Modificar cita</button>
+				<Button variant="secondary" onClick={this.handleCancelar} className="btn btn-primary btn-block">Cancelar</Button>
 				</form>
 				</div>
 				</div>
