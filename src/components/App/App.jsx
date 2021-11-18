@@ -55,17 +55,16 @@ function App() {
 									Lista de vacunacion
 								</NavLink>
 							</li>
-							<li className="nav-item">
-								<NavLink id="navLogin" className="nav-link" to="/Login" activeClassName="nav-link active">
-									Login
-								</NavLink>
-							</li >
 						</ul>
 					</div>
 					<div>
 						<ul className="navbar-nav">
 							<li id="navNombre" className="nav-link"></li>
 							<li id="navCentro" className="nav-link"></li>
+							<li className="nav-item">
+								<NavLink id="navLogin" className="nav-link" to="/Login" activeClassName="nav-link active">
+								</NavLink>
+							</li >
 						</ul>
 					</div>
 				</div>

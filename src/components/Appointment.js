@@ -28,6 +28,7 @@ export default class Appointment extends Component {
 		document.getElementById("navCita").hidden = false;
 		document.getElementById("navLsVac").hidden = true;
 		document.getElementById("navLogin").hidden = false;
+		
 	}
 
 	checkPermission(thisComponent){
