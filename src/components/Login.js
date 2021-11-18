@@ -32,9 +32,14 @@ export default class Login extends Component{
 				sessionStorage.setItem("email",response.email);
 				sessionStorage.setItem("password",response.password);
 				sessionStorage.setItem("centro",response.centro);
+				sessionStorage.setItem("nombre",response.nombre);
 				thisComponent.setState(
 						{ msgLoginResultOk: "Acceso permitido"
 							, msgLoginResultFail: ""});
+				
+				document.getElementById("navCentro").innerHTML = "Centro: " + response.centro;
+				document.getElementById("navNombre").innerHTML = response.nombre;
+				
 				if(rol === "paciente" || rol === "Paciente") {
 					thisComponent.loadPacienteLinks();
 				}
@@ -124,5 +129,8 @@ export default class Login extends Component{
 	
 	componentDidMount(){
 		this.loadDefLinks();
+		document.getElementById("navCentro").innerHTML = "";
+		document.getElementById("navNombre").innerHTML = "";
+		sessionStorage.clear();
 	}
 }
