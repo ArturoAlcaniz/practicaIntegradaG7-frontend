@@ -69,9 +69,7 @@ export default class FormularioUsuarios extends Component {
 			});
 			let response = (await answer.json());
 			if (response.status === "200") {
-				thisComponent.setState(
-						{ msgLoginResultOk: "Usuario creado correctamente"
-							, msgLoginResultFail: ""})
+				window.location = '/Usuarios';
 			}else{
 				thisComponent.setState(
 						{ msgLoginResultOk: ""

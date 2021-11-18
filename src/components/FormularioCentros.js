@@ -65,13 +65,11 @@ export default class FormularioCentros extends Component {
 			});
 			let response = (await answer.json());
 			if (response.status === "200") {
-				thisComponent.setState(
-						{ msgCreationResultOk: response.message
-							, msgCreationResultFail: ""})
+				window.location = '/Centros';
 			}else{
 				thisComponent.setState(
 						{ msgCreationResultOk: ""
-							, msgCreationResultFail: response.message})
+							, msgCreationResultFail: "Error al crear el centro."})
 			}console.log(answer);
 		}
 

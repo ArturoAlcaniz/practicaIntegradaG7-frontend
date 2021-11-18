@@ -120,7 +120,7 @@ export default class Usuarios extends Component {
 														<td>{listValue.nombre}</td>
 														<td>{listValue.apellidos}</td>
 														<td>{listValue.email}</td>
-														<td>{listValue.centro.nombre}</td>
+														<td>{listValue.centro}</td>
 														<td>
 															<Link
 																to={{
