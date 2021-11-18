@@ -42,7 +42,6 @@ export default class ListaVacunacion extends Component {
 		
 		manageNavBar() {
 		document.getElementById("navConf").hidden = true;
-		document.getElementById("navCupos").hidden = true;
 		document.getElementById("navCentros").hidden = true;
 		document.getElementById("navUsers").hidden = true;
 		document.getElementById("navCita").hidden = true;
@@ -95,18 +94,22 @@ export default class ListaVacunacion extends Component {
 									<table className="table table-hover">
 										<thead>
 											<tr>
-												<th>Email</th>
 												<th>Hora</th>
-												<th>Dosis a suministrar</th>
-												<th>Vacunar</th>
+												<th>DNI</th>
+												<th>Nombre</th>
+												<th>Apellidos</th>
+												<th>Dosis</th>
+												<th></th>
 											</tr>
 										</thead>
 										<tbody>
 											{this.state.citas.map((listValue, index) => {
 												return (
 													<tr key={index}>
-														<td>{listValue.email}</td>
 														<td>{listValue.fecha.substring(11,16)}</td>
+														<td>{listValue.dni}</td>
+														<td>{listValue.nombre}</td>
+														<td>{listValue.apellidos}</td>
 														<td>{listValue.ncita}</td>
 														{/*<td><VacunarPaciente dataVacunacion={[listValue.email]} /></td>*/}										
 													</tr>
