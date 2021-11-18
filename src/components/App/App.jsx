@@ -62,12 +62,12 @@ function App() {
 							</li >
 						</ul>
 					</div>
-								<div>
-					<ul className="navbar-nav">
-						<li id="navNombre" className="nav-link"></li>
-						<li id="navCentro" className="nav-link"></li>
-					</ul>
-				</div>
+					<div>
+						<ul className="navbar-nav">
+							<li id="navNombre" className="nav-link"></li>
+							<li id="navCentro" className="nav-link"></li>
+						</ul>
+					</div>
 				</div>
 			</nav>
 			<Switch>
