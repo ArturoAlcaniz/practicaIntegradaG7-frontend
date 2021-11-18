@@ -26,7 +26,6 @@ export default class ModificarCita extends Component {
 	
 	manageNavBar() {
 		document.getElementById("navConf").hidden = true;
-		document.getElementById("navCupos").hidden = true;
 		document.getElementById("navCentros").hidden = true;
 		document.getElementById("navUsers").hidden = true;
 		document.getElementById("navCita").hidden = false;

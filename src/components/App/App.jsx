@@ -5,8 +5,6 @@ import FormularioCentros from '../FormularioCentros';
 import Usuarios from '../Usuarios';
 import FormularioUsuarios from '../FormularioUsuarios';
 import Appointment from '../Appointment';
-import Cupos from '../Cupos';
-import FormularioCupos from '../FormularioCupos';
 import Login from '../Login';
 import FormularioConfiguracion from '../FormularioConfiguracion';
 import FormularioModificarUsuario from '../FormularioModificarUsuario';
@@ -28,11 +26,6 @@ function App() {
 							<li className="nav-item">
 								<NavLink id="navConf" className="nav-link" to="/Configuracion" activeClassName="nav-link active">
 									Configuracion
-								</NavLink>
-							</li>
-							<li className="nav-item">
-								<NavLink id="navCupos" className="nav-link" to="/Cupos" activeClassName="nav-link active">
-									Cupos
 								</NavLink>
 							</li>
 							<li className="nav-item">
@@ -71,9 +64,7 @@ function App() {
 				<Route path='/Appointment' exact component={Appointment} />
 				<Route path='/FormularioCentros' exact component={FormularioCentros} />
 				<Route path='/FormularioUsuarios' exact component={FormularioUsuarios} />
-				<Route path='/FormularioCupos' exact component={FormularioCupos} />
 				<Route path='/ModificarCita' exact component={ModificarCita} />
-				<Route path='/Cupos' exact component={Cupos} />
 				<Route path='/Login' exact component={Login} />
 				<Route path='/Configuracion' exact component={FormularioConfiguracion} />
 				<Route path='/modifyUser' exact component={FormularioModificarUsuario} />

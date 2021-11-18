@@ -20,7 +20,6 @@ export default class FormularioCentros extends Component {
 	
 	manageNavBar() {
 		document.getElementById("navConf").hidden = false;
-		document.getElementById("navCupos").hidden = false;
 		document.getElementById("navCentros").hidden = false;
 		document.getElementById("navUsers").hidden = false;
 		document.getElementById("navCita").hidden = true;
