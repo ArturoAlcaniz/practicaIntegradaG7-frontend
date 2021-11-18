@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import env from "react-dotenv";
+import Button from 'react-bootstrap/Button';
 
 export default class ModificarCentro extends Component {
 	constructor(props) {
@@ -12,6 +13,10 @@ export default class ModificarCentro extends Component {
 			msgModifyResultOk: "",
 			msgModifyResultFail: ""
 		}
+	}
+	
+	handleCancelar(){
+		window.location = '/Centros'
 	}
 	
 	handleModificarCentro(event) {
@@ -62,6 +67,7 @@ export default class ModificarCentro extends Component {
 							<div className="invalid-feedback d-block">{this.state.msgModifyResultFail}</div>
 							<div className="valid-feedback d-block">{this.state.msgModifyResultOk}</div>
 							<button type="submit" className="btn btn-primary btn-block">Modificar centro</button>
+							<Button variant="secondary" onClick={this.handleCancelar} className="btn btn-primary btn-block">Cancelar</Button>
 						</form>
 					</div>
 				</div>
