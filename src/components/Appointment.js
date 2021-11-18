@@ -19,6 +19,7 @@ export default class Appointment extends Component {
 		}
 	}
 	
+	
 	manageNavBar() {
 		document.getElementById("navConf").hidden = true;
 		document.getElementById("navCupos").hidden = true;
@@ -86,6 +87,35 @@ export default class Appointment extends Component {
 		}
 		makeReserve(this)
 	}
+	
+	handleEliminarCita(event) {
+		event.preventDefault()
+
+		async function eliminarCita() {
+
+		var email = sessionStorage.getItem("email");
+		var centro = event.target.parentNode.parentNode.getElementsByTagName("td")[0].innerHTML;
+		var fecha = event.target.parentNode.parentNode.getElementsByTagName("td")[1].innerHTML;
+		var ncita = event.target.parentNode.parentNode.getElementsByTagName("td")[2].innerHTML;
+
+		let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/citas/delete', {
+			method: "POST",
+			body: JSON.stringify({fecha: fecha, email: email, centro:centro, ncita: ncita}),
+			headers: { 
+				'Accept': 'application/json',
+				'Content-Type': 'application/json' 
+			}
+		});
+		let response = await answer.json();
+			
+		alert(response.message);
+		if(response.status === "200"){
+			window.location = "/Appointment";
+		}
+		
+		}
+		eliminarCita(this);
+	}
 
 	render() {
 		if (this.state.perm && this.state.perm !== "OK") {
@@ -133,6 +163,9 @@ export default class Appointment extends Component {
 							<td>		
 							<ModificarCita dataCita={[listValue.email, listValue.centroNombre, listValue.fecha, listValue.ncita]}/>										        
 							</td>
+							<td>
+														<Button  onClick={this.handleEliminarCita}>Eliminar</Button>
+													</td>
 							</tr>
 					);
 				})}
@@ -149,7 +182,7 @@ export default class Appointment extends Component {
 		);
 	}
 	
-	componentDidMount() {
+componentDidMount() {
 		this.checkPermission(this);
 		this.manageNavBar();
 		this.obtenerDatos(this);
@@ -175,5 +208,16 @@ function ModificarCita({dataCita}){
 	return (
 		<Button href="/ModificarCita" onClick={handleClick}>Modificar cita</Button>	
 	)
+
 }
+
+
+
+
+
+
+
+
+
+
 

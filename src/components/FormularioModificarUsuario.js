@@ -15,7 +15,7 @@ export default class FormularioModificarUsuario extends Component {
 				dni: props.location.state.user.dniDenc,
 				nombre:props.location.state.user.nombre,
 				apellidos:props.location.state.user.apellidos,
-				centro: props.location.state.user.centro.nombre,
+				centro: props.location.state.user.centro,
 				rol: props.location.state.user.rol,
 				password: "",
 				perm: ""
@@ -72,11 +72,10 @@ export default class FormularioModificarUsuario extends Component {
 					'Content-Type': 'application/json' 
 				}
 			});
+			console.log(thisComponent.state.centro);
 			let response = (await answer.json());
 			if (response.status === "200") {
-				thisComponent.setState(
-						{ msgLoginResultOk: "Usuario creado correctamente"
-							, msgLoginResultFail: ""})
+				window.location = '/Usuarios';
 			}else{
 				thisComponent.setState(
 						{ msgLoginResultOk: ""
@@ -109,7 +108,7 @@ export default class FormularioModificarUsuario extends Component {
 		}
 		
 		return (
-				<div className="auth-wrapper">
+			<div className="auth-wrapper">
 				<div className="auth-inner">
 				<form onSubmit={this.handleModUsuario.bind(this)}>
 				<h3>Modificar Usuario</h3>
@@ -150,6 +149,7 @@ export default class FormularioModificarUsuario extends Component {
 				</form>
 				</div>
 				</div>
+			
 		);
 	}
 	
