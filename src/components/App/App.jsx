@@ -59,10 +59,15 @@ function App() {
 								<NavLink id="navLogin" className="nav-link" to="/Login" activeClassName="nav-link active">
 									Login
 								</NavLink>
-							</li>
-
+							</li >
 						</ul>
 					</div>
+								<div>
+					<ul className="navbar-nav">
+						<li id="navNombre" className="nav-link"></li>
+						<li id="navCentro" className="nav-link"></li>
+					</ul>
+				</div>
 				</div>
 			</nav>
 			<Switch>
