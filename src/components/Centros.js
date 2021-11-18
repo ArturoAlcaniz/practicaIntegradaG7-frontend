@@ -23,7 +23,6 @@ export default class Centros extends Component{
 	
 	manageNavBar() {
 		document.getElementById("navConf").hidden = false;
-		document.getElementById("navCupos").hidden = false;
 		document.getElementById("navCentros").hidden = false;
 		document.getElementById("navUsers").hidden = false;
 		document.getElementById("navCita").hidden = true;
@@ -117,51 +116,57 @@ export default class Centros extends Component{
 			}}
 			/>
 		}
-    	
-        return (
-        	<div className="container-fluid px-4">
-                <div className="card mb-4">
-                    <div className="card-header">
-                        Centros
-                    </div>
-                    <div className="card-body">
-                        <div className="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
-                            <div className="dataTable-container">
-								<a className="btn btn-success" aria-current="page" href="/FormularioCentros">Add Centro</a>
-                                <table className="table table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th>Nombre del centro</th>
-                                        <th>Direccion</th>
-                                        <th>Vacunas disponibles</th>
-                                        <th>Anadir vacunas</th>
-										<th>Eliminar</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-										{this.state.centros.map((listValue, index) => {
-											return (
-												<tr key={index}>
-													<td  data-value={listValue.nombre}>{listValue.nombre}</td>
-													<td>{listValue.direccion}</td>
-													<td>{listValue.vacunas}</td>
-													<td>
-														<Button onClick={this.addVaccines}>Anadir vacunas</Button>
-													</td>
-													<td>
-														<Button onClick={this.handleEliminar}>Eliminar</Button>	
-													</td>
-												</tr>
-											);
-										})}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-        </div>
-        );
+
+		return (
+			<div className="auth-wrapper">
+				<div className="container-fluid px-4">
+					<div className="card mb-4">
+						<div className="card-header">
+							Centros
+						</div>
+						<div className="card-body">
+							<div className="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+								<div className="dataTable-container">
+									<a className="btn btn-success" aria-current="page" href="/FormularioCentros">Add Centro</a>
+									<table className="table table-hover">
+										<thead>
+											<tr>
+												<th>Nombre del centro</th>
+												<th>Direccion</th>
+												<th>Vacunas disponibles</th>
+												<th>Anadir vacunas</th>
+												<th>Modificar Centro</th>
+												<th>Eliminar</th>
+											</tr>
+										</thead>
+										<tbody>
+											{this.state.centros.map((listValue, index) => {
+												return (
+													<tr key={index}>
+														<td data-value={listValue.nombre}>{listValue.nombre}</td>
+														<td>{listValue.direccion}</td>
+														<td>{listValue.vacunas}</td>
+														<td>
+															<Button onClick={this.addVaccines}>Anadir vacunas</Button>
+														</td>
+														<td>
+															<ModificarCentro dataCentro={[listValue.nombre, listValue.direccion, listValue.vacunas]} />
+														</td>
+														<td>
+															<Button onClick={this.handleEliminar}>Eliminar</Button>
+														</td>
+													</tr>
+												);
+											})}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		);
     }
 
 	componentDidMount(){
@@ -169,4 +174,21 @@ export default class Centros extends Component{
 		this.manageNavBar();
 		this.obtenerDatos(this);
 	}
+}
+
+
+function ModificarCentro({dataCentro}){
+	
+	let centroNombre = dataCentro[0];
+	let centroDireccion = dataCentro[1];
+	let centroVacunas = dataCentro[2];
+	
+	const handleClick = () => {
+    	localStorage.setItem("nombreCentro", centroNombre);
+		localStorage.setItem("direccionCentro", centroDireccion);
+		localStorage.setItem("vacunasCentro", centroVacunas);
+  	}
+	return (
+		<Button href="/ModificarCentro" onClick={handleClick}>Modificar centro</Button>	
+	)
 }

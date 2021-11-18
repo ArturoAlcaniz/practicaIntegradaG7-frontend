@@ -5,14 +5,13 @@ import FormularioCentros from '../FormularioCentros';
 import Usuarios from '../Usuarios';
 import FormularioUsuarios from '../FormularioUsuarios';
 import Appointment from '../Appointment';
-import Cupos from '../Cupos';
-import FormularioCupos from '../FormularioCupos';
 import Login from '../Login';
 import FormularioConfiguracion from '../FormularioConfiguracion';
 import FormularioModificarUsuario from '../FormularioModificarUsuario';
 import ModificarCita from '../ModificarCita';
 import ListaVacunacion from '../ListaVacunacion';
 import NotAllowed from '../NotAllowed';
+import ModificarCentro from '../ModificarCentro';
 
 function App() {
 	return (<Router>
@@ -27,11 +26,6 @@ function App() {
 							<li className="nav-item">
 								<NavLink id="navConf" className="nav-link" to="/Configuracion" activeClassName="nav-link active">
 									Configuracion
-								</NavLink>
-							</li>
-							<li className="nav-item">
-								<NavLink id="navCupos" className="nav-link" to="/Cupos" activeClassName="nav-link active">
-									Cupos
 								</NavLink>
 							</li>
 							<li className="nav-item">
@@ -58,8 +52,13 @@ function App() {
 								<NavLink id="navLogin" className="nav-link" to="/Login" activeClassName="nav-link active">
 									Login
 								</NavLink>
-							</li>
-
+							</li >
+						</ul>
+					</div>
+					<div>
+						<ul className="navbar-nav">
+							<li id="navNombre" className="nav-link"></li>
+							<li id="navCentro" className="nav-link"></li>
 						</ul>
 					</div>
 				</div>
@@ -70,14 +69,13 @@ function App() {
 				<Route path='/Appointment' exact component={Appointment} />
 				<Route path='/FormularioCentros' exact component={FormularioCentros} />
 				<Route path='/FormularioUsuarios' exact component={FormularioUsuarios} />
-				<Route path='/FormularioCupos' exact component={FormularioCupos} />
 				<Route path='/ModificarCita' exact component={ModificarCita} />
-				<Route path='/Cupos' exact component={Cupos} />
 				<Route path='/Login' exact component={Login} />
 				<Route path='/Configuracion' exact component={FormularioConfiguracion} />
 				<Route path='/modifyUser' exact component={FormularioModificarUsuario} />
 				<Route path='/ListaVacunacion' exact component={ListaVacunacion} />
 				<Route path='/notAllowed' exact component={NotAllowed} />
+				<Route path='/ModificarCentro' exact component={ModificarCentro} />
 				<Redirect exact from="/" to="/Login" />
 			</Switch>
 		</div>

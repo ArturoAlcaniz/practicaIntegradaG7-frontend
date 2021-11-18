@@ -32,9 +32,14 @@ export default class Login extends Component{
 				sessionStorage.setItem("email",response.email);
 				sessionStorage.setItem("password",response.password);
 				sessionStorage.setItem("centro",response.centro);
+				sessionStorage.setItem("nombre",response.nombre);
 				thisComponent.setState(
 						{ msgLoginResultOk: "Acceso permitido"
 							, msgLoginResultFail: ""});
+				
+				document.getElementById("navCentro").innerHTML = "Centro: " + response.centro;
+				document.getElementById("navNombre").innerHTML = response.nombre;
+				
 				if(rol === "paciente" || rol === "Paciente") {
 					thisComponent.loadPacienteLinks();
 				}
@@ -56,7 +61,6 @@ export default class Login extends Component{
 	
 	loadPacienteLinks() {
 		document.getElementById("navConf").hidden = true;
-		document.getElementById("navCupos").hidden = true;
 		document.getElementById("navCentros").hidden = true;
 		document.getElementById("navUsers").hidden = true;
 		document.getElementById("navCita").hidden = false;
@@ -66,7 +70,6 @@ export default class Login extends Component{
 	
 	loadSanitarioLinks() {
 		document.getElementById("navConf").hidden = true;
-		document.getElementById("navCupos").hidden = true;
 		document.getElementById("navCentros").hidden = true;
 		document.getElementById("navUsers").hidden = true;
 		document.getElementById("navCita").hidden = true;
@@ -76,7 +79,6 @@ export default class Login extends Component{
 	
 	loadAdminLinks() {
 		document.getElementById("navConf").hidden = false;
-		document.getElementById("navCupos").hidden = false;
 		document.getElementById("navCentros").hidden = false;
 		document.getElementById("navUsers").hidden = false;
 		document.getElementById("navCita").hidden = true;
@@ -86,7 +88,6 @@ export default class Login extends Component{
 	
 	loadDefLinks() {
 		document.getElementById("navConf").hidden = true;
-		document.getElementById("navCupos").hidden = true;
 		document.getElementById("navCentros").hidden = true;
 		document.getElementById("navUsers").hidden = true;
 		document.getElementById("navCita").hidden = true;
@@ -124,5 +125,8 @@ export default class Login extends Component{
 	
 	componentDidMount(){
 		this.loadDefLinks();
+		document.getElementById("navCentro").innerHTML = "";
+		document.getElementById("navNombre").innerHTML = "";
+		sessionStorage.clear();
 	}
 }

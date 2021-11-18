@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.css';
 import env from"react-dotenv";
 import { Redirect } from 'react-router-dom';
@@ -23,12 +24,14 @@ export default class FormularioModificarUsuario extends Component {
 	
 	manageNavBar() {
 		document.getElementById("navConf").hidden = false;
-		document.getElementById("navCupos").hidden = false;
 		document.getElementById("navCentros").hidden = false;
 		document.getElementById("navUsers").hidden = false;
 		document.getElementById("navCita").hidden = true;
 		document.getElementById("navLsVac").hidden = true;
 		document.getElementById("navLogin").hidden = false;
+	}
+	handleCancelar(){
+		window.location = '/Usuarios'
 	}
 	
 	checkPermission(thisComponent){
@@ -68,11 +71,10 @@ export default class FormularioModificarUsuario extends Component {
 					'Content-Type': 'application/json' 
 				}
 			});
+			console.log(thisComponent.state.centro);
 			let response = (await answer.json());
 			if (response.status === "200") {
-				thisComponent.setState(
-						{ msgLoginResultOk: "Usuario creado correctamente"
-							, msgLoginResultFail: ""})
+				window.location = '/Usuarios';
 			}else{
 				thisComponent.setState(
 						{ msgLoginResultOk: ""
@@ -105,7 +107,7 @@ export default class FormularioModificarUsuario extends Component {
 		}
 		
 		return (
-				<div className="auth-wrapper">
+			<div className="auth-wrapper">
 				<div className="auth-inner">
 				<form onSubmit={this.handleModUsuario.bind(this)}>
 				<h3>Modificar Usuario</h3>
@@ -142,9 +144,11 @@ export default class FormularioModificarUsuario extends Component {
 				<div className="invalid-feedback d-block">{this.state.msgLoginResultFail}</div>
 				<div className="valid-feedback d-block">{this.state.msgLoginResultOk}</div>
 				<button type="submit" className="btn btn-primary btn-block">Guardar usuario</button>
+				<Button variant="secondary" onClick={this.handleCancelar} className="btn btn-primary btn-block">Cancelar</Button>
 				</form>
 				</div>
 				</div>
+			
 		);
 	}
 	
