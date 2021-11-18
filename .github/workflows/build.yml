@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
   sonarcloud:
+    if: github.actor != 'ArturoAlcaniz'
     name: SonarCloud
     runs-on: ubuntu-latest
     steps:
