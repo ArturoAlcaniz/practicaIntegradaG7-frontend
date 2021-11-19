@@ -21,7 +21,7 @@ export default class Login extends Component{
 			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/usuario/login', {
 				method: "POST",
 				body: JSON.stringify({email: thisComponent.state.email, password: thisComponent.state.password}),
-				headers: { 
+				headers: {
 					'Accept': 'application/json',
 					'Content-Type': 'application/json' 
 				}
@@ -94,6 +94,15 @@ export default class Login extends Component{
 		document.getElementById("navLsVac").hidden = true;
 		document.getElementById("navLogin").hidden = false;
 	}
+	
+	showPwd() {
+		var x = document.getElementById("pwdInput");
+		if (x.type === "password") {
+			x.type = "text";
+		} else {
+			x.type = "password";
+		}
+	}
 
 	render() {
 		return (
@@ -108,9 +117,11 @@ export default class Login extends Component{
 						</div>
 						<div className="form-group">
 							<label>Password</label>
-							<input type="password" className="form-control" placeholder="Introduzca Password"
+							<input id="pwdInput" type="password" className="form-control" placeholder="Introduzca Password"
 								onChange={e => this.setState({ password: e.target.value })} />
 						</div>
+					<div> <input type="checkbox" onClick={this.showPwd} />Mostrar contrasena</div>
+					<label> </label>
 					<div className="text-center">
 						<button id="SubmitButton" type="submit" className="btn  btn-primary btnblock">Acceso</button>
 					</div>

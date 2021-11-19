@@ -93,6 +93,15 @@ export default class FormularioUsuarios extends Component {
 		getCentros();
 	}
 	
+	showPwd() {
+		var x = document.getElementById("pwdInput");
+		if (x.type === "password") {
+			x.type = "text";
+		} else {
+			x.type = "password";
+		}
+	}
+	
 	render() {
 		if (this.state.perm && this.state.perm !== "OK") {
 			return <Redirect to={{
@@ -151,9 +160,11 @@ export default class FormularioUsuarios extends Component {
 				</div>
 				<div className="form-group">
 				<label>Password</label>
-				<input type="password" className="form-control" placeholder="Introduzca Password"
+				<input id="pwdInput" type="password" className="form-control" placeholder="Introduzca Password"
 					onChange={e => this.setState({ password: e.target.value })} />
 				</div>
+				<div> <input type="checkbox" onClick={this.showPwd} />Mostrar contrasena</div>
+				<label> </label>
 				<div className="invalid-feedback d-block">{this.state.msgLoginResultFail}</div>
 				<div className="valid-feedback d-block">{this.state.msgLoginResultOk}</div>
 				<button type="submit" className="btn btn-primary btn-block">Crear usuario</button>

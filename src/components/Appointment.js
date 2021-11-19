@@ -11,7 +11,7 @@ export default class Appointment extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-				user: "PRUEBA",
+				email: sessionStorage.getItem("email"),
 				citas:[],
 				msgAppointFail: "",
 				msgAppointOk: "",
@@ -36,7 +36,7 @@ export default class Appointment extends Component {
 				body: JSON.stringify({site: "appointment", 
 					email: sessionStorage.getItem("email"),
 					password: sessionStorage.getItem("password")}),
-				headers: { 
+				headers: {
 					'Accept': 'application/json',
 					'Content-Type': 'application/json' 
 				}
@@ -63,9 +63,14 @@ export default class Appointment extends Component {
 	handlePetition(event) {
 		event.preventDefault()
 		async function makeReserve(thisComponent) {
-
-			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/citas/create', 
-					{ method: "POST" }
+			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/citas/create', {
+				method: "POST",
+				body: JSON.stringify({email: thisComponent.state.email}),
+				headers: { 
+					'Accept': 'application/json',
+					'Content-Type': 'application/json' 
+				}
+			}
 			);
 
 			let response = (await answer.json());
@@ -76,6 +81,7 @@ export default class Appointment extends Component {
 							, msgAppointFail: ""
 						}
 				)
+				thisComponent.obtenerDatos(thisComponent);
 			}else {
 				thisComponent.setState(
 						{ msgAppointOk: ""
