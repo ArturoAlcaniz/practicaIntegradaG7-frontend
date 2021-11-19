@@ -13,6 +13,24 @@ import ListaVacunacion from '../ListaVacunacion';
 import NotAllowed from '../NotAllowed';
 import ModificarCentro from '../ModificarCentro';
 
+function loadFirstLink() {
+	console.log(sessionStorage.getItem("rol"))
+	switch(sessionStorage.getItem("rol")) {
+		
+		case 'paciente':
+			return <Redirect exact from="/" to="/Appointment" />
+
+		case 'sanitario':
+			return <Redirect exact from="/" to="/ListaVacunacion" />
+		
+		case 'administrador':
+			return <Redirect exact from="/" to="/Configuracion" />
+			
+		default:
+			return <Redirect exact from="/" to="/Login" />
+	}
+}
+
 function App() {
 	
 	return (<Router>
@@ -79,7 +97,7 @@ function App() {
 				<Route path='/ListaVacunacion' exact component={ListaVacunacion} />
 				<Route path='/notAllowed' exact component={NotAllowed} />
 				<Route path='/ModificarCentro' exact component={ModificarCentro} />
-				<Redirect exact from="/" to="/Login" />
+				{loadFirstLink()}
 			</Switch>
 		</div>
 	</Router>);
