@@ -14,7 +14,7 @@ import NotAllowed from '../NotAllowed';
 import ModificarCentro from '../ModificarCentro';
 
 function loadFirstLink() {
-	console.log(sessionStorage.getItem("rol"))
+
 	switch(sessionStorage.getItem("rol")) {
 		
 		case 'paciente':
