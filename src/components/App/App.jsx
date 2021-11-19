@@ -14,6 +14,7 @@ import NotAllowed from '../NotAllowed';
 import ModificarCentro from '../ModificarCentro';
 
 function App() {
+	
 	return (<Router>
 		<div className="App">
 			<nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -48,17 +49,20 @@ function App() {
 									Lista de vacunacion
 								</NavLink>
 							</li>
-							<li className="nav-item">
-								<NavLink id="navLogin" className="nav-link" to="/Login" activeClassName="nav-link active">
-									Login
-								</NavLink>
-							</li >
 						</ul>
 					</div>
 					<div>
 						<ul className="navbar-nav">
 							<li id="navNombre" className="nav-link"></li>
 							<li id="navCentro" className="nav-link"></li>
+							<li className="nav-item">
+								<NavLink id="navLogin" className="nav-link" to="/Login" activeClassName="nav-link active">	
+								</NavLink>
+							</li >
+						</ul>
+					</div>
+					<div>
+						<ul id="navLogOut" className="navbar-nav">
 						</ul>
 					</div>
 				</div>
@@ -81,7 +85,6 @@ function App() {
 		</div>
 	</Router>);
 }
-
 
 
 export default App;
