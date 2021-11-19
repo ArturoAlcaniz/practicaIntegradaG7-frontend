@@ -187,7 +187,7 @@ export default class FormularioConfiguracion extends Component {
 				<div className="row">
 				<div className="col-5">
 				<div className="w-75">
-				<input className="col-4 form-control" type="number"
+				<input className="form-control" type="number"
 					min="0" max="9999"
 						onChange={e => this.setState(
 								{ franjasPorDia: e.target.value
