@@ -33,6 +33,7 @@ export default class Login extends Component{
 				sessionStorage.setItem("password",response.password);
 				sessionStorage.setItem("centro",response.centro);
 				sessionStorage.setItem("nombre",response.nombre);
+				sessionStorage.setItem("rol",response.rol);
 				thisComponent.setState(
 						{ msgLoginResultOk: "Acceso permitido"
 							, msgLoginResultFail: ""});
