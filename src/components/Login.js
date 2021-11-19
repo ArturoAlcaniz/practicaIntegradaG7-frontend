@@ -37,10 +37,9 @@ export default class Login extends Component{
 						{ msgLoginResultOk: "Acceso permitido"
 							, msgLoginResultFail: ""});
 				
-				document.getElementById("navCentro").innerHTML = "Centro: " + response.centro;
-				document.getElementById("navNombre").innerHTML = response.nombre;
-				//document.getElementById("navLogin").innerHTML = "LogOut";
-				//document.getElementById("navLogin").hidden = false;
+				document.getElementById("navCentro").value = "Centro: " + sessionStorage.getItem("centro");
+				document.getElementById("navNombre").value = (sessionStorage.getItem("nombre")).toUpperCase();
+				document.getElementById("navLogin").value = "LogOut";
 				
 				if(rol === "paciente" || rol === "Paciente") {
 					thisComponent.loadPacienteLinks();
@@ -76,7 +75,7 @@ export default class Login extends Component{
 		document.getElementById("navUsers").hidden = true;
 		document.getElementById("navCita").hidden = true;
 		document.getElementById("navLsVac").hidden = false;
-		document.getElementById("navLogin").hidden = false;
+		document.getElementById("navLogin").hidden = true;
 	}
 	
 	loadAdminLinks() {
@@ -85,7 +84,7 @@ export default class Login extends Component{
 		document.getElementById("navUsers").hidden = false;
 		document.getElementById("navCita").hidden = true;
 		document.getElementById("navLsVac").hidden = true;
-		document.getElementById("navLogin").hidden = false;
+		document.getElementById("navLogin").hidden = true;
 	}
 	
 	loadDefLinks() {
@@ -94,7 +93,7 @@ export default class Login extends Component{
 		document.getElementById("navUsers").hidden = true;
 		document.getElementById("navCita").hidden = true;
 		document.getElementById("navLsVac").hidden = true;
-		document.getElementById("navLogin").hidden = false;
+		document.getElementById("navLogin").hidden = true;
 	}
 
 	render() {
@@ -129,7 +128,7 @@ export default class Login extends Component{
 		this.loadDefLinks();
 		document.getElementById("navCentro").innerHTML = "";
 		document.getElementById("navNombre").innerHTML = "";
-		//document.getElementById("navLogin").innerHTML = "";
+		document.getElementById("navLogin").innerHTML = "";
 		sessionStorage.clear();
 		localStorage.clear();
 	}

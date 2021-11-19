@@ -29,6 +29,23 @@ export default class FormularioModificarUsuario extends Component {
 		document.getElementById("navCita").hidden = true;
 		document.getElementById("navLsVac").hidden = true;
 		document.getElementById("navLogin").hidden = false;
+		document.getElementById("navCentro").innerHTML = "Centro: " + sessionStorage.getItem("centro");
+		document.getElementById("navNombre").innerHTML = sessionStorage.getItem("nombre");
+		document.getElementById("navLogin").hidden = true;
+		document.getElementById("navCentro").innerHTML = "Centro: " + sessionStorage.getItem("centro");
+		document.getElementById("navNombre").innerHTML = (sessionStorage.getItem("nombre")).toUpperCase();
+		
+		var ul = document.getElementById("navLogOut");
+		var li = document.createElement("li");
+		li.className = "nav-link";
+		var button = document.createElement("Button");
+		button.innerHTML = "LogOut";
+		button.className = "btn btn-secondary";
+		button.onclick = function() {window.location = "/Login";};
+		li.appendChild(button);
+		li.setAttribute("id","buttonLogOut");
+		ul.appendChild(li);
+
 	}
 	handleCancelar(){
 		window.location = '/Usuarios'
