@@ -59,10 +59,9 @@ function App() {
 								<NavLink id="navLogin" className="nav-link" to="/Login" activeClassName="nav-link active">	
 								</NavLink>
 							</li >
-						</ul>
-					</div>
-					<div>
-						<ul id="navLogOut" className="navbar-nav">
+							<li>
+								<a id="btnLO" className="btn btn-secondary" aria-current="page" href="\Login" hidden='true'>LogOut</a>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -85,6 +84,5 @@ function App() {
 		</div>
 	</Router>);
 }
-
 
 export default App;
