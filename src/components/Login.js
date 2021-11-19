@@ -39,7 +39,10 @@ export default class Login extends Component{
 				
 				document.getElementById("navCentro").value = "Centro: " + sessionStorage.getItem("centro");
 				document.getElementById("navNombre").value = (sessionStorage.getItem("nombre")).toUpperCase();
+				document.getElementById("navCentro").innerHTML = "Centro: " + sessionStorage.getItem("centro");
+				document.getElementById("navNombre").innerHTML = (sessionStorage.getItem("nombre")).toUpperCase();
 				document.getElementById("navLogin").value = "LogOut";
+				document.getElementById("btnLO").hidden = false;
 				
 				if(rol === "paciente" || rol === "Paciente") {
 					thisComponent.loadPacienteLinks();
@@ -126,10 +129,6 @@ export default class Login extends Component{
 	
 	componentDidMount(){
 		this.loadDefLinks();
-		document.getElementById("navCentro").innerHTML = "";
-		document.getElementById("navNombre").innerHTML = "";
-		document.getElementById("navLogin").innerHTML = "";
 		sessionStorage.clear();
-		localStorage.clear();
 	}
 }
