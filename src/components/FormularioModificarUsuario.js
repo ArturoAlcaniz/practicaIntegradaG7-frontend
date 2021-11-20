@@ -18,6 +18,7 @@ export default class FormularioModificarUsuario extends Component {
 				centro: props.location.state.user.centro,
 				rol: props.location.state.user.rol,
 				password: "",
+				msgUsrModifyFail: "",
 				perm: ""
 		}
 	}
@@ -75,14 +76,12 @@ export default class FormularioModificarUsuario extends Component {
 					'Content-Type': 'application/json' 
 				}
 			});
-			console.log(thisComponent.state.centro);
 			let response = (await answer.json());
 			if (response.status === "200") {
 				window.location = '/Usuarios';
 			}else{
 				thisComponent.setState(
-						{ msgLoginResultOk: ""
-							, msgLoginResultFail: "Error al crear usuario"})
+						{ msgUsrModifyFail: response.message})
 			}
 		}
 
@@ -99,6 +98,15 @@ export default class FormularioModificarUsuario extends Component {
 		thisComponent.setState({centros: JSON.parse(json)})
 		}
 		getUsuarios();
+	}
+	
+	showPwd() {
+		var x = document.getElementById("pwdInput");
+		if (x.type === "password") {
+			x.type = "text";
+		} else {
+			x.type = "password";
+		}
 	}
 	
 	render() {
@@ -143,16 +151,17 @@ export default class FormularioModificarUsuario extends Component {
 				</div>
 				<div className="form-group">
 				<label>Password</label>
-				<input type="password" className="form-control" onChange={e => this.setState({ password: e.target.value })} />
+				<input id = "pwdInput" type="password" className="form-control" onChange={e => this.setState({ password: e.target.value })} />
 				</div>
-				<div className="invalid-feedback d-block">{this.state.msgLoginResultFail}</div>
-				<div className="valid-feedback d-block">{this.state.msgLoginResultOk}</div>
+				<div> <input type="checkbox" onClick={this.showPwd} />Mostrar contrasena</div>
+				<label> </label>
+				<label className="invalid-feedback d-block">{this.state.msgUsrModifyFail}</label>
+				<label> </label>
 				<button type="submit" className="btn btn-primary btn-block">Guardar usuario</button>
 				<Button variant="secondary" onClick={this.handleCancelar} className="btn btn-primary btn-block">Cancelar</Button>
 				</form>
 				</div>
 				</div>
-			
 		);
 	}
 	

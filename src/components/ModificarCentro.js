@@ -10,7 +10,6 @@ export default class ModificarCentro extends Component {
 			nombre: localStorage.getItem("nombreCentro"),
 			direccion: localStorage.getItem("direccionCentro"),
 			vacunas: localStorage.getItem("vacunasCentro"),
-			msgModifyResultOk: "",
 			msgModifyResultFail: ""
 		}
 	}
@@ -22,6 +21,7 @@ export default class ModificarCentro extends Component {
 	handleModificarCentro(event) {
 		event.preventDefault()
 		async function modificarCentro(thisComponent) {
+			if(thisComponent.state.vacunas === "") thisComponent.state.vacunas = "0";
 			
 			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/centro/modify', {
 				method: "POST",
@@ -36,9 +36,7 @@ export default class ModificarCentro extends Component {
 			if (response.status === "200") {
 				window.location = '/Centros';
 			}else{
-				thisComponent.setState(
-						{ msgModifyResultOk: ""
-							, msgModifyResultFail: "Error al modificar centro."})
+				thisComponent.setState({ msgModifyResultFail: response.message})
 			}
 		}
 
@@ -65,7 +63,7 @@ export default class ModificarCentro extends Component {
 									onChange={e => this.setState({ vacunas: e.target.value })} />
 							</div>
 							<div className="invalid-feedback d-block">{this.state.msgModifyResultFail}</div>
-							<div className="valid-feedback d-block">{this.state.msgModifyResultOk}</div>
+							<label> </label>
 							<button type="submit" className="btn btn-primary btn-block">Modificar centro</button>
 							<Button variant="secondary" onClick={this.handleCancelar} className="btn btn-primary btn-block">Cancelar</Button>
 						</form>

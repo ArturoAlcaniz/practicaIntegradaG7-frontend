@@ -130,9 +130,9 @@ export default class ListaVacunacion extends Component {
 		);
 	}
 	
-	componentDidMount(){
-		this.obtenerCitas(this,this.state.fecha);
+	componentDidMount() {
 		this.checkPermission(this);
+		this.obtenerCitas(this,this.state.fecha);
 		this.manageNavBar();
 	}
 
