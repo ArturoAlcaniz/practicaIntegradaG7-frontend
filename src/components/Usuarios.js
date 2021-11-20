@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import env from"react-dotenv";
 import { Link, Redirect } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
-import manageNavBar from './Functions';
+import manageNavBar from './manageNavBar';
 
 
 export default class Usuarios extends Component {

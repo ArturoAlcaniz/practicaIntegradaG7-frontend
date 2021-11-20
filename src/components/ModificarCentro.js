@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import env from "react-dotenv";
 import Button from 'react-bootstrap/Button';
-import manageNavBar from './Functions';
+import manageNavBar from './manageNavBar';
 
 export default class ModificarCentro extends Component {
 	constructor(props) {
