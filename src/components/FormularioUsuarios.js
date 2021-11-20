@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Button from 'react-bootstrap/Button';
 import env from"react-dotenv";
 import { Redirect } from 'react-router-dom';
-import manageNavBar from './Functions';
+import manageNavBar from './manageNavBar';
 
 
 export default class FormularioUsuarios extends Component {

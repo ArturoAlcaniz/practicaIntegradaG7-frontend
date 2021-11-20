@@ -4,6 +4,7 @@ import env from "react-dotenv";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Redirect } from 'react-router-dom';
+import manageNavBar from './manageNavBar';
 
 
 
@@ -17,20 +18,6 @@ export default class Appointment extends Component {
 				msgAppointOk: "",
 				perm: ""
 		}
-	}
-	
-	
-	manageNavBar() {
-		document.getElementById("navConf").hidden = true;
-		document.getElementById("navCentros").hidden = true;
-		document.getElementById("navUsers").hidden = true;
-		document.getElementById("navCita").hidden = false;
-		document.getElementById("navLsVac").hidden = true;
-		document.getElementById("navLogin").hidden = true;
-		document.getElementById("btnLO").hidden = false;
-		document.getElementById("navCentro").innerHTML = "Centro: " + sessionStorage.getItem("centro");
-		document.getElementById("navNombre").innerHTML = (sessionStorage.getItem("nombre")).toUpperCase();
-		
 	}
 
 	checkPermission(thisComponent){
@@ -193,7 +180,7 @@ export default class Appointment extends Component {
 	
 componentDidMount() {
 		this.checkPermission(this);
-		this.manageNavBar();
+		manageNavBar();
 		this.obtenerDatos(this);
 	}
 	

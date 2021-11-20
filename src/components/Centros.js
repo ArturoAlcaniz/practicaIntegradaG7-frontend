@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import env  from "react-dotenv";
 import Button from 'react-bootstrap/Button';
 import { Redirect } from 'react-router-dom';
+import manageNavBar from './manageNavBar';
 
 
 export default class Centros extends Component{
@@ -19,19 +20,6 @@ export default class Centros extends Component{
 			msgGetResultFail: "",
 			perm: ""
 		}
-	}
-	
-	manageNavBar() {
-		document.getElementById("navConf").hidden = false;
-		document.getElementById("navCentros").hidden = false;
-		document.getElementById("navUsers").hidden = false;
-		document.getElementById("navCita").hidden = true;
-		document.getElementById("navLsVac").hidden = true;
-		document.getElementById("navLogin").hidden = true;
-		document.getElementById("btnLO").hidden = false;
-		document.getElementById("navCentro").innerHTML = "Centro: " + sessionStorage.getItem("centro");
-		document.getElementById("navNombre").innerHTML = (sessionStorage.getItem("nombre")).toUpperCase();
-		
 	}
 	
 	checkPermission(thisComponent){
@@ -175,7 +163,7 @@ export default class Centros extends Component{
 
 	componentDidMount(){
 		this.checkPermission(this);
-		this.manageNavBar();
+		manageNavBar();
 		this.obtenerDatos(this);
 	}
 }
