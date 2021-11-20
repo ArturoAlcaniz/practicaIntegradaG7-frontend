@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import env from"react-dotenv";
 import { Link, Redirect } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
+import manageNavBar from './Functions';
 
 
 export default class Usuarios extends Component {
@@ -12,20 +13,6 @@ export default class Usuarios extends Component {
 			usuarios: [],
 			perm: ""
 		}
-	}
-	
-	manageNavBar() {
-		document.getElementById("navConf").hidden = false;
-		document.getElementById("navCentros").hidden = false;
-		document.getElementById("navUsers").hidden = false;
-		document.getElementById("navCita").hidden = true;
-		document.getElementById("navLsVac").hidden = true;
-		document.getElementById("navLogin").hidden = true;
-		document.getElementById("btnLO").hidden = false;
-		document.getElementById("navCentro").innerHTML = "Centro: " + sessionStorage.getItem("centro");
-		document.getElementById("navNombre").innerHTML = (sessionStorage.getItem("nombre")).toUpperCase();
-		
-
 	}
 	
 	checkPermission(thisComponent){
@@ -66,7 +53,7 @@ export default class Usuarios extends Component {
 		window.location = '/Usuarios';
 		
 		}
-		eliminarUsuario(this);
+		eliminarUsuario();
 	}
 
 	obtenerDatos(thisComponent){
@@ -155,7 +142,7 @@ export default class Usuarios extends Component {
 	
 	componentDidMount(){
 		this.checkPermission(this);
-		this.manageNavBar();
+		manageNavBar();
 		this.obtenerDatos(this);
 	}
 }

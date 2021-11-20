@@ -123,7 +123,7 @@ export default class Appointment extends Component {
 		}
 		
 		}
-		eliminarCita(this);
+		eliminarCita();
 	}
 
 	render() {

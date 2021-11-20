@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import env from "react-dotenv";
 import { Redirect } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import manageNavBar from './Functions';
 
 export default class ModificarCita extends Component {
 	constructor(props) {
@@ -23,19 +24,6 @@ export default class ModificarCita extends Component {
 			msgCreationResultFail: "",
 			perm: ""
 		}
-	}
-	
-	manageNavBar() {
-		document.getElementById("navConf").hidden = true;
-		document.getElementById("navCentros").hidden = true;
-		document.getElementById("navUsers").hidden = true;
-		document.getElementById("navCita").hidden = false;
-		document.getElementById("navLsVac").hidden = true;
-		document.getElementById("navLogin").hidden = true;
-		document.getElementById("btnLO").hidden = false;
-		document.getElementById("navCentro").innerHTML = "Centro: " + sessionStorage.getItem("centro");
-		document.getElementById("navNombre").innerHTML = (sessionStorage.getItem("nombre")).toUpperCase();
-
 	}
 	
 	checkPermission(thisComponent){
@@ -183,7 +171,7 @@ export default class ModificarCita extends Component {
 	
 	componentDidMount(){
 		this.checkPermission(this);
-		this.manageNavBar();
+		manageNavBar();
 		this.obtenerDatos(this);
 		this.setLimiteCalendario(this);
 		this.obtenerCuposLibres(this, this.state.fechaAntigua.substring(0,10));
