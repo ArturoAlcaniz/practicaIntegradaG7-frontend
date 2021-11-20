@@ -8,17 +8,9 @@ import Button from 'react-bootstrap/Button'
 export default class ListaVacunacion extends Component {
 	constructor(props) {
 		super(props);
-		let today = new Date();
-		let dia;
-		if (today.getDate()<10) {
-			dia = '0'+today.getDate();
-		}else {
-			dia = today.getDate();
-		}
-		let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + dia;
 		this.state = {
 			citas: [],
-			fecha: date,
+			fecha: this.obtenerFechaActual(),
 			perm: "",
 			msgVacunasError: "",
 		}
@@ -36,7 +28,7 @@ export default class ListaVacunacion extends Component {
 		});
 		
 		let json = await answer.text();
-		thisComponent.setState({citas: JSON.parse(json)})}
+		thisComponent.setState({citas: JSON.parse(json), fecha: fecha})}
 		
 		getCitas();
 		}
@@ -140,7 +132,7 @@ export default class ListaVacunacion extends Component {
 														<td>{listValue.nombre}</td>
 														<td>{listValue.apellidos}</td>
 														<td>{listValue.ncita}</td>
-														<td><Button className="btn btn-primary btn-block col-6" onClick={e => this.handleVacunacion(this, [listValue.dni, listValue.email, listValue.ncita])}>Vacunar</Button></td> 
+														<td><Button hidden={this.obtenerFechaActual() !== this.state.fecha} className="btn btn-primary btn-block col-6" onClick={e => this.handleVacunacion(this, [listValue.dni, listValue.email, listValue.ncita])}>Vacunar</Button></td> 
 													</tr>
 												);
 											})}
@@ -161,5 +153,16 @@ export default class ListaVacunacion extends Component {
 		this.obtenerCitas(this,this.state.fecha);
 		this.manageNavBar();
 	}
-
+	
+	obtenerFechaActual() {
+		let today = new Date();
+		let dia;
+		if (today.getDate()<10) {
+			dia = '0'+today.getDate();
+		}else {
+			dia = today.getDate();
+		}
+		let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + dia;
+		return date;
+	}
 }
