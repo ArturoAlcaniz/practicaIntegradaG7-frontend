@@ -26,7 +26,11 @@ export default class Appointment extends Component {
 		document.getElementById("navUsers").hidden = true;
 		document.getElementById("navCita").hidden = false;
 		document.getElementById("navLsVac").hidden = true;
-		document.getElementById("navLogin").hidden = false;
+		document.getElementById("navLogin").hidden = true;
+		document.getElementById("btnLO").hidden = false;
+		document.getElementById("navCentro").innerHTML = "Centro: " + sessionStorage.getItem("centro");
+		document.getElementById("navNombre").innerHTML = (sessionStorage.getItem("nombre")).toUpperCase();
+		
 	}
 
 	checkPermission(thisComponent){

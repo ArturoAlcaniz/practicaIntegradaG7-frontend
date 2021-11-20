@@ -25,7 +25,11 @@ export default class FormularioCentros extends Component {
 		document.getElementById("navUsers").hidden = false;
 		document.getElementById("navCita").hidden = true;
 		document.getElementById("navLsVac").hidden = true;
-		document.getElementById("navLogin").hidden = false;
+		document.getElementById("navLogin").hidden = true;
+		document.getElementById("btnLO").hidden = false;
+		document.getElementById("navCentro").innerHTML = "Centro: " + sessionStorage.getItem("centro");
+		document.getElementById("navNombre").innerHTML = (sessionStorage.getItem("nombre")).toUpperCase();
+		
 	}
 	
 	checkPermission(thisComponent){
@@ -65,13 +69,11 @@ export default class FormularioCentros extends Component {
 			});
 			let response = (await answer.json());
 			if (response.status === "200") {
-				thisComponent.setState(
-						{ msgCreationResultOk: response.message
-							, msgCreationResultFail: ""})
+				window.location = '/Centros';
 			}else{
 				thisComponent.setState(
 						{ msgCreationResultOk: ""
-							, msgCreationResultFail: response.message})
+							, msgCreationResultFail: "Error al crear el centro."})
 			}console.log(answer);
 		}
 

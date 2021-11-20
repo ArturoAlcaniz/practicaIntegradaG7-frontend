@@ -27,7 +27,12 @@ export default class FormularioConfiguracion extends Component {
 		document.getElementById("navUsers").hidden = false;
 		document.getElementById("navCita").hidden = true;
 		document.getElementById("navLsVac").hidden = true;
-		document.getElementById("navLogin").hidden = false;
+		document.getElementById("navLogin").hidden = true;
+		document.getElementById("btnLO").hidden = false;
+		document.getElementById("navCentro").innerHTML = "Centro: " + sessionStorage.getItem("centro");
+		document.getElementById("navNombre").innerHTML = (sessionStorage.getItem("nombre")).toUpperCase();
+		
+
 	}
 	
 	checkPermission(thisComponent){
@@ -170,7 +175,7 @@ export default class FormularioConfiguracion extends Component {
 				<div className="row">
 				<div className="col-5">
 				<div className="w-75">
-				<input className="col-4 form-control" type="number"
+				<input className="form-control" type="number"
 					min="0" max="9999"
 						onChange={e => this.setState(
 								{ franjasPorDia: e.target.value

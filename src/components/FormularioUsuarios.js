@@ -30,7 +30,11 @@ export default class FormularioUsuarios extends Component {
 		document.getElementById("navUsers").hidden = false;
 		document.getElementById("navCita").hidden = true;
 		document.getElementById("navLsVac").hidden = true;
-		document.getElementById("navLogin").hidden = false;
+		document.getElementById("navLogin").hidden = true;
+		document.getElementById("btnLO").hidden = false;
+		document.getElementById("navCentro").innerHTML = "Centro: " + sessionStorage.getItem("centro");
+		document.getElementById("navNombre").innerHTML = (sessionStorage.getItem("nombre")).toUpperCase();
+
 	}
 	
 	checkPermission(thisComponent){
@@ -69,9 +73,7 @@ export default class FormularioUsuarios extends Component {
 			});
 			let response = (await answer.json());
 			if (response.status === "200") {
-				thisComponent.setState(
-						{ msgLoginResultOk: "Usuario creado correctamente"
-							, msgLoginResultFail: ""})
+				window.location = '/Usuarios';
 			}else{
 				thisComponent.setState(
 						{ msgLoginResultOk: ""

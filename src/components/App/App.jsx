@@ -13,7 +13,26 @@ import ListaVacunacion from '../ListaVacunacion';
 import NotAllowed from '../NotAllowed';
 import ModificarCentro from '../ModificarCentro';
 
+function loadFirstLink() {
+
+	switch(sessionStorage.getItem("rol")) {
+		
+		case 'paciente':
+			return <Redirect exact from="/" to="/Appointment" />
+
+		case 'sanitario':
+			return <Redirect exact from="/" to="/ListaVacunacion" />
+		
+		case 'administrador':
+			return <Redirect exact from="/" to="/Configuracion" />
+			
+		default:
+			return <Redirect exact from="/" to="/Login" />
+	}
+}
+
 function App() {
+	
 	return (<Router>
 		<div className="App">
 			<nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -48,17 +67,19 @@ function App() {
 									Lista de vacunacion
 								</NavLink>
 							</li>
-							<li className="nav-item">
-								<NavLink id="navLogin" className="nav-link" to="/Login" activeClassName="nav-link active">
-									Login
-								</NavLink>
-							</li >
 						</ul>
 					</div>
 					<div>
 						<ul className="navbar-nav">
 							<li id="navNombre" className="nav-link"></li>
 							<li id="navCentro" className="nav-link"></li>
+							<li className="nav-item">
+								<NavLink id="navLogin" className="nav-link" to="/Login" activeClassName="nav-link active">	
+								</NavLink>
+							</li >
+							<li>
+								<a id="btnLO" className="btn btn-secondary" aria-current="page" href="\Login" hidden='true'>LogOut</a>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -76,12 +97,10 @@ function App() {
 				<Route path='/ListaVacunacion' exact component={ListaVacunacion} />
 				<Route path='/notAllowed' exact component={NotAllowed} />
 				<Route path='/ModificarCentro' exact component={ModificarCentro} />
-				<Redirect exact from="/" to="/Login" />
+				{loadFirstLink()}
 			</Switch>
 		</div>
 	</Router>);
 }
-
-
 
 export default App;
