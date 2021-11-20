@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Button from 'react-bootstrap/Button';
 import env from"react-dotenv";
 import { Redirect } from 'react-router-dom';
+import manageNavBar from './Functions';
 
 
 export default class FormularioUsuarios extends Component {
@@ -22,19 +23,6 @@ export default class FormularioUsuarios extends Component {
 				msgLoginResultFail: "",
 				perm: ""
 		}
-	}
-	
-	manageNavBar() {
-		document.getElementById("navConf").hidden = false;
-		document.getElementById("navCentros").hidden = false;
-		document.getElementById("navUsers").hidden = false;
-		document.getElementById("navCita").hidden = true;
-		document.getElementById("navLsVac").hidden = true;
-		document.getElementById("navLogin").hidden = true;
-		document.getElementById("btnLO").hidden = false;
-		document.getElementById("navCentro").innerHTML = "Centro: " + sessionStorage.getItem("centro");
-		document.getElementById("navNombre").innerHTML = (sessionStorage.getItem("nombre")).toUpperCase();
-
 	}
 	
 	checkPermission(thisComponent){
@@ -77,7 +65,7 @@ export default class FormularioUsuarios extends Component {
 			}else{
 				thisComponent.setState(
 						{ msgLoginResultOk: ""
-							, msgLoginResultFail: "Error al crear usuario"})
+							, msgLoginResultFail: response.message})
 			}console.log(answer);
 		}
 
@@ -167,8 +155,8 @@ export default class FormularioUsuarios extends Component {
 				</div>
 				<div> <input type="checkbox" onClick={this.showPwd} />Mostrar contrasena</div>
 				<label> </label>
-				<div className="invalid-feedback d-block">{this.state.msgLoginResultFail}</div>
-				<div className="valid-feedback d-block">{this.state.msgLoginResultOk}</div>
+				<div className="text-danger d-block mb-3">{this.state.msgLoginResultFail}</div>
+				<div className="text-success d-block mb-3">{this.state.msgLoginResultOk}</div>
 				<button type="submit" className="btn btn-primary btn-block">Crear usuario</button>
 				<Button variant="secondary" onClick={this.handleCancelar} className="btn btn-primary btn-block">Cancelar</Button>
 				</form>
@@ -178,7 +166,7 @@ export default class FormularioUsuarios extends Component {
 	}
 	componentDidMount(){
 		this.checkPermission(this);
-		this.manageNavBar();
+		manageNavBar();
 		this.obtenerDatos(this);
 	}
 

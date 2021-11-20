@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import env from"react-dotenv";
 import { Redirect } from 'react-router-dom';
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
+import manageNavBar from './Functions';
 
 
 export default class ListaVacunacion extends Component {
@@ -31,19 +32,6 @@ export default class ListaVacunacion extends Component {
 		thisComponent.setState({citas: JSON.parse(json), fecha: fecha})}
 		
 		getCitas();
-		}
-		
-		manageNavBar() {
-		document.getElementById("navConf").hidden = true;
-		document.getElementById("navCentros").hidden = true;
-		document.getElementById("navUsers").hidden = true;
-		document.getElementById("navCita").hidden = true;
-		document.getElementById("navLsVac").hidden = false;
-		document.getElementById("navLogin").hidden = true;
-		document.getElementById("btnLO").hidden = false;
-		document.getElementById("navCentro").innerHTML = "Centro: " + sessionStorage.getItem("centro");
-		document.getElementById("navNombre").innerHTML = (sessionStorage.getItem("nombre")).toUpperCase();
-
 	}
 	
 	checkPermission(thisComponent){
@@ -151,7 +139,7 @@ export default class ListaVacunacion extends Component {
 	componentDidMount() {
 		this.checkPermission(this);
 		this.obtenerCitas(this,this.state.fecha);
-		this.manageNavBar();
+		manageNavBar();
 	}
 	
 	obtenerFechaActual() {
@@ -162,7 +150,6 @@ export default class ListaVacunacion extends Component {
 		}else {
 			dia = today.getDate();
 		}
-		let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + dia;
-		return date;
+		return today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + dia;
 	}
 }

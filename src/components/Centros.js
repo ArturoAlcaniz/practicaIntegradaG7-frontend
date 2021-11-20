@@ -86,7 +86,7 @@ export default class Centros extends Component{
 		}
 		
 		}
-		eliminarCentro(this);
+		eliminarCentro();
 	}
 
 	addVaccines(event) {

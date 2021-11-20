@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import env from "react-dotenv";
 import { Redirect } from 'react-router-dom';
+import manageNavBar from './Functions';
 
 export default class FormularioCentros extends Component {
 
@@ -17,19 +18,6 @@ export default class FormularioCentros extends Component {
 			msgCreationResultFail: "",
 			perm: ""
 		}
-	}
-	
-	manageNavBar() {
-		document.getElementById("navConf").hidden = false;
-		document.getElementById("navCentros").hidden = false;
-		document.getElementById("navUsers").hidden = false;
-		document.getElementById("navCita").hidden = true;
-		document.getElementById("navLsVac").hidden = true;
-		document.getElementById("navLogin").hidden = true;
-		document.getElementById("btnLO").hidden = false;
-		document.getElementById("navCentro").innerHTML = "Centro: " + sessionStorage.getItem("centro");
-		document.getElementById("navNombre").innerHTML = (sessionStorage.getItem("nombre")).toUpperCase();
-		
 	}
 	
 	checkPermission(thisComponent){
@@ -123,7 +111,7 @@ export default class FormularioCentros extends Component {
 	
 	componentDidMount(){
 		this.checkPermission(this);
-		this.manageNavBar();
+		manageNavBar();
 	}
 
 }
