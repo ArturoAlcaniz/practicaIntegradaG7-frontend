@@ -5,8 +5,8 @@ export default function manageNavBar() {
     document.getElementById("navCita").hidden = (sessionStorage.getItem("rol").toLowerCase() !== "paciente");
     document.getElementById("navLsVac").hidden = (sessionStorage.getItem("rol").toLowerCase() !== "sanitario");
     let roles = ["adminitrador", "paciente", "sanitario"];
-    document.getElementById("navLogin").hidden = !(roles.includes(sessionStorage.getItem("rol").toLowerCase()));
-    document.getElementById("btnLO").hidden = (roles.includes(sessionStorage.getItem("rol").toLowerCase()));
+    document.getElementById("navLogin").hidden = (roles.includes(sessionStorage.getItem("rol").toLowerCase()));
+    document.getElementById("btnLO").hidden = !(roles.includes(sessionStorage.getItem("rol").toLowerCase()));
     document.getElementById("navCentro").innerHTML = "Centro: " + sessionStorage.getItem("centro");
     document.getElementById("navNombre").innerHTML = (sessionStorage.getItem("nombre")).toUpperCase();
 }
