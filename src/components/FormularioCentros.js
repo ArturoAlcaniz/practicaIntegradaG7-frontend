@@ -61,7 +61,7 @@ export default class FormularioCentros extends Component {
 			}else{
 				thisComponent.setState(
 						{ msgCreationResultOk: ""
-							, msgCreationResultFail: "Error al crear el centro."})
+							, msgCreationResultFail: response.message})
 			}console.log(answer);
 		}
 
@@ -86,23 +86,23 @@ export default class FormularioCentros extends Component {
 				<div className="form-group">
 				<label>Nombre</label>
 				<input type="nombre" className="form-control" placeholder="Introduzca Nombre"
-					onChange={e => this.setState({ nombre: e.target.value })} />
+					onChange={e => this.setState({ nombre: e.target.value })} required />
 				</div>
 				<div className="form-group">
 				<label>Direccion</label>
 				<input type="Direccion" className="form-control" placeholder="Introduzca Direccion"
-					onChange={e => this.setState({ direccion: e.target.value })} />
+					onChange={e => this.setState({ direccion: e.target.value })} required />
 				</div>
 				<div className="form-group">
 				<label>Vacunas disponibles</label>
-				<input type="vacunas" className="form-control" placeholder="Introduzca el numero de vacunas"
-					onChange={e => this.setState({ vacunas: e.target.value })} />
+				<input type="number" min="0" className="form-control" placeholder="Introduzca el numero de vacunas"
+					onChange={e => this.setState({ vacunas: e.target.value })} required />
 				</div>
 
+				<div className="text-danger d-block">{this.state.msgCreationResultFail}</div>
+				<div className="valid-feedback d-block">{this.state.msgCreationResultOk}</div>
 				<button type="submit" className="btn btn-primary btn-block">Crear centro</button>
 				<Button variant="secondary" onClick={this.handleCancelar} className="btn btn-primary btn-block">Cancelar</Button>
-				<div className="invalid-feedback d-block">{this.state.msgCreationResultFail}</div>
-				<div className="valid-feedback d-block">{this.state.msgCreationResultOk}</div>
 				</form>
 				</div>
 				</div>

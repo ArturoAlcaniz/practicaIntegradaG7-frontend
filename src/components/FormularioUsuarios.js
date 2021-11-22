@@ -109,13 +109,13 @@ export default class FormularioUsuarios extends Component {
 				<div className="form-group">
 				<label>DNI</label>
 				<input type="dni" className="form-control" placeholder="Introduzca DNI"
-					onChange={e => this.setState({ dni: e.target.value })} />
+					onChange={e => this.setState({ dni: e.target.value })} required />
 				</div>
 				<div className="form-group">
 				<label htmlFor="exampleFormControlSelect1">Rol</label>
 				<select className="form-control" id="exampleFormControlSelect1"
-					onChange={e => this.setState({ rol: e.target.value })}>
-				<option>Selecciona un rol</option>
+					onChange={e => this.setState({ rol: e.target.value })} required>
+				<option value="">Selecciona un rol</option>
 				<option>Paciente</option>
 				<option>Sanitario</option>
 				<option>Administrador</option>
@@ -124,22 +124,22 @@ export default class FormularioUsuarios extends Component {
 				<div className="form-group">
 				<label>Nombre</label>
 				<input type="nombre" className="form-control" placeholder="Introduzca Nombre"
-					onChange={e => this.setState({ nombre: e.target.value })} />
+					onChange={e => this.setState({ nombre: e.target.value })} required />
 				</div>
 				<div className="form-group">
 				<label>Apellidos</label>
 				<input type="apellidos" className="form-control" placeholder="Introduzca Apellidos"
-					onChange={e => this.setState({ apellidos: e.target.value })} />
+					onChange={e => this.setState({ apellidos: e.target.value })} required />
 				</div>
 				<div className="form-group">
 				<label>Email</label>
 				<input type="email" className="form-control" placeholder="Introduzca Email"
-					onChange={e => this.setState({ email: e.target.value })} />
+					onChange={e => this.setState({ email: e.target.value })} required />
 				</div>
 				<div className="form-group">
 				<label htmlFor="exampleFormControlSelect1">Centro</label>
 				<select className="form-control" id="exampleFormControlSelect1" 
-					onChange={e => this.setState({ centro: e.target.value })}>
+					onChange={e => this.setState({ centro: e.target.value })} required>
 				<option value="" selected disabled hidden>Selecciona un centro</option>
 				{this.state.centros.map((listValue, index) => {
 					return (
@@ -151,7 +151,7 @@ export default class FormularioUsuarios extends Component {
 				<div className="form-group">
 				<label>Password</label>
 				<input id="pwdInput" type="password" className="form-control" placeholder="Introduzca Password"
-					onChange={e => this.setState({ password: e.target.value })} />
+					onChange={e => this.setState({ password: e.target.value })} required />
 				</div>
 				<div> <input type="checkbox" onClick={this.showPwd} />Mostrar contrasena</div>
 				<label> </label>

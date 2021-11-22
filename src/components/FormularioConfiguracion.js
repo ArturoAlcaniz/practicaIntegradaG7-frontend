@@ -136,7 +136,7 @@ export default class FormularioConfiguracion extends Component {
 									, duracionFranja: Math.round((((new Date (new Date().toDateString() + ' ' + this.state.horaFin))
 											-(new Date (new Date().toDateString() + ' ' + e.target.value)))/60000)/this.state.franjasPorDia) })} 
 				value={this.state.horaInicio}
-				disabled={this.state.configurationAlreadySaved} />
+				disabled={this.state.configurationAlreadySaved} required />
 				</div>
 				<div className="col-5">
 				<input className="h5" type="time"
@@ -146,7 +146,7 @@ export default class FormularioConfiguracion extends Component {
 									, duracionFranja: Math.round((((new Date (new Date().toDateString() + ' ' + e.target.value))
 											-(new Date (new Date().toDateString() + ' ' + this.state.horaInicio)))/60000)/this.state.franjasPorDia) })} 
 				value={this.state.horaFin}
-				disabled={this.state.configurationAlreadySaved} />
+				disabled={this.state.configurationAlreadySaved} required />
 				</div>
 				</div>
 				</div>
@@ -169,7 +169,7 @@ export default class FormularioConfiguracion extends Component {
 									, duracionFranja: Math.round((((new Date (new Date().toDateString() + ' ' + this.state.horaFin))
 											-(new Date (new Date().toDateString() + ' ' + this.state.horaInicio)))/60000)/e.target.value) }) } 
 				value={this.state.franjasPorDia}
-				disabled={this.state.configurationAlreadySaved} />
+				disabled={this.state.configurationAlreadySaved} required />
 				</div>
 				</div>
 				<div className="col-5">
@@ -178,7 +178,7 @@ export default class FormularioConfiguracion extends Component {
 					min="0" max="9999"
 						onChange={e => this.setState({ citasPorFranja: e.target.value })} 
 				value={this.state.citasPorFranja}
-				disabled={this.state.configurationAlreadySaved} />
+				disabled={this.state.configurationAlreadySaved} required />
 				</div>
 				</div>
 				</div>
@@ -188,8 +188,8 @@ export default class FormularioConfiguracion extends Component {
 				</div>
 				</div>
 
-				<div className="invalid-feedback d-block">{this.state.msgConfigResultFail}</div>
-				<div className="valid-feedback d-block">{this.state.msgConfigResultOk}</div>
+				<div className="text-danger d-block">{this.state.msgConfigResultFail}</div>
+				<div className="text-success d-block">{this.state.msgConfigResultOk}</div>
 				<button disabled={this.state.configurationAlreadySaved} type="submit" className="btn btn-primary btn-block">Guardar configuración</button>
 				</form>
 				</div>
