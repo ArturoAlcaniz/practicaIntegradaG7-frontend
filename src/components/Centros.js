@@ -83,7 +83,7 @@ export default class Centros extends Component{
 		var amount = prompt("¿Cuantas vacunas?", "0");
 		nvacunas = parseInt(nvacunas) + parseInt(amount);
 		
-		if (amount === null) {
+		if (amount === null || amount < 0) {
 			return;
 		}
 		fetch(env[process.env.NODE_ENV+'_API_URL']+'/addVaccines', {

@@ -78,7 +78,7 @@ function App() {
 								</NavLink>
 							</li >
 							<li>
-								<a id="btnLO" className="btn btn-secondary" aria-current="page" href="\Login" hidden='true'>LogOut</a>
+								<a id="btnLO" className="btn btn-secondary" aria-current="page" href="\Login" hidden={true}>LogOut</a>
 							</li>
 						</ul>
 					</div>
