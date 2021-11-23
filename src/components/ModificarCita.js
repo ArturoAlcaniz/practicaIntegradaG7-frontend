@@ -52,7 +52,7 @@ export default class ModificarCita extends Component {
 	obtenerDatos(thisComponent){
 		async function getCitas(){
 				let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/citas/obtener', {
-			method: "GET"
+			method: "POST"
 		});
 		
 		let json = await answer.text();
