@@ -42,7 +42,12 @@ export default class Appointment extends Component {
 	obtenerDatos(thisComponent){
 		async function getCitas(){
 			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/citas/obtener', {
-				method: "GET"
+				method: "POST",
+				body: JSON.stringify({email: sessionStorage.getItem("email")}),
+				headers: { 
+					'Accept': 'application/json',
+					'Content-Type': 'application/json' 
+				}
 			});
 
 			let json = await answer.text();
