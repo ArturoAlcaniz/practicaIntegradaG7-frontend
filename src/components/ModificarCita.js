@@ -99,6 +99,13 @@ export default class ModificarCita extends Component {
 	handleModificarCita(event) {
 		event.preventDefault()
 		async function modificarCita(thisComponent) {
+
+			if (thisComponent.state.cupoSeleccionado===''){
+				thisComponent.setState(
+					{ msgCreationResultOk: ""
+						, msgCreationResultFail: "Debe seleccionar una hora"});
+			}else{
+
 			
 			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/citas/modify', {
 				method: "POST",
@@ -123,6 +130,7 @@ export default class ModificarCita extends Component {
 							, msgCreationResultFail: response.message})
 			}
 		}
+	}
 
 		modificarCita(this)
 	}

@@ -83,11 +83,11 @@ export default class Usuarios extends Component {
 					<div className="card mb-4">
 						<div className="card-header">
 							Usuarios
-						</div>
-						<div className="card-body">
+						</div>						
+						<div className="card-body">				
 							<div className="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
 								<div className="dataTable-container">
-									<a className="btn btn-success" aria-current="page" href="/FormularioUsuarios">Add usuario</a>
+								<a className="btn btn-success" aria-current="page" href="/FormularioUsuarios">Nuevo Usuario</a>
 									<table className="table table-hover">
 										<thead>
 											<tr>
