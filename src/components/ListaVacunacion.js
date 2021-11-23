@@ -65,9 +65,7 @@ export default class ListaVacunacion extends Component {
 			});
 			let response = (await answer.json());
 			if (response.status === "200") {
-				let arrayCitas = thisComponent.state.citas
-				let newArrayCitas = arrayCitas.filter((cita, _) => cita.email !== dataVacunacion[1])
-				thisComponent.setState({citas: newArrayCitas, msgVacunasError: ""})
+				window.location = '/ListaVacunacion';
 			}else{
 				thisComponent.setState(
 						{ msgVacunasError: response.message})
@@ -120,7 +118,7 @@ export default class ListaVacunacion extends Component {
 														<td>{listValue.nombre}</td>
 														<td>{listValue.apellidos}</td>
 														<td>{listValue.ncita}</td>
-														<td><Button hidden={this.obtenerFechaActual() !== this.state.fecha} className="btn btn-primary btn-block col-6" onClick={e => this.handleVacunacion(this, [listValue.dni, listValue.email, listValue.ncita])}>Vacunar</Button></td> 
+														<td><Button hidden={this.obtenerFechaActual() !== this.state.fecha || (listValue.ncita===1 && listValue.primeraDosis===true) ||  (listValue.ncita===2 && listValue.segundaDosis===true)} className="btn btn-primary btn-block col-6" onClick={e => this.handleVacunacion(this, [listValue.dni, listValue.email, listValue.ncita])}>Vacunar</Button></td> 
 													</tr>
 												);
 											})}
