@@ -35,9 +35,11 @@ export default class Login extends Component{
 				sessionStorage.setItem("nombre",response.nombre);
 				sessionStorage.setItem("rol",response.rol);
 				thisComponent.setState(
-						{ msgLoginResultOk: "Acceso permitido"
+						{ msgLoginResultOk: ""
 							, msgLoginResultFail: ""});
 				
+				alert("Acceso permitido");
+
 				document.getElementById("navCentro").value = "Centro: " + sessionStorage.getItem("centro");
 				document.getElementById("navNombre").value = (sessionStorage.getItem("nombre")).toUpperCase();
 				document.getElementById("navCentro").innerHTML = "Centro: " + sessionStorage.getItem("centro");
@@ -47,12 +49,16 @@ export default class Login extends Component{
 				
 				if(rol === "paciente" || rol === "Paciente") {
 					thisComponent.loadPacienteLinks();
+					window.location = '/Appointment';
 				}
 				if(rol === "sanitario" || rol === "Sanitario") {
 					thisComponent.loadSanitarioLinks();
+					window.location = '/ListaVacunacion';
+
 				}
 				if(rol === "administrador" || rol === "Administrador") {
 					thisComponent.loadAdminLinks();
+					window.location = '/Configuracion';
 				}
 			}else{
 				thisComponent.setState(

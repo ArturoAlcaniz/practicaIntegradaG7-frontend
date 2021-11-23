@@ -119,7 +119,7 @@ export default class Centros extends Component{
 						<div className="card-body">
 							<div className="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
 								<div className="dataTable-container">
-									<a className="btn btn-success" aria-current="page" href="/FormularioCentros">Add Centro</a>
+									<a className="btn btn-success" aria-current="page" href="/FormularioCentros">Nuevo Centro</a>
 									<table className="table table-hover">
 										<thead>
 											<tr>
