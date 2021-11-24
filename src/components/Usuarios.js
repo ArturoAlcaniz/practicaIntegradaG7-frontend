@@ -36,6 +36,7 @@ export default class Usuarios extends Component {
 	
 	handleEliminar(event) {
 		var email = event.target.parentNode.parentNode.getElementsByTagName("td")[4].innerHTML;
+		var tipo = event.target.parentNode.parentNode.getElementsByTagName("td")[1].innerHTML;
 		
 		async function eliminarUsuario() {
 		
@@ -47,9 +48,13 @@ export default class Usuarios extends Component {
 				'Content-Type': 'application/json' 
 			}
 		});
-		let response = await answer.json();
-			
-		alert(response.message);
+		if(tipo === "administrador") {
+			alert("No se pueden eliminar administradores")
+		}else {
+			let response = await answer.json();
+			alert(response.message);
+		}	
+		
 		window.location = '/Usuarios';
 		
 		}
