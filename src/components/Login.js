@@ -38,7 +38,7 @@ export default class Login extends Component{
 						{ msgLoginResultOk: ""
 							, msgLoginResultFail: ""});
 				
-				alert("Acceso permitido");
+				
 
 				document.getElementById("navCentro").value = "Centro: " + sessionStorage.getItem("centro");
 				document.getElementById("navNombre").value = (sessionStorage.getItem("nombre")).toUpperCase();
