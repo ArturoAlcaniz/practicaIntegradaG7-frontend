@@ -2,6 +2,9 @@ import React, {Component} from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import env  from "react-dotenv";
+import Button from 'react-bootstrap/Button';
+import { Redirect } from 'react-router-dom';
+import manageNavBar from './manageNavBar';
 
 
 export default class Centros extends Component{
@@ -14,10 +17,30 @@ export default class Centros extends Component{
 			direccion: "",
 			vacunas: "",
 			msgGetResultOk: "",
-			msgGetResultFail: ""
+			msgGetResultFail: "",
+			perm: ""
 		}
-		
 	}
+	
+	checkPermission(thisComponent){
+		async function chek(){
+			let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/perms/check', {
+				method: "POST",
+				body: JSON.stringify({site: "centros", 
+					email: sessionStorage.getItem("email"),
+					password: sessionStorage.getItem("password")}),
+				headers: { 
+					'Accept': 'application/json',
+					'Content-Type': 'application/json' 
+				}
+
+			});
+			let allowed = (await answer.json());
+			thisComponent.state.perm = allowed.message;
+			}
+		chek();
+	}
+	
 	obtenerDatos(thisComponent){
 		async function getCentros(){
 				let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/centros/obtener', {
@@ -29,6 +52,30 @@ export default class Centros extends Component{
 		}
 		getCentros();
 	}
+	
+	handleEliminar(event) {
+		var nombreCentro = event.target.parentNode.parentNode.getElementsByTagName("td")[0].innerHTML;
+		
+		async function eliminarCentro() {
+		
+		let answer = await fetch(env[process.env.NODE_ENV+'_API_URL']+'/centros/eliminar', {
+			method: "POST",
+			body: JSON.stringify({nombreCentro}),
+			headers: { 
+				'Accept': 'application/json',
+				'Content-Type': 'application/json' 
+			}
+		});
+		let response = await answer.json();
+			
+		alert(response.message);
+		if(response.status === "200"){
+		window.location = '/Centros';
+		}
+		
+		}
+		eliminarCentro();
+	}
 
 	addVaccines(event) {
 		var hospital =  event.target.parentNode.parentNode.getElementsByTagName("td")[0].getAttribute("data-value");
@@ -36,7 +83,7 @@ export default class Centros extends Component{
 		var amount = prompt("¿Cuantas vacunas?", "0");
 		nvacunas = parseInt(nvacunas) + parseInt(amount);
 		
-		if (amount === null) {
+		if (amount === null || amount < 0) {
 			return;
 		}
 		fetch(env[process.env.NODE_ENV+'_API_URL']+'/addVaccines', {
@@ -54,52 +101,86 @@ export default class Centros extends Component{
 	}
 	
     render() {
-	
-        return (
-        	<div className="container-fluid px-4">
-                <h1>Centros de salud</h1>
-                <div className="card mb-4">
-                    <div className="card-header">
-                        Centros
-                    </div>
-                    <div className="card-body">
-                        <div className="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
-                            <div className="dataTable-container">
+    	if (this.state.perm && this.state.perm !== "OK") {
+			return <Redirect to={{
+				pathname: '/notAllowed',
+				state: { prevMssg: this.state.perm }
+			}}
+			/>
+		}
 
-                                <table className="table table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th>Nombre del centro</th>
-                                        <th>Direccion</th>
-                                        <th>Vacunas disponibles</th>
-                                        <th>Anadir vacunas</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-										{this.state.centros.map((listValue, index) => {
-											return (
-												<tr key={index}>
-													<td  data-value={listValue.nombre}>{listValue.nombre}</td>
-													<td>{listValue.direccion}</td>
-													<td>{listValue.vacunas}</td>
-													<td>
-														<button onClick={this.addVaccines}>Anadir vacunas</button>
-													</td>
-												</tr>
-											);
-										})}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-            <a className="btn btn-success" aria-current="page" href="/FormularioCentros">Add Centro</a>
-        </div>
-        );
+		return (
+			<div className="auth-wrapper">
+				<div className="container-fluid px-4">
+					<div className="card mb-4">
+						<div className="card-header">
+							Centros
+						</div>
+						<div className="card-body">
+							<div className="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+								<div className="dataTable-container">
+									<a className="btn btn-success" aria-current="page" href="/FormularioCentros">Nuevo Centro</a>
+									<table className="table table-hover">
+										<thead>
+											<tr>
+												<th>Nombre del centro</th>
+												<th>Direccion</th>
+												<th>Vacunas disponibles</th>
+												<th>Anadir vacunas</th>
+												<th>Modificar Centro</th>
+												<th>Eliminar</th>
+											</tr>
+										</thead>
+										<tbody>
+											{this.state.centros.map((listValue, index) => {
+												return (
+													<tr key={index}>
+														<td data-value={listValue.nombre}>{listValue.nombre}</td>
+														<td>{listValue.direccion}</td>
+														<td>{listValue.vacunas}</td>
+														<td>
+															<Button onClick={this.addVaccines}>Anadir vacunas</Button>
+														</td>
+														<td>
+															<ModificarCentro dataCentro={[listValue.nombre, listValue.direccion, listValue.vacunas]} />
+														</td>
+														<td>
+															<Button onClick={this.handleEliminar}>Eliminar</Button>
+														</td>
+													</tr>
+												);
+											})}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		);
     }
 
 	componentDidMount(){
+		this.checkPermission(this);
+		manageNavBar();
 		this.obtenerDatos(this);
 	}
+}
+
+
+function ModificarCentro({dataCentro}){
+	
+	let centroNombre = dataCentro[0];
+	let centroDireccion = dataCentro[1];
+	let centroVacunas = dataCentro[2];
+	
+	const handleClick = () => {
+    	localStorage.setItem("nombreCentro", centroNombre);
+		localStorage.setItem("direccionCentro", centroDireccion);
+		localStorage.setItem("vacunasCentro", centroVacunas);
+  	}
+	return (
+		<Button href="/ModificarCentro" onClick={handleClick}>Modificar centro</Button>	
+	)
 }
