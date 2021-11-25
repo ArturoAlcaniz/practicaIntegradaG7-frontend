@@ -79,11 +79,21 @@ export default class Appointment extends Component {
 				)
 				thisComponent.obtenerDatos(thisComponent);
 			}else {
-				thisComponent.setState(
+				
+				if(response.message.includes("Todos")) {
+					thisComponent.setState(
+						{ msgAppointOk: ""
+							, msgAppointFail: "Ya tiene asignado el maximo numero de citas"
+						}
+						)
+					
+				} else {
+					thisComponent.setState(
 						{ msgAppointOk: ""
 							, msgAppointFail: response.message
 						}
-				)
+					)
+				}
 			}
 		}
 		makeReserve(this)
