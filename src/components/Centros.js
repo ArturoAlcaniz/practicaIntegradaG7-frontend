@@ -70,6 +70,7 @@ export default class Centros extends Component{
 		
 		if(!response.includes("cupo")) {
 			alert(response.message);
+			window.location = '/Centros';
 		}
 		if(response.status === "200"){
 		window.location = '/Centros';
