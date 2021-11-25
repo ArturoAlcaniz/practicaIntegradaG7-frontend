@@ -67,8 +67,10 @@ export default class Centros extends Component{
 			}
 		});
 		let response = await answer.json();
-			
-		alert(response.message);
+		
+		if(!response.includes("cupo")) {
+			alert(response.message);
+		}
 		if(response.status === "200"){
 		window.location = '/Centros';
 		}
