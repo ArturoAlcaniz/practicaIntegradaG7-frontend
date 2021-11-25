@@ -28,8 +28,14 @@ export default class ListaVacunacion extends Component {
 				}
 		});
 		
+	
 		let json = await answer.text();
-		thisComponent.setState({citas: JSON.parse(json), fecha: fecha})}
+		let citasDos = JSON.parse(json);
+		citasDos.sort((a, b) => (a.fecha.substring(11,16) < b.fecha.substring(11,16)) ? -1 : ((a.fecha.substring(11,16) > b.fecha.substring(11,16)) ? 1 : 0));
+		
+		thisComponent.setState({citas: citasDos, fecha: fecha});
+		
+		}
 		
 		getCitas();
 	}
